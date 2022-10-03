@@ -3,6 +3,7 @@ import { useTheme } from 'next-themes'
 import Link from 'next/link'
 import { WiMoonAltThirdQuarter } from 'react-icons/wi'
 import { CgProfile } from 'react-icons/cg'
+import Image from 'next/image'
 
 const Navbar = () => {
   // Color Theme
@@ -54,10 +55,21 @@ const Navbar = () => {
                 </div>
               )
               : (
-                <>
+                <div className='flex flex-cols'>
                   {/* Log out */}
-                  <button onClick={() => signOut()}>Sign Out</button>
-                </>
+                  <button onClick={() => signOut()} className='mr-1 border rounded-lg p-1'>Sign Out</button>
+
+                  {/* Avatar Image */}
+
+                  <Image
+                    className="rounded-full"
+                    // Just casted as string because next see's string | undefined -> can't be undefined
+                    src={session.user?.image === undefined ? "/assets/avatar.png" : session?.user?.image as string}
+                    alt="profile image"
+                    width="30"
+                    height="30"
+                  />
+                </div>
               )
             }
           </div>
