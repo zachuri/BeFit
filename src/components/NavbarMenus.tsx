@@ -4,13 +4,94 @@ import Image from 'next/image';
 import { signIn, signOut } from 'next-auth/react';
 import { Session } from 'next-auth';
 import router from 'next/router';
+import { BsThreeDotsVertical } from 'react-icons/bs'
+
+const links = [
+  { href: '/', name: 'Home' },
+  { href: '/progress', name: 'Progress' },
+  { href: '/exercise', name: 'Exercise' },
+  { href: '/weight', name: 'Weight' },
+  { href: '/diet', name: 'Diet' },
+]
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export const AccountMenu: React.FC<{ session: Session }> = ({ session }) => {
+export const NavigateMenu: React.FC = () => {
+  return (
+    <div className='flex items-center justify-center'>
+      <Menu as="div" className="relative inline-block text-left mt-1">
+        <Menu.Button role="navigation" aria-label="hamburger menu to navigate to pages">
+          <BsThreeDotsVertical size={20} />
+        </Menu.Button>
 
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-100"
+          enterFrom="transform opacity-0 scale-95"
+          enterTo="transform opacity-100 scale-100"
+          leave="transition ease-in duration-75"
+          leaveFrom="transform opacity-100 scale-100"
+          leaveTo="transform opacity-0 scale-95"
+        >
+          <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-[#0e0e10] ring-1 ring-white ring-opacity-5 focus:outline-none">
+            {/* <Menu.Items> */}
+            {links.map((link) => (
+              /* Use the `active` state to conditionally style the active item. */
+              <Menu.Item key={link.href} as={Fragment}>
+                {({ active }) => (
+                  // Headless UI needs to use a tag
+                  //  mylink component helps to make it work
+
+                  // <MyLink href={`${link.href}`} active={active} onClick={() => {
+                  //   setTimeout(() => {
+                  //     ref.current?.click();
+                  //   }, 0);
+                  // }}>
+                  //   {link.name}
+                  // </MyLink>
+
+                  // <Link href={link.href}>{link.name}</Link>
+
+                  // <a href={link.href}
+                  //   className={classNames(
+                  //     active
+                  //       ? "bg-gray-500 text-gray-100"
+                  //       : "text-gray-200",
+                  //     "block px-4 py-2 text-sm"
+                  //   )}
+                  // >
+                  //   {link.name}
+                  // </a>
+
+                  // Work around for menu to close
+                  <button
+                    name={link.name}
+
+                    className={classNames(
+                      active
+                        ? "bg-gray-500 text-gray-100"
+                        : "text-gray-200",
+                      "text-left w-full block px-4 py-2 text-sm"
+                    )}
+
+                    onClick={() => {
+                      router.push(`${link.href}`)
+                    }}>
+                    {link.name}
+                  </button>
+                )}
+              </Menu.Item>
+            ))}
+          </Menu.Items>
+        </Transition>
+      </Menu>
+    </div>
+  )
+}
+
+export const AccountMenu: React.FC<{ session: Session }> = ({ session }) => {
   return (
     <>
       {/* Menu for Account*/}
