@@ -20,8 +20,8 @@ function classNames(...classes: string[]) {
 
 export const NavigateMenu: React.FC = () => {
   return (
-    <div className='flex items-center justify-center'>
-      <Menu as="div" className="relative inline-block text-left mt-1">
+    <div className='flex items-center justify-center pt-2'>
+      <Menu as="div" className="relative inline-block text-left ">
         <Menu.Button role="navigation" aria-label="hamburger menu to navigate to pages">
           <BsThreeDotsVertical size={20} />
         </Menu.Button>
@@ -42,29 +42,6 @@ export const NavigateMenu: React.FC = () => {
               <Menu.Item key={link.href} as={Fragment}>
                 {({ active }) => (
                   // Headless UI needs to use a tag
-                  //  mylink component helps to make it work
-
-                  // <MyLink href={`${link.href}`} active={active} onClick={() => {
-                  //   setTimeout(() => {
-                  //     ref.current?.click();
-                  //   }, 0);
-                  // }}>
-                  //   {link.name}
-                  // </MyLink>
-
-                  // <Link href={link.href}>{link.name}</Link>
-
-                  // <a href={link.href}
-                  //   className={classNames(
-                  //     active
-                  //       ? "bg-gray-500 text-gray-100"
-                  //       : "text-gray-200",
-                  //     "block px-4 py-2 text-sm"
-                  //   )}
-                  // >
-                  //   {link.name}
-                  // </a>
-
                   // Work around for menu to close
                   <button
                     name={link.name}
