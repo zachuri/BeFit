@@ -1,4 +1,4 @@
-import { useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import { useTheme } from 'next-themes'
 import Link from 'next/link'
 import { WiMoonAltThirdQuarter } from 'react-icons/wi'
@@ -55,12 +55,11 @@ const Navbar = () => {
               : (
                 <>
                   {/* Log out */}
-                  <button>Sign Out</button>
+                  <button onClick={() => signOut()}>Sign Out</button>
                 </>
               )
             }
           </div>
-
         </div>
       </div>
     </>
