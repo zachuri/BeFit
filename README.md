@@ -21,6 +21,14 @@ $PROJECT_ROOT
 ├── public
 │   # components, pages, server, styles
 └── src
+    │   # React Components
+    ├── components
+    │   # Next Auth Pages
+    ├── pages
+    │   # Backend (trpc)
+    ├── server
+    │   # Global Styles
+    └── styles
 ```
 
 ## License
