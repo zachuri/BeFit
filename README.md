@@ -1,6 +1,6 @@
 # BeFit Application
 
-[https://zachuri.vercel.app/](https://zachuri.vercel.app/)
+[https://[add_later].vercel.app/](https://[add_later].vercel.app/)
 
 ## Stack
 
@@ -15,12 +15,12 @@
 
 ```
 $PROJECT_ROOT
-│   # Page files
-├── pages
-│   # React component files
-├── components
+│   # Prisma schema
+├── prisma
 │   # Static files for images
-└── public
+├── public
+│   # components, pages, server, styles
+└── src
 ```
 
 ## License
