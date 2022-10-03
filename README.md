@@ -1,6 +1,12 @@
 # BeFit Application
 
-[https://[add_later].vercel.app/](https://[add_later].vercel.app/)
+An application built be ZACHURI and artifactz1 to be able to keep ourselves fit.
+It will track three main categories we believe are essentail for body building.
+- Weight
+- Exercise
+- Diet
+
+link: [https://[add_later].vercel.app/](https://[add_later].vercel.app/)
 
 ## Stack
 
