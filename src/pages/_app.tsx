@@ -16,12 +16,16 @@ const MyApp: AppType<{ session: Session | null }> = ({
   pageProps: { session, ...pageProps },
 }) => {
   return (
-    <ThemeProvider attribute="class">
-      <SessionProvider session={session}>
+    <SessionProvider session={session}>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme='system'
+        storageKey="theme"
+      >
         <Navbar />
         <Component {...pageProps} />
-      </SessionProvider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </SessionProvider>
   );
 };
 
@@ -56,17 +60,17 @@ export default withTRPC<AppRouter>({
       // queryClientConfig: { defaultOptions: { queries: { staleTime: 60 } } },
 
       // To use SSR properly you need to forward the client's headers to the server
-      // headers: () => {
-      //   if (ctx?.req) {
-      //     const headers = ctx?.req?.headers;
-      //     delete headers?.connection;
-      //     return {
-      //       ...headers,
-      //       "x-ssr": "1",
-      //     };
-      //   }
-      //   return {};
-      // }
+      headers: () => {
+        if (ctx?.req) {
+          const headers = ctx?.req?.headers;
+          delete headers?.connection;
+          return {
+            ...headers,
+            "x-ssr": "1",
+          };
+        }
+        return {};
+      }
     };
   },
   /**
