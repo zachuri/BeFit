@@ -3,7 +3,7 @@ import { useTheme } from 'next-themes'
 import Link from 'next/link'
 import { WiMoonAltThirdQuarter } from 'react-icons/wi'
 import { CgProfile } from 'react-icons/cg'
-import Image from 'next/image'
+import { AccountMenu, NavigateMenu } from './NavbarMenus'
 
 const Navbar = () => {
   // Color Theme
@@ -35,6 +35,9 @@ const Navbar = () => {
 
           {/* Right */}
           <div className='flex flex-cols'>
+            {/* ThreeDot for Navigating to pages */}
+            <NavigateMenu />
+
             {/* Button Theme Toggle */}
             <button onClick={handleTheme} className='border rounded-lg p-1 mr-4'>
               <WiMoonAltThirdQuarter size={20} />
@@ -60,15 +63,8 @@ const Navbar = () => {
                   <button onClick={() => signOut()} className='mr-1 border rounded-lg p-1'>Sign Out</button>
 
                   {/* Avatar Image */}
+                  <AccountMenu session={session} />
 
-                  <Image
-                    className="rounded-full"
-                    // Just casted as string because next see's string | undefined -> can't be undefined
-                    src={session.user?.image === undefined ? "/assets/avatar.png" : session?.user?.image as string}
-                    alt="profile image"
-                    width="30"
-                    height="30"
-                  />
                 </div>
               )
             }
