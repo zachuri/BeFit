@@ -1,4 +1,4 @@
-import { signOut, useSession } from 'next-auth/react'
+import { signIn, signOut, useSession } from 'next-auth/react'
 import { useTheme } from 'next-themes'
 import Link from 'next/link'
 import { WiMoonAltThirdQuarter } from 'react-icons/wi'
@@ -44,9 +44,10 @@ const Navbar = () => {
               (
                 <div className='flex flex-cols'>
                   {/* Log In */}
-                  <Link href='/account'>
+                  {/* <Link href='/account'>
                     <button className='mr-1 border rounded-lg p-1'>Sign In</button>
-                  </Link>
+                  </Link> */}
+                  <button onClick={() => signIn()} className='mr-1 border rounded-lg p-1'>Sign In</button>
 
                   {/* Empty Avatar */}
                   <CgProfile size={30} />
