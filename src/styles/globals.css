@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	body {
+		/* @apply max-w-2xl mx-auto px-4; */
+		font-family: Questrial, SF Pro Display, SF Pro Icons, Helvetica Neue,
+			Helvetica, Arial, sans-serif;
+		@apply bg-[#F4F4F4] text-[#111111] dark:bg-[#111111] dark:text-[#EEEEEE];
+	}
+}
