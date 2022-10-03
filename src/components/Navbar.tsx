@@ -44,7 +44,9 @@ const Navbar = () => {
               (
                 <div className='flex flex-cols'>
                   {/* Log In */}
-                  <button className='mr-1 border rounded-lg p-1'>Sign In</button>
+                  <Link href='/account'>
+                    <button className='mr-1 border rounded-lg p-1'>Sign In</button>
+                  </Link>
 
                   {/* Empty Avatar */}
                   <CgProfile size={30} />
