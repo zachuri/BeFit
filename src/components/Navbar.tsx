@@ -39,7 +39,7 @@ const Navbar = () => {
             <NavigateMenu />
 
             {/* Button Theme Toggle */}
-            <button onClick={handleTheme} className='border rounded-lg p-1 mr-4'>
+            <button onClick={handleTheme} className='p-2 mr-4'>
               <WiMoonAltThirdQuarter size={20} />
             </button>
 
@@ -51,7 +51,7 @@ const Navbar = () => {
                   {/* <Link href='/account'>
                     <button className='mr-1 border rounded-lg p-1'>Sign In</button>
                   </Link> */}
-                  <button onClick={() => signIn()} className='mr-1 border rounded-lg p-1'>Sign In</button>
+                  <button onClick={() => signIn()} className='mr-1 p-1'>Sign In</button>
 
                   {/* Empty Avatar */}
                   <CgProfile size={30} />
@@ -60,7 +60,7 @@ const Navbar = () => {
               : (
                 <div className='flex flex-cols'>
                   {/* Log out */}
-                  <button onClick={() => signOut()} className='mr-1 border rounded-lg p-1'>Sign Out</button>
+                  <button onClick={() => signOut()} className='mr-1 p-1'>Sign Out</button>
 
                   {/* Avatar Image */}
                   <AccountMenu session={session} />
