@@ -1,18 +1,17 @@
-import type { NextPage } from 'next';
 import Head from 'next/head';
 import {
   MainLayoutFlex,
   MainLayoutHeightScreen
 } from '../components/layouts/Main';
 import { AiFillCaretDown } from 'react-icons/ai';
-import LineGraph from '../components/LineGraph';
+// import LineGraph from '../components/LineGraph';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 // import { trpc } from "../utils/trpc";
 
-const Home: NextPage = () => {
+const Home = () => {
   // const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
-  const { data: session, status } = useSession();
+  const { status } = useSession();
 
   if (status === 'loading') {
     return (

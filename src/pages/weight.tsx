@@ -10,7 +10,7 @@ import {
 } from '../components/layouts/Main';
 
 const Weight: React.FC = () => {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
 
   const queryClient = useQueryClient();
 
