@@ -3,10 +3,13 @@ import Head from 'next/head';
 import MainLayout from '../components/layouts/Main';
 import { AiFillCaretDown } from 'react-icons/ai';
 import LineGraph from '../components/LineGraph';
+import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 // import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {
   // const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
+  const { data: session } = useSession();
 
   return (
     <>
@@ -15,10 +18,21 @@ const Home: NextPage = () => {
         <meta name="app tracker for body goals" content="Let's get fit" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MainLayout>
-        <div className="flex flex-col mt-20">
+
+      {!session ? (
+        <MainLayout>
+          <div className="min-h-screen flex items-center justify-center -mt-10 md:-mt-20">
+            <div className="flex flex-col text-center">
+              <h1 className="text-2xl">Please Sign in</h1>
+              <p className="">In order to view your progress</p>
+            </div>
+          </div>
+        </MainLayout>
+      ) : (
+        <MainLayout>
+          {/* Current Weight of User  */}
           <div className="mt-5 mx-20 text-center">
-            <h1 className="text-5xl">Current </h1>
+            <h1 className="text-5xl">Current Weight</h1>
             <h2 className="text-4xl">210 LBS</h2>
           </div>
 
@@ -38,8 +52,34 @@ const Home: NextPage = () => {
           <div className="mt-5">
             <LineGraph />
           </div>
-        </div>
-      </MainLayout>
+
+          <div className="text-center text-2xl mt-5 p-2 grid grid-cols-2 gap-5">
+            <Link href="/account">
+              <div className="p-10 border rounded border-black dark:border-white border-[#00C804] hover:dark:border-[#00C804]">
+                <button>Progress</button>
+              </div>
+            </Link>
+
+            <Link href="/account">
+              <div className="p-10 border rounded border-black dark:border-white border-[#00C804] hover:dark:border-[#00C804]">
+                <button>Exercise</button>
+              </div>
+            </Link>
+
+            <Link href="/account">
+              <div className="p-10 border rounded border-black dark:border-white border-[#00C804] hover:dark:border-[#00C804]">
+                <button>Diet</button>
+              </div>
+            </Link>
+
+            <Link href="/account">
+              <div className="p-10 border rounded border-black dark:border-white border-[#00C804] hover:dark:border-[#00C804]">
+                <button>Weight</button>
+              </div>
+            </Link>
+          </div>
+        </MainLayout>
+      )}
     </>
   );
 };
