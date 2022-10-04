@@ -54,26 +54,26 @@ const Home: NextPage = () => {
           </div>
 
           <div className="text-center text-2xl mt-5 p-2 grid grid-cols-2 gap-5">
-            <Link href="/account">
-              <div className="p-10 border rounded border-black dark:border-white border-[#00C804] hover:dark:border-[#00C804]">
+            <Link href="/progress">
+              <div className="p-10 border rounded border-black dark:border-white hover:border-[#00C804] hover:dark:border-[#00C804]">
                 <button>Progress</button>
               </div>
             </Link>
 
-            <Link href="/account">
-              <div className="p-10 border rounded border-black dark:border-white border-[#00C804] hover:dark:border-[#00C804]">
+            <Link href="/exercise">
+              <div className="p-10 border rounded border-black dark:border-white hover:border-[#00C804] hover:dark:border-[#00C804]">
                 <button>Exercise</button>
               </div>
             </Link>
 
-            <Link href="/account">
-              <div className="p-10 border rounded border-black dark:border-white border-[#00C804] hover:dark:border-[#00C804]">
+            <Link href="/diet">
+              <div className="p-10 border rounded border-black dark:border-white hover:border-[#00C804] hover:dark:border-[#00C804]">
                 <button>Diet</button>
               </div>
             </Link>
 
-            <Link href="/account">
-              <div className="p-10 border rounded border-black dark:border-white border-[#00C804] hover:dark:border-[#00C804]">
+            <Link href="/weight">
+              <div className="p-10 border rounded border-black dark:border-white hover:border-[#00C804] hover:dark:border-[#00C804]">
                 <button>Weight</button>
               </div>
             </Link>
