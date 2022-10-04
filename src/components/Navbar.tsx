@@ -43,17 +43,7 @@ const Navbar = () => {
             </button>
 
             {/* Log in/out */}
-            {!session ? (
-              <div className="flex items-center justify-center">
-                {/* Log In */}
-                <button onClick={() => signIn()} className="mr-1 p-1">
-                  Sign In
-                </button>
-
-                {/* Empty Avatar */}
-                <CgProfile size={30} />
-              </div>
-            ) : (
+            {session ? (
               <div className="flex flex-cols">
                 {/* Log out */}
                 <button onClick={() => signOut()} className="mr-1 p-1">
@@ -62,6 +52,16 @@ const Navbar = () => {
 
                 {/* Avatar Image */}
                 <AccountMenu session={session} />
+              </div>
+            ) : (
+              <div className="flex items-center justify-center">
+                {/* Log In */}
+                <button onClick={() => signIn()} className="mr-1 p-1">
+                  Sign In
+                </button>
+
+                {/* Empty Avatar */}
+                <CgProfile size={30} />
               </div>
             )}
           </div>

@@ -38,18 +38,7 @@ const Weight: React.FC = () => {
 
   return (
     <>
-      {!session ? (
-        <>
-          <MainLayoutHeightScreen>
-            <div className="min-h-screen flex items-center justify-center -mt-10 md:-mt-20">
-              <div className="flex flex-col text-center">
-                <h1 className="text-4xl">Weight Tracker</h1>
-                <p className="text-2xl text-gray-700">Please Sign in!</p>
-              </div>
-            </div>
-          </MainLayoutHeightScreen>
-        </>
-      ) : (
+      {session ? (
         <>
           <MainLayoutFill>
             <div className="mt-10">
@@ -134,6 +123,17 @@ const Weight: React.FC = () => {
               })}
             </div>
           </MainLayoutFill>
+        </>
+      ) : (
+        <>
+          <MainLayoutHeightScreen>
+            <div className="min-h-screen flex items-center justify-center -mt-10 md:-mt-20">
+              <div className="flex flex-col text-center">
+                <h1 className="text-4xl">Weight Tracker</h1>
+                <p className="text-2xl text-gray-700">Please Sign in!</p>
+              </div>
+            </div>
+          </MainLayoutHeightScreen>
         </>
       )}
     </>

@@ -22,14 +22,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {!session ? (
-        <MainLayoutHeightScreen>
-          <div className="flex flex-col text-center">
-            <h1 className="text-2xl">Please Sign in</h1>
-            <p className="">In order to view your progress</p>
-          </div>
-        </MainLayoutHeightScreen>
-      ) : (
+      {session ? (
         <MainLayoutFlex>
           {/* Current Weight of User  */}
           <div className="mt-5 mx-20 text-center">
@@ -80,6 +73,13 @@ const Home: NextPage = () => {
             </Link>
           </div>
         </MainLayoutFlex>
+      ) : (
+        <MainLayoutHeightScreen>
+          <div className="flex flex-col text-center">
+            <h1 className="text-2xl">Please Sign in</h1>
+            <p className="">In order to view your progress</p>
+          </div>
+        </MainLayoutHeightScreen>
       )}
     </>
   );
