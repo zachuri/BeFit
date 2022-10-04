@@ -50,9 +50,9 @@ const Home: NextPage = () => {
           </div>
 
           {/* Graph of Progress */}
-          <div className="mt-5">
+          {/* <div className="mt-5">
             <LineGraph />
-          </div>
+          </div> */}
 
           <div className="text-center text-2xl mt-5 p-2 grid grid-cols-2 gap-5">
             <Link href="/progress">
