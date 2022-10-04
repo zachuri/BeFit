@@ -51,7 +51,7 @@ const Navbar = () => {
                 </button>
 
                 {/* Empty Avatar */}
-                <CgProfile size={25} />
+                <CgProfile size={30} />
               </div>
             ) : (
               <div className="flex flex-cols">
