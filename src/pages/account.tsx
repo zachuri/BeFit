@@ -1,7 +1,7 @@
-import React from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
-import { FaGithub, FaDiscord } from "react-icons/fa";
-import Image from "next/image";
+import React from 'react';
+import { useSession, signIn, signOut } from 'next-auth/react';
+import { FaGithub, FaDiscord } from 'react-icons/fa';
+import Image from 'next/image';
 
 const Account = () => {
   const { data: session } = useSession();
@@ -10,13 +10,15 @@ const Account = () => {
   if (session) {
     return (
       <div className="pt-[100px] flex flex-col max-w-[400px] w-full mx-auto p-4">
-        <h2 className="text-2xl font-bold">
-          Welcome, {session?.user?.name}
-        </h2>
+        <h2 className="text-2xl font-bold">Welcome, {session?.user?.name}</h2>
         <p className="py-4">Signed in as {session?.user?.email}</p>
         <div className="pb-4 m-auto">
           <Image
-            src={session.user?.image === undefined ? "/assets/avatar.png" : session?.user?.image as string}
+            src={
+              session.user?.image === undefined
+                ? '/assets/avatar.png'
+                : (session?.user?.image as string)
+            }
             alt="/"
             width="100"
             height="100"
