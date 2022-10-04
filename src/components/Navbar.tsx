@@ -15,7 +15,7 @@ const Navbar = () => {
     console.log('Theme: ' + theme);
   }
 
-  const { data: session, status } = useSession();
+  const { status } = useSession();
 
   // console.log(session);
 
@@ -43,7 +43,7 @@ const Navbar = () => {
             </button>
 
             {/* Log in/out */}
-            {status === 'authenticated' ? (
+            {status === 'authenticated' || status === 'loading' ? (
               <div className="flex flex-cols">
                 {/* Log out */}
                 <button onClick={() => signOut()} className="mr-1 p-1">
@@ -51,7 +51,7 @@ const Navbar = () => {
                 </button>
 
                 {/* Avatar Image */}
-                <AccountMenu session={session} />
+                <AccountMenu />
               </div>
             ) : (
               <div className="flex items-center justify-center">
