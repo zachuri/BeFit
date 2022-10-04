@@ -14,6 +14,16 @@ const Home: NextPage = () => {
   // const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
   const { data: session, status } = useSession();
 
+  if (status === 'loading') {
+    return (
+      <MainLayoutHeightScreen>
+        <div className="flex flex-col text-center">
+          <h1 className="text-2xl">...Loading</h1>
+        </div>
+      </MainLayoutHeightScreen>
+    );
+  }
+
   return (
     <>
       <Head>

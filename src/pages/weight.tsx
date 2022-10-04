@@ -36,6 +36,16 @@ const Weight: React.FC = () => {
     mutate(values);
   }
 
+  if (status === 'loading') {
+    return (
+      <MainLayoutHeightScreen>
+        <div className="flex flex-col text-center">
+          <h1 className="text-2xl">...Loading</h1>
+        </div>
+      </MainLayoutHeightScreen>
+    );
+  }
+
   return (
     <>
       {status === 'authenticated' ? (
