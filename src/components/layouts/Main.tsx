@@ -4,6 +4,16 @@ interface mainProps {
   children: React.ReactNode;
 }
 
+export const MainLayoutFill: React.FC<mainProps> = ({ children }) => {
+  return (
+    <main>
+      <div className="container mx-auto flex flex-col items-center justify-center mt-20">
+        {children}
+      </div>
+    </main>
+  );
+};
+
 export const MainLayoutFlex: React.FC<mainProps> = ({ children }) => {
   return (
     <main>
