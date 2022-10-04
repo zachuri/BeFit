@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import MainLayout from '../components/layouts/Main';
 import { AiFillCaretDown } from 'react-icons/ai';
+import LineGraph from '../components/LineGraph';
 // import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {
@@ -34,7 +35,9 @@ const Home: NextPage = () => {
           </div>
 
           {/* Graph of Progress */}
-          <div></div>
+          <div className="mt-5">
+            <LineGraph />
+          </div>
         </div>
       </MainLayout>
     </>
