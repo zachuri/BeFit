@@ -7,6 +7,6 @@
 		/* @apply max-w-2xl mx-auto px-4; */
 		font-family: Questrial, SF Pro Display, SF Pro Icons, Helvetica Neue,
 			Helvetica, Arial, sans-serif;
-		@apply bg-light-color-bg text-light-color-text dark:bg-dark-color-bg dark:text-dark-color-text;
+		@apply bg-white text-black dark:bg-black dark:text-white;
 	}
 }
