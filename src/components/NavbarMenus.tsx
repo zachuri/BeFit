@@ -23,7 +23,7 @@ export const NavigateMenu: React.FC = () => {
     <div className='flex items-center justify-center pt-2'>
       <Menu as="div" className="relative inline-block text-left ">
         <Menu.Button role="navigation" aria-label="hamburger menu to navigate to pages">
-          <BsThreeDotsVertical size={20} />
+          <BsThreeDotsVertical size={15} />
         </Menu.Button>
 
         <Transition
@@ -70,11 +70,11 @@ export const NavigateMenu: React.FC = () => {
 
 export const AccountMenu: React.FC<{ session: Session }> = ({ session }) => {
   return (
-    <>
+    <div className='flex items-center justify-center'>
       {/* Menu for Account*/}
       <Menu as="div" className="relative inline-block text-left">
         <Menu.Button as="div" role="navigation" aria-label="hamburger menu to navigate to pages">
-          <div className='hover:shadow hover:shadow-light-color-bg rounded-xl flex items-center justify-center'>
+          <div className='flex items-center justify-center md:border-2 md:border-white rounded-full'>
             <Image
               className="rounded-full"
               // Just casted as string because next see's string | undefined -> can't be undefined
@@ -147,7 +147,7 @@ export const AccountMenu: React.FC<{ session: Session }> = ({ session }) => {
                     active
                       ? "bg-gray-500 text-gray-100"
                       : "text-gray-200",
-                    "text-left w-full block px-4 py-2 text-sm"
+                    "text-left w-full block px-4 py-2 text-xs"
                   )}
 
                   onClick={() => {
@@ -160,7 +160,7 @@ export const AccountMenu: React.FC<{ session: Session }> = ({ session }) => {
           </Menu.Items>
         </Transition>
       </Menu>
-    </>
+    </div>
   )
 }
 
