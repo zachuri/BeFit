@@ -7,7 +7,7 @@ interface mainProps {
 export const MainLayoutFill: React.FC<mainProps> = ({ children }) => {
   return (
     <main>
-      <div className="container mx-auto flex flex-col items-center justify-center mt-20">
+      <div className="container mx-auto flex flex-col items-center justify-center mt-10 md:mt-20">
         {children}
       </div>
     </main>
