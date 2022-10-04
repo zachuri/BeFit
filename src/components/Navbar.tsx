@@ -23,7 +23,7 @@ const Navbar = () => {
     <>
       {/* Container for Navbar */}
       <div className="top-0 fixed w-full h-10 md:h-20 z-[100] bg-opacity-20 backdrop-blur-lg drop-shadow-lg border-b-2 border-black dark:border-white">
-        <div className="flex justify-between items-center w-full h-full px-10">
+        <div className="flex justify-between items-center w-full h-full px-5 md:px-10">
           {/* Left */}
           <div>
             <Link href="/">BeFit</Link>
