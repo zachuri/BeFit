@@ -9,17 +9,46 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 // import { trpc } from "../utils/trpc";
 
+const NavigateLinks = () => {
+  return (
+    <div className="text-center text-2xl mt-5 p-2 grid grid-cols-2 gap-5">
+      <Link href="/progress">
+        <div className="p-10 border rounded border-black dark:border-white hover:border-[#00C804] hover:dark:border-[#00C804]">
+          <button>Progress</button>
+        </div>
+      </Link>
+
+      <Link href="/exercise">
+        <div className="p-10 border rounded border-black dark:border-white hover:border-[#00C804] hover:dark:border-[#00C804]">
+          <button>Exercise</button>
+        </div>
+      </Link>
+
+      <Link href="/diet">
+        <div className="p-10 border rounded border-black dark:border-white hover:border-[#00C804] hover:dark:border-[#00C804]">
+          <button>Diet</button>
+        </div>
+      </Link>
+
+      <Link href="/weight">
+        <div className="p-10 border rounded border-black dark:border-white hover:border-[#00C804] hover:dark:border-[#00C804]">
+          <button>Weight</button>
+        </div>
+      </Link>
+    </div>
+  );
+};
+
 const Home = () => {
   // const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
   const { status } = useSession();
 
   if (status === 'loading') {
     return (
-      <MainLayoutHeightScreen>
-        <div className="flex flex-col text-center">
-          <h1 className="text-2xl">...Loading</h1>
-        </div>
-      </MainLayoutHeightScreen>
+      <MainLayoutFlex>
+        <h1>Data is loading...</h1>
+        <NavigateLinks />
+      </MainLayoutFlex>
     );
   }
 
@@ -56,31 +85,8 @@ const Home = () => {
             <LineGraph />
           </div> */}
 
-          <div className="text-center text-2xl mt-5 p-2 grid grid-cols-2 gap-5">
-            <Link href="/progress">
-              <div className="p-10 border rounded border-black dark:border-white hover:border-[#00C804] hover:dark:border-[#00C804]">
-                <button>Progress</button>
-              </div>
-            </Link>
-
-            <Link href="/exercise">
-              <div className="p-10 border rounded border-black dark:border-white hover:border-[#00C804] hover:dark:border-[#00C804]">
-                <button>Exercise</button>
-              </div>
-            </Link>
-
-            <Link href="/diet">
-              <div className="p-10 border rounded border-black dark:border-white hover:border-[#00C804] hover:dark:border-[#00C804]">
-                <button>Diet</button>
-              </div>
-            </Link>
-
-            <Link href="/weight">
-              <div className="p-10 border rounded border-black dark:border-white hover:border-[#00C804] hover:dark:border-[#00C804]">
-                <button>Weight</button>
-              </div>
-            </Link>
-          </div>
+          {/* Navigation Links */}
+          <NavigateLinks />
         </MainLayoutFlex>
       ) : (
         <MainLayoutHeightScreen>
