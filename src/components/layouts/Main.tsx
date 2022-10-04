@@ -7,10 +7,8 @@ interface mainProps {
 const MainLayout: React.FC<mainProps> = ({ children }) => {
   return (
     <main>
-      <div className="flex flex-col justify-center items-center px-10 pt-10 md:pt-20 ">
-        <div className="max-w-lg flex-1 flex flex-col justify-center items-center">
-          {children}
-        </div>
+      <div className="flex flex-col justify-center items-center mt-10 md:mt-20 ">
+        <div className="max-w-md w-full">{children}</div>
       </div>
     </main>
   );
