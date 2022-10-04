@@ -2,11 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'IBM-Plex-Mono';
+  src: url('../../public/assets/fonts/IBMPlexMono-Regular.ttf');
+}
+
 @layer base {
-	body {
-		/* @apply max-w-2xl mx-auto px-4; */
-		font-family: IBM Plex Mono, Questrial, SF Pro Display, SF Pro Icons,
-			Helvetica Neue, Helvetica, Arial, sans-serif;
-		@apply bg-white text-black dark:bg-black dark:text-white;
-	}
+  body {
+    /* @apply max-w-2xl mx-auto px-4; */
+    font-family: IBM-Plex-Mono, Questrial, SF Pro Display, SF Pro Icons,
+      Helvetica Neue, Helvetica, Arial, sans-serif;
+    @apply bg-white text-black dark:bg-black dark:text-white;
+  }
 }
