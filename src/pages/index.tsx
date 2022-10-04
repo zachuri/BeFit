@@ -1,6 +1,9 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import MainLayout from '../components/layouts/Main';
+import {
+  MainLayoutFlex,
+  MainLayoutHeightScreen
+} from '../components/layouts/Main';
 import { AiFillCaretDown } from 'react-icons/ai';
 import LineGraph from '../components/LineGraph';
 import Link from 'next/link';
@@ -20,16 +23,14 @@ const Home: NextPage = () => {
       </Head>
 
       {!session ? (
-        <MainLayout>
-          <div className="min-h-screen flex items-center justify-center -mt-10 md:-mt-20">
-            <div className="flex flex-col text-center">
-              <h1 className="text-2xl">Please Sign in</h1>
-              <p className="">In order to view your progress</p>
-            </div>
+        <MainLayoutHeightScreen>
+          <div className="flex flex-col text-center">
+            <h1 className="text-2xl">Please Sign in</h1>
+            <p className="">In order to view your progress</p>
           </div>
-        </MainLayout>
+        </MainLayoutHeightScreen>
       ) : (
-        <MainLayout>
+        <MainLayoutFlex>
           {/* Current Weight of User  */}
           <div className="mt-5 mx-20 text-center">
             <h1 className="text-5xl">Current Weight</h1>
@@ -78,7 +79,7 @@ const Home: NextPage = () => {
               </div>
             </Link>
           </div>
-        </MainLayout>
+        </MainLayoutFlex>
       )}
     </>
   );
