@@ -12,7 +12,7 @@ import { useSession } from 'next-auth/react';
 
 const Home: NextPage = () => {
   // const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   return (
     <>
@@ -22,7 +22,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {session ? (
+      {status === 'authenticated' ? (
         <MainLayoutFlex>
           {/* Current Weight of User  */}
           <div className="mt-5 mx-20 text-center">

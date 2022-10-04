@@ -10,7 +10,7 @@ import {
 } from '../components/layouts/Main';
 
 const Weight: React.FC = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const queryClient = useQueryClient();
 
@@ -38,7 +38,7 @@ const Weight: React.FC = () => {
 
   return (
     <>
-      {session ? (
+      {status === 'authenticated' ? (
         <>
           <MainLayoutFill>
             <div className="mt-10">
