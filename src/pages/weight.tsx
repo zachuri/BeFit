@@ -61,11 +61,13 @@ const Weight: React.FC = () => {
                     Current weight in lbs
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="180lbs"
+                    placeholder="180"
                     required
-                    {...register('weightTotal')}
+                    {...register('weightTotal', {
+                      setValueAs: v => parseInt(v)
+                    })}
                   />
                 </div>
                 <div className="mb-6">
@@ -85,43 +87,6 @@ const Weight: React.FC = () => {
                 </div>
               </form>
             </div>
-            {/* <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                  <th scope="col" className="py-3 px-6">
-                    Date
-                  </th>
-                  <th scope="col" className="py-3 px-6">
-                    Weight
-                  </th>
-                  <th scope="col" className="py-3 px-6">
-                    Description/Image
-                  </th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {data?.map((weight) => {
-                  return (
-                    <tr
-                      key={weight.id}
-                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                    >
-                      <th
-                        scope="row"
-                        className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                      >
-                        {weight.createdAt.toUTCString()}
-                      </th>
-                      <td className="py-4 px-6">
-                        {weight.weightTotal}
-                      </td>
-                      <td className="py-4 px-6">{weight.body}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table> */}
             <div className="grid grid-cols text-xs md:text-base md:grid-cols-2 gap-3 mt-2">
               {data?.map(weight => {
                 return (
@@ -154,3 +119,43 @@ const Weight: React.FC = () => {
 };
 
 export default Weight;
+
+{
+  /* <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+  <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <tr>
+      <th scope="col" className="py-3 px-6">
+        Date
+      </th>
+      <th scope="col" className="py-3 px-6">
+        Weight
+      </th>
+      <th scope="col" className="py-3 px-6">
+        Description/Image
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {data?.map((weight) => {
+      return (
+        <tr
+          key={weight.id}
+          className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+        >
+          <th
+            scope="row"
+            className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+          >
+            {weight.createdAt.toUTCString()}
+          </th>
+          <td className="py-4 px-6">
+            {weight.weightTotal}
+          </td>
+          <td className="py-4 px-6">{weight.body}</td>
+        </tr>
+      );
+    })}
+  </tbody>
+</table> */
+}
