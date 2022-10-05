@@ -95,7 +95,7 @@ const Weight: React.FC = () => {
                 return (
                   <div key={weight.id}>
                     <Item
-                      id={{ id: weight.id }}
+                      id={weight.id}
                       weight={weight.weightTotal}
                       date={weight.createdAt.toUTCString()}
                       description={weight.body}
