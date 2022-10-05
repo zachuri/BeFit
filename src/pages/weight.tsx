@@ -52,6 +52,7 @@ const Weight: React.FC = () => {
         <>
           <MainLayoutFill>
             <div className="mt-10">
+              {error && error.message}
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-6">
                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
