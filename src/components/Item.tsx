@@ -46,26 +46,27 @@ const Item: React.FC<Props> = ({ id, date, weight, description }) => {
 
   const { handleSubmit, register, reset } = useForm<UpdateWeightInput>();
 
-  const { mutate: mutateUpdate, error: errorUpdate } = trpc.useMutation(
-    ['weights.updateWeight'],
-    {
-      // onSuccess({ id }) {
-      // router.push(`/weight/${id}`);
-      // router.push(`/weight`);
-      onError() {
-        errorUpdate;
-      },
+  const {
+    mutate: mutateUpdate,
+    error: errorUpdate,
+    isLoading: isLoadingUpdate
+  } = trpc.useMutation(['weights.updateWeight'], {
+    // onSuccess({ id }) {
+    // router.push(`/weight/${id}`);
+    // router.push(`/weight`);
+    onError() {
+      errorUpdate;
+    },
 
-      onSuccess() {
-        // reset teh form
-        reset();
+    onSuccess() {
+      // reset teh form
+      reset();
 
-        // able to refetch query
-        // queryClient.refetchQueries('weights.getAllWeights');
-        refetch();
-      }
+      // able to refetch query
+      // queryClient.refetchQueries('weights.getAllWeights');
+      refetch();
     }
-  );
+  });
 
   function onSubmit(values: UpdateWeightInput) {
     mutateUpdate(values);
@@ -75,6 +76,7 @@ const Item: React.FC<Props> = ({ id, date, weight, description }) => {
   return (
     <>
       <div className="rounded border border-black dark:border-white p-4">
+        {isLoadingUpdate && <div className="text-xs">Updating...</div>}
         <div>
           Weight: {weight} <span className="text-xs">lbs</span>
         </div>
