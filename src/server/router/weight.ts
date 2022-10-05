@@ -13,7 +13,7 @@ export const weightRouter = createRouter()
     }
     return next();
   })
-  .mutation('create-weight', {
+  .mutation('addWeight', {
     input: createWeightSchema,
     async resolve({ ctx, input }) {
       // !ctx.session.user -> no need for user

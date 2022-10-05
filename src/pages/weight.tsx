@@ -19,7 +19,7 @@ const Weight: React.FC = () => {
 
   const { data, isLoading, refetch } = trpc.useQuery(['weights.getAllWeights']);
 
-  const { mutate, error } = trpc.useMutation(['weights.create-weight'], {
+  const { mutate, error } = trpc.useMutation(['weights.addWeight'], {
     // onSuccess({ id }) {
     // router.push(`/weight/${id}`);
     // router.push(`/weight`);
