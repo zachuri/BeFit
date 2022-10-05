@@ -21,6 +21,14 @@ const Item: React.FC<Props> = ({ date, weight, description }) => {
         <div className="text-xs">
           Time: {date.split(' ').slice(-2).join(' ')}
         </div>
+        <div className="mt-2 flex flex-row-reverse gap-2">
+          <button className="border border-black dark:border-white hover:border-[#00C804] hover:dark:border-[#00C804] p-1 rounded">
+            Remove
+          </button>
+          <button className="border border-black dark:border-white hover:border-[#00C804] hover:dark:border-[#00C804] p-1 rounded">
+            Edit
+          </button>
+        </div>
       </div>
     </>
   );
