@@ -69,6 +69,7 @@ const Item: React.FC<Props> = ({ id, date, weight, description }) => {
 
   function onSubmit(values: UpdateWeightInput) {
     mutateUpdate(values);
+    setIsOpen(false);
   }
 
   return (
