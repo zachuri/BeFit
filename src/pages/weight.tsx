@@ -1,12 +1,13 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { trpc } from '../utils/trpc';
-import { CreateWeightInput } from '../schema/weight.schema';
+import { AddWeightInput } from '../schema/weight.schema';
 // import { useQueryClient } from 'react-query';
 import { useSession } from 'next-auth/react';
 import Item from '../components/Item';
 import {
   MainLayoutFill,
+  MainLayoutFlex,
   MainLayoutHeightScreen
 } from '../components/layouts/Main';
 
@@ -15,7 +16,7 @@ const Weight: React.FC = () => {
 
   // const queryClient = useQueryClient();
 
-  const { handleSubmit, register, reset } = useForm<CreateWeightInput>();
+  const { handleSubmit, register, reset } = useForm<AddWeightInput>();
 
   const { data, isLoading, refetch } = trpc.useQuery(['weights.getAllWeights']);
 
@@ -34,7 +35,7 @@ const Weight: React.FC = () => {
     }
   });
 
-  function onSubmit(values: CreateWeightInput) {
+  function onSubmit(values: AddWeightInput) {
     mutate(values);
   }
 
@@ -53,8 +54,8 @@ const Weight: React.FC = () => {
       {status === 'authenticated' ? (
         <>
           <MainLayoutFill>
+            {error && <MainLayoutFlex>{error.message}</MainLayoutFlex>}
             <div className="mt-10">
-              {error && error.message}
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-6">
                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">

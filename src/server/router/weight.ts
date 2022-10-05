@@ -1,6 +1,6 @@
 import { createRouter } from './context';
 // import { z } from "zod";
-import { createWeightSchema } from '../../schema/weight.schema';
+import { addWeightSchema } from '../../schema/weight.schema';
 import * as trpc from '@trpc/server';
 import { TRPCError } from '@trpc/server';
 
@@ -9,12 +9,12 @@ export const weightRouter = createRouter()
     // Any queries or mutations after this middleware will
     // raise an error unless there is a current session
     if (!ctx.session) {
-      throw new TRPCError({ code: "UNAUTHORIZED" });
+      throw new TRPCError({ code: 'UNAUTHORIZED' });
     }
     return next();
   })
   .mutation('addWeight', {
-    input: createWeightSchema,
+    input: addWeightSchema,
     async resolve({ ctx, input }) {
       // !ctx.session.user -> no need for user
       if (!ctx.session) {

@@ -1,6 +1,6 @@
 import z from 'zod';
 
-export const createWeightSchema = z.object({
+export const addWeightSchema = z.object({
   weightTotal: z
     .number()
     .min(1, 'Min weight is 1 lbs')
@@ -8,7 +8,7 @@ export const createWeightSchema = z.object({
   body: z.string().max(100, 'Max body length is 100 words')
 });
 
-export type CreateWeightInput = z.TypeOf<typeof createWeightSchema>;
+export type AddWeightInput = z.TypeOf<typeof addWeightSchema>;
 
 export const getSingleWeightSchema = z.object({
   weigthId: z.string().uuid()
