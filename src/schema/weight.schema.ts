@@ -14,6 +14,8 @@ export const removeWeightSchema = z.object({
   id: z.string().uuid()
 });
 
+export type RemoveWeightInput = z.TypeOf<typeof removeWeightSchema>;
+
 export const getSingleWeightSchema = z.object({
   weigthId: z.string().uuid()
 });
