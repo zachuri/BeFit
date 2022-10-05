@@ -125,10 +125,10 @@ const Item: React.FC<Props> = ({ id, date, weight, description }) => {
                     leaveFrom="opacity-100 scale-100"
                     leaveTo="opacity-0 scale-95"
                   >
-                    <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                    <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white border border-black  dark:bg-black dark:border dark:border-white p-6 text-left align-middle shadow-xl transition-all">
                       <Dialog.Title
                         as="h3"
-                        className="text-lg font-medium leading-6 text-gray-900"
+                        className="text-lg font-medium leading-6 text-gray-900 dark:text-white"
                       >
                         Please input new weight or descripton!
                       </Dialog.Title>
@@ -167,16 +167,10 @@ const Item: React.FC<Props> = ({ id, date, weight, description }) => {
                           </div>
                           <div className="flex items-center justify-center">
                             <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                              Add Weight
+                              Update Weight
                             </button>
                           </div>
                         </form>
-
-                        <p className="text-sm text-gray-500">
-                          Your payment has been successfully submitted. We’ve
-                          sent you an email with all of the details of your
-                          order.
-                        </p>
                       </div>
 
                       <div className="mt-4">
@@ -185,7 +179,7 @@ const Item: React.FC<Props> = ({ id, date, weight, description }) => {
                           className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                           onClick={closeModal}
                         >
-                          Submit
+                          Cancel
                         </button>
                       </div>
                     </Dialog.Panel>
