@@ -1,7 +1,8 @@
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { trpc } from '../utils/trpc';
 import { CreateWeightInput } from '../schema/weight.schema';
-import { useQueryClient } from 'react-query';
+// import { useQueryClient } from 'react-query';
 import { useSession } from 'next-auth/react';
 import Item from '../components/Item';
 import {
@@ -12,11 +13,11 @@ import {
 const Weight: React.FC = () => {
   const { status } = useSession();
 
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
 
   const { handleSubmit, register, reset } = useForm<CreateWeightInput>();
 
-  const { data, isLoading } = trpc.useQuery(['weights.getAllWeights']);
+  const { data, isLoading, refetch } = trpc.useQuery(['weights.getAllWeights']);
 
   const { mutate, error } = trpc.useMutation(['weights.create-weight'], {
     // onSuccess({ id }) {
@@ -28,7 +29,8 @@ const Weight: React.FC = () => {
       reset();
 
       // able to refetch query
-      queryClient.refetchQueries('weights.getAllWeights');
+      // queryClient.refetchQueries('weights.getAllWeights');
+      refetch();
     }
   });
 
