@@ -1,6 +1,9 @@
 import { createRouter } from './context';
 // import { z } from "zod";
-import { addWeightSchema } from '../../schema/weight.schema';
+import {
+  addWeightSchema,
+  removeWeightSchema
+} from '../../schema/weight.schema';
 import * as trpc from '@trpc/server';
 import { TRPCError } from '@trpc/server';
 
@@ -37,6 +40,23 @@ export const weightRouter = createRouter()
       });
 
       return weight;
+    }
+  })
+  .mutation('removeWeight', {
+    input: removeWeightSchema,
+    async resolve({ ctx, input }) {
+      if (!ctx.session) {
+        new trpc.TRPCError({
+          code: 'FORBIDDEN',
+          message: "Please Sign In: can't get any post"
+        });
+      }
+
+      return ctx.prisma.weight.delete({
+        where: {
+          id: input.id
+        }
+      });
     }
   })
   .query('getAllWeights', {

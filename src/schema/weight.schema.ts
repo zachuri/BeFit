@@ -10,6 +10,10 @@ export const addWeightSchema = z.object({
 
 export type AddWeightInput = z.TypeOf<typeof addWeightSchema>;
 
+export const removeWeightSchema = z.object({
+  id: z.string().uuid()
+});
+
 export const getSingleWeightSchema = z.object({
   weigthId: z.string().uuid()
 });
