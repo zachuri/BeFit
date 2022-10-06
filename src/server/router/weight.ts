@@ -95,6 +95,9 @@ export const weightRouter = createRouter()
       }
 
       return ctx.prisma.weight.findMany({
+        orderBy: {
+          createdAt: "desc",
+        },
         where: {
           userId: ctx.session?.user?.id
         }
