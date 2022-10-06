@@ -93,13 +93,13 @@ const Item: React.FC<Props> = ({ id, date, weight, description }) => {
         <div className="mt-2 flex flex-row-reverse gap-2">
           <button
             onClick={() => mutateRemove({ id: id })}
-            className="border border-black dark:border-white hover:border-[#00C804] hover:dark:border-[#00C804] p-1 rounded"
+            className="border border-black dark:border-white hover:border-[red] hover:dark:border-[red] p-1 rounded"
           >
             Remove
           </button>
           <button
             onClick={openModal}
-            className="border border-black dark:border-white hover:border-[#00C804] hover:dark:border-[#00C804] p-1 rounded"
+            className="border border-black dark:border-white hover:border-blue-500 hover:dark:border-blue-500 p-1 rounded"
           >
             Edit
           </button>
