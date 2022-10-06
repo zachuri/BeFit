@@ -14,25 +14,26 @@ interface Props {
 const Item: React.FC<Props> = ({ id, date, weight, description }) => {
   const { refetch } = trpc.useQuery(['weights.getAllWeights']);
 
-  const { mutate: mutateRemove, error: errorRemove } = trpc.useMutation(
-    ['weights.removeWeight'],
-    {
-      // onSuccess({ id }) {
-      // router.push(`/weight/${id}`);
-      // router.push(`/weight`);
+  const {
+    mutate: mutateRemove,
+    error: errorRemove,
+    isLoading: isLoadinRemove
+  } = trpc.useMutation(['weights.removeWeight'], {
+    // onSuccess({ id }) {
+    // router.push(`/weight/${id}`);
+    // router.push(`/weight`);
 
-      onError() {
-        errorRemove;
-      },
+    onError() {
+      errorRemove;
+    },
 
-      onSuccess() {
-        // reset teh form
-        // able to refetch query
-        // queryClient.refetchQueries('weights.getAllWeights');
-        refetch();
-      }
+    onSuccess() {
+      // reset teh form
+      // able to refetch query
+      // queryClient.refetchQueries('weights.getAllWeights');
+      refetch();
     }
-  );
+  });
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -77,6 +78,7 @@ const Item: React.FC<Props> = ({ id, date, weight, description }) => {
     <>
       <div className="rounded border border-black dark:border-white p-4">
         {isLoadingUpdate && <div className="text-xs">Updating...</div>}
+        {isLoadinRemove && <div className="text-xs">Removing...</div>}
         <div>
           Weight: {weight} <span className="text-xs">lbs</span>
         </div>

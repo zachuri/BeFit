@@ -20,7 +20,11 @@ const Weight: React.FC = () => {
 
   const { data, isLoading, refetch } = trpc.useQuery(['weights.getAllWeights']);
 
-  const { mutate, error } = trpc.useMutation(['weights.addWeight'], {
+  const {
+    mutate,
+    error,
+    isLoading: isLoadingAddWeight
+  } = trpc.useMutation(['weights.addWeight'], {
     // onSuccess({ id }) {
     // router.push(`/weight/${id}`);
     // router.push(`/weight`);
@@ -88,6 +92,11 @@ const Weight: React.FC = () => {
                     Add Weight
                   </button>
                 </div>
+                {isLoading && (
+                  <div className="flex justify-center mt-2 items-center text-xs">
+                    LOADING your weights...
+                  </div>
+                )}
               </form>
             </div>
             <div className="grid grid-cols md:grid-cols-2 gap-3 mt-2">
