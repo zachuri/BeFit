@@ -85,7 +85,7 @@ const Item: React.FC<Props> = ({ id, date, weight, description }) => {
         <div className="text-xs">Description: {description}</div>
         <div className="text-xs">
           {/* Only get the date */}
-          Date: {date.split(' ').slice(0, 4).join(' ')}
+          Date: {date.split(' ').slice(0, 1).join(' ').replace(',', '')}
         </div>
         <div className="text-xs">
           Time: {date.split(' ').slice(-2).join(' ')}

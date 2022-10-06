@@ -106,7 +106,7 @@ const Weight: React.FC = () => {
                     <Item
                       id={weight.id}
                       weight={weight.weightTotal}
-                      date={weight.createdAt.toUTCString()}
+                      date={weight.createdAt.toLocaleString()}
                       description={weight.body}
                     />
                   </div>
