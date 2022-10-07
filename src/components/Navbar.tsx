@@ -1,4 +1,5 @@
-import { signIn, signOut, useSession } from 'next-auth/react';
+// import { signIn, signOut, useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import { WiMoonAltThirdQuarter } from 'react-icons/wi';
@@ -25,8 +26,10 @@ const Navbar = () => {
       <div className="top-0 fixed w-full h-10 md:h-20 z-[100] bg-opacity-20 backdrop-blur-lg drop-shadow-lg border-b-2 border-black dark:border-white">
         <div className="flex justify-between items-center w-full h-full px-5 md:px-10">
           {/* Left */}
-          <div>
+          <div className="flex items-center justify-center gap-5">
             <Link href="/">BeFit</Link>
+            {/* ThreeDot for Navigating to pages */}
+            <NavigateMenu />
           </div>
 
           {/* Middle */}
@@ -34,21 +37,18 @@ const Navbar = () => {
 
           {/* Right */}
           <div className="flex flex-cols">
-            {/* ThreeDot for Navigating to pages */}
-            <NavigateMenu />
-
             {/* Button Theme Toggle */}
-            <button onClick={handleTheme} className="p-2 mr-2">
+            <button onClick={handleTheme} className="p-2">
               <WiMoonAltThirdQuarter size={20} />
             </button>
 
             {/* Log in/out */}
             {status === 'authenticated' || status === 'loading' ? (
-              <div className="flex flex-cols">
+              <div className="flex flex-cols ml-2">
                 {/* Log out */}
-                <button onClick={() => signOut()} className="mr-1 p-1">
+                {/* <button onClick={() => signOut()} className="mr-1 p-1">
                   Sign Out
-                </button>
+                </button> */}
 
                 {/* Avatar Image */}
                 <AccountMenu />
