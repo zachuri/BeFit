@@ -6,7 +6,7 @@ import { AddWeightInput } from '../schema/weight.schema';
 import { useSession } from 'next-auth/react';
 import Item from '../components/Item';
 import {
-  MainLayoutFill,
+  // MainLayoutFill,
   MainLayoutFlex,
   MainLayoutHeightScreen
 } from '../components/layouts/Main';
@@ -28,7 +28,6 @@ const Weight: React.FC = () => {
     // onSuccess({ id }) {
     // router.push(`/weight/${id}`);
     // router.push(`/weight`);
-
     onSuccess() {
       // reset teh form
       reset();
@@ -57,13 +56,13 @@ const Weight: React.FC = () => {
     <>
       {status === 'authenticated' ? (
         <>
-          <MainLayoutFill>
+          <MainLayoutFlex>
             {error && <MainLayoutFlex>{error.message}</MainLayoutFlex>}
-            <div className="my-5 p-3 rounded border border-white">
+            <div className="my-10 md:mx-40 p-3 rounded border border-black dark:border-white">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-6">
                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                    Current weight in lbs
+                    Add current weight (lbs)
                   </label>
                   <input
                     type="number"
@@ -88,7 +87,7 @@ const Weight: React.FC = () => {
                   />
                 </div>
                 <div className="flex items-center justify-center">
-                  <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Add Weight
                   </button>
                 </div>
@@ -107,13 +106,14 @@ const Weight: React.FC = () => {
                       id={weight.id}
                       weight={weight.weightTotal}
                       date={weight.createdAt.toLocaleString()}
+                      day={weight.createdAt.getUTCDay()}
                       description={weight.body}
                     />
                   </div>
                 );
               })}
             </div>
-          </MainLayoutFill>
+          </MainLayoutFlex>
         </>
       ) : (
         <>

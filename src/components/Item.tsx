@@ -7,11 +7,12 @@ import { trpc } from '../utils/trpc';
 interface Props {
   id: string;
   date: string;
+  day: number;
   weight: number;
   description: string;
 }
 
-const Item: React.FC<Props> = ({ id, date, weight, description }) => {
+const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
   const { refetch } = trpc.useQuery(['weights.getAllWeights']);
 
   const {
@@ -74,6 +75,16 @@ const Item: React.FC<Props> = ({ id, date, weight, description }) => {
     setIsOpen(false);
   }
 
+  const weekday = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday'
+  ];
+
   return (
     <>
       <div className="rounded border border-black dark:border-white p-4">
@@ -82,10 +93,16 @@ const Item: React.FC<Props> = ({ id, date, weight, description }) => {
         <div>
           Weight: {weight} <span className="text-xs">lbs</span>
         </div>
-        <div className="text-xs">Description: {description}</div>
+        {/* If description is empty */}
+        {description.length == 0 ? (
+          ''
+        ) : (
+          <div className="text-xs">Description: {description}</div>
+        )}
         <div className="text-xs">
           {/* Only get the date */}
-          Date: {date.split(' ').slice(0, 1).join(' ').replace(',', '')}
+          Date: {weekday[day]},{' '}
+          {date.split(' ').slice(0, 1).join(' ').replace(',', '')}
         </div>
         <div className="text-xs">
           Time: {date.split(' ').slice(-2).join(' ')}
