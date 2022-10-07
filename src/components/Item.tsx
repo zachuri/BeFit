@@ -37,6 +37,7 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
   });
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenRemove, setIsOpenRemove] = useState(false);
 
   function closeModal() {
     setIsOpen(false);
@@ -44,6 +45,14 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
 
   function openModal() {
     setIsOpen(true);
+  }
+
+  function closeModalRemove() {
+    setIsOpenRemove(false);
+  }
+
+  function openModalRemove() {
+    setIsOpenRemove(true);
   }
 
   const { handleSubmit, register, reset } = useForm<UpdateWeightInput>();
@@ -109,11 +118,72 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
         </div>
         <div className="mt-2 flex flex-row-reverse gap-2">
           <button
-            onClick={() => mutateRemove({ id: id })}
+            onClick={openModalRemove}
             className="border border-black dark:border-white hover:border-[red] hover:dark:border-[red] p-1 rounded"
           >
             Remove
           </button>
+          {/* modal transition */}
+          <Transition appear show={isOpenRemove} as={Fragment}>
+            <Dialog as="div" className="relative z-10" onClose={closeModal}>
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+              >
+                <div className="fixed inset-0 bg-black bg-opacity-25" />
+              </Transition.Child>
+
+              <div className="fixed inset-0 overflow-y-auto">
+                <div className="flex min-h-full items-center justify-center p-4 text-center">
+                  <Transition.Child
+                    as={Fragment}
+                    enter="ease-out duration-300"
+                    enterFrom="opacity-0 scale-95"
+                    enterTo="opacity-100 scale-100"
+                    leave="ease-in duration-200"
+                    leaveFrom="opacity-100 scale-100"
+                    leaveTo="opacity-0 scale-95"
+                  >
+                    <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white border border-black  dark:bg-black dark:border dark:border-white p-6 text-left align-middle shadow-xl transition-all">
+                      <Dialog.Title
+                        as="h3"
+                        className="text-lg font-medium leading-6 text-gray-900 dark:text-white"
+                      >
+                        Are you sure you want to remove?
+                      </Dialog.Title>
+                      <div className="flex justify-center item-center mt-2">
+                        <button
+                          onClick={() => {
+                            mutateRemove({ id: id });
+                            setIsOpenRemove(false);
+                          }}
+                          className="bg-[red] p-2 rounded mt-2"
+                        >
+                          Remove
+                        </button>
+                      </div>
+
+                      <div className="mt-4">
+                        <button
+                          type="button"
+                          className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                          onClick={closeModalRemove}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </Dialog.Panel>
+                  </Transition.Child>
+                </div>
+              </div>
+            </Dialog>
+          </Transition>
+
           <button
             onClick={openModal}
             className="border border-black dark:border-white hover:border-blue-500 hover:dark:border-blue-500 p-1 rounded"
