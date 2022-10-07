@@ -95,9 +95,9 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
         </div>
         {/* If description is empty */}
         {description.length == 0 ? (
-          ''
+          <div className="my-9"></div>
         ) : (
-          <div className="text-xs">Description: {description}</div>
+          <div className="text-xs mb-5">Description: {description}</div>
         )}
         <div className="text-xs">
           {/* Only get the date */}
