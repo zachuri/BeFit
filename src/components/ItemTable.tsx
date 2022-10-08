@@ -101,7 +101,10 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
         <div className="text-xs text-black dark:text-white">Updating...</div>
       )}
       {isLoadinRemove && <div className="text-xs">Removing...</div>}
-      <tr key={id} className="text-center border-t">
+      <tr
+        key={id}
+        className="text-center border-t border-[black] dark:border-white dark:border-t"
+      >
         <td
           scope="row"
           className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"

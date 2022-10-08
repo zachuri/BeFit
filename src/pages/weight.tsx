@@ -130,7 +130,7 @@ const Weight: React.FC = () => {
               {/* visible on md and up */}
               <div
                 className="hidden md:block rounded
-                    text-black bg-white border border-black 
+                    text-black bg-white border border-black  
                     dark:bg-black dark:text-white dark:border-t dark:border-white"
               >
                 <table className="table-fixed">
