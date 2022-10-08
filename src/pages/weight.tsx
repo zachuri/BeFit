@@ -128,13 +128,13 @@ const Weight: React.FC = () => {
             {/* Desktop Screens -> will show a table */}
             <div className="-mt-20 mx-5">
               {/* visible on md and up */}
-              <div className="hidden md:block">
-                <table className="table-fixed">
-                  <thead
-                    className="text-xs uppercase
+              <div
+                className="hidden md:block rounded
                     text-black bg-white border border-black 
-                    dark:bg-black dark:text-white dark:border dark:border-white"
-                  >
+                    dark:bg-black dark:text-white dark:border-t dark:border-white"
+              >
+                <table className="table-fixed">
+                  <thead className="text-xs uppercase">
                     <tr>
                       <th scope="col" className="w-1/2 py-3 px-6">
                         Date
