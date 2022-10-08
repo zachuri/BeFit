@@ -257,7 +257,7 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
                               mutateRemove({ id: id });
                               setIsOpenRemove(false);
                             }}
-                            className="bg-[red] p-2 rounded mt-2"
+                            className="border border-black dark:border-white hover:bg-[red] hover:border-white hover:dark:border-[red] p-2 rounded"
                           >
                             Remove
                           </button>

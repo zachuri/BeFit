@@ -77,6 +77,7 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
     // router.push(`/weight`);
     onError() {
       errorUpdate;
+      setIsOpen(true);
     },
 
     onSuccess() {
@@ -123,7 +124,14 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
           >
             Remove
           </button>
-          {/* modal transition */}
+          <button
+            onClick={openModal}
+            className="border border-black dark:border-white hover:border-blue-500 hover:dark:border-blue-500 p-1 rounded"
+          >
+            Edit
+          </button>
+
+          {/*  Modal for Remove */}
           <Transition appear show={isOpenRemove} as={Fragment}>
             <Dialog as="div" className="relative z-10" onClose={closeModal}>
               <Transition.Child
@@ -162,7 +170,7 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
                             mutateRemove({ id: id });
                             setIsOpenRemove(false);
                           }}
-                          className="bg-[red] p-2 rounded mt-2"
+                          className="border border-black dark:border-white hover:bg-[red] hover:border-white hover:dark:border-[red] p-2 rounded"
                         >
                           Remove
                         </button>
@@ -184,14 +192,7 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
             </Dialog>
           </Transition>
 
-          <button
-            onClick={openModal}
-            className="border border-black dark:border-white hover:border-blue-500 hover:dark:border-blue-500 p-1 rounded"
-          >
-            Edit
-          </button>
-
-          {/* modal transition */}
+          {/* Modal Update */}
           <Transition appear show={isOpen} as={Fragment}>
             <Dialog as="div" className="relative z-10" onClose={closeModal}>
               <Transition.Child
@@ -218,6 +219,7 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
                     leaveTo="opacity-0 scale-95"
                   >
                     <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white border border-black  dark:bg-black dark:border dark:border-white p-6 text-left align-middle shadow-xl transition-all">
+                      {errorUpdate && <div>{errorUpdate.message}</div>}
                       <Dialog.Title
                         as="h3"
                         className="text-lg font-medium leading-6 text-gray-900 dark:text-white"
