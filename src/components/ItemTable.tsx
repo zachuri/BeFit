@@ -117,14 +117,14 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
           <div className="flex flex-col gap-2">
             <button
               onClick={openModal}
-              className="rounded p-1 border hover:border-blue-500"
+              className="rounded p-1 border border-black dark:border-white hover:border-blue-500"
             >
               Edit
             </button>
 
             <button
               onClick={openModalRemove}
-              className="rounded p-1 border hover:border-[red]"
+              className="rounded p-1 border border-black dark:border-white hover:border-[red]"
             >
               Remove
             </button>
