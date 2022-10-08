@@ -106,7 +106,7 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
           scope="row"
           className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
         >
-          {weekday[day] + ', ' + date + ', '}
+          {weekday[day] + ', ' + date}
         </td>
         <td className="py-4 px-6">{weight}</td>
         <td className="py-4 px-6">{description}</td>

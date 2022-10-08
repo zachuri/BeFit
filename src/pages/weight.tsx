@@ -57,7 +57,8 @@ const Weight: React.FC = () => {
     <>
       {status === 'authenticated' ? (
         <>
-          <MainLayoutFill>
+          {/* LayoutFlex for Mobile */}
+          <MainLayoutFlex>
             {error && <MainLayoutFlex>{error.message}</MainLayoutFlex>}
             <div className="my-10 md:mx-40 p-3 rounded border border-black dark:border-white">
               <form onSubmit={handleSubmit(onSubmit)}>
@@ -102,7 +103,7 @@ const Weight: React.FC = () => {
             </div>
 
             {/* Mobile Screen */}
-            <div className="grid grid-cols md:grid-cols-2 gap-3 mt-2">
+            <div className="grid grid-cols md:grid-cols-2 gap-3 mt-2 w-full">
               {/* hidden on larger screens */}
               <div className="md:hidden">
                 {data?.map(weight => {
@@ -120,9 +121,12 @@ const Weight: React.FC = () => {
                 })}
               </div>
             </div>
+          </MainLayoutFlex>
 
+          {/* LayoutFill for Desktop */}
+          <MainLayoutFill>
             {/* Desktop Screens -> will show a table */}
-            <div className="mx-20">
+            <div className="-mt-20 mx-5">
               {/* visible on md and up */}
               <div className="hidden md:block">
                 <table className="table-fixed">
@@ -146,27 +150,6 @@ const Weight: React.FC = () => {
                   <tbody>
                     {data?.map(weight => {
                       return (
-                        // <tr
-                        //   key={weight.id}
-                        //   className="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                        // >
-                        //   <td
-                        //     scope="row"
-                        //     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                        //   >
-                        //     {weekday[weight.createdAt.getUTCDay()] +
-                        //       ', ' +
-                        //       weight.createdAt.toLocaleString()}
-                        //   </td>
-                        //   <td className="py-4 px-6">{weight.weightTotal}</td>
-                        //   <td className="py-4 px-6">{weight.body}</td>
-                        //   <td className="py-4 px-6">
-                        //     <div>
-                        //       <button className="bg-[blue]">Edit</button>
-                        //       <button className="bg-[red]">Remove</button>
-                        //     </div>
-                        //   </td>
-                        // </tr>
                         <ItemTable
                           key={weight.id}
                           id={weight.id}
