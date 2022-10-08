@@ -130,7 +130,11 @@ const Weight: React.FC = () => {
               {/* visible on md and up */}
               <div className="hidden md:block">
                 <table className="table-fixed">
-                  <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                  <thead
+                    className="text-xs uppercase
+                    text-black bg-white border border-black 
+                    dark:bg-black dark:text-white dark:border dark:border-white"
+                  >
                     <tr>
                       <th scope="col" className="w-1/2 py-3 px-6">
                         Date

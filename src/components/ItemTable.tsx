@@ -100,7 +100,9 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
       {isLoadinRemove && <div className="text-xs">Removing...</div>}
       <tr
         key={id}
-        className="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+        className="text-center 
+           bg-white border border-black
+           dark:bg-black dark:border dark:border-white"
       >
         <td
           scope="row"
@@ -111,7 +113,7 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
         <td className="py-4 px-6">{weight}</td>
         <td className="py-4 px-6">{description}</td>
         <td className="py-4 px-6">
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2">
             <button
               onClick={openModal}
               className="rounded p-1 border hover:border-blue-500"
