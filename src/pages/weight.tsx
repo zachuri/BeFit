@@ -12,16 +12,6 @@ import {
   MainLayoutHeightScreen
 } from '../components/layouts/Main';
 
-const weekday = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday'
-];
-
 const Weight: React.FC = () => {
   const { status } = useSession();
 
