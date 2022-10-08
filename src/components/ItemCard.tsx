@@ -4,6 +4,16 @@ import { useForm } from 'react-hook-form';
 import { UpdateWeightInput } from '../schema/weight.schema';
 import { trpc } from '../utils/trpc';
 
+const weekday = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday'
+];
+
 interface Props {
   id: string;
   date: string;
@@ -84,19 +94,9 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
     setIsOpen(false);
   }
 
-  const weekday = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday'
-  ];
-
   return (
     <>
-      <div className="rounded border border-black dark:border-white p-4">
+      <div className="rounded border border-black dark:border-white p-4 mb-10">
         {isLoadingUpdate && <div className="text-xs">Updating...</div>}
         {isLoadinRemove && <div className="text-xs">Removing...</div>}
         <div>
