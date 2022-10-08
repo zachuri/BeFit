@@ -77,6 +77,7 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
     // router.push(`/weight`);
     onError() {
       errorUpdate;
+      // Open modal again on error
       setIsOpen(true);
     },
 
