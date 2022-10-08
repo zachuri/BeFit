@@ -96,6 +96,8 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
 
   return (
     <>
+      {isLoadingUpdate && <div className="text-xs">Updating...</div>}
+      {isLoadinRemove && <div className="text-xs">Removing...</div>}
       <tr
         key={id}
         className="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700"
