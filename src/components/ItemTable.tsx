@@ -111,12 +111,22 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
         <td className="py-4 px-6">{weight}</td>
         <td className="py-4 px-6">{description}</td>
         <td className="py-4 px-6">
-          <div>
-            <button onClick={openModal} className="bg-[blue]">
+          <div className="flex gap-2">
+            <button
+              onClick={openModal}
+              className="rounded p-1 border hover:border-blue-500"
+            >
               Edit
             </button>
 
-            {/* modal transition */}
+            <button
+              onClick={openModalRemove}
+              className="rounded p-1 border hover:border-[red]"
+            >
+              Remove
+            </button>
+
+            {/* Modal Update */}
             <Transition appear show={isOpen} as={Fragment}>
               <Dialog as="div" className="relative z-10" onClose={closeModal}>
                 <Transition.Child
@@ -207,11 +217,7 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
               </Dialog>
             </Transition>
 
-            <button onClick={openModalRemove} className="bg-[red]">
-              Remove
-            </button>
-
-            {/* modal transition */}
+            {/* Modal Remove */}
             <Transition appear show={isOpenRemove} as={Fragment}>
               <Dialog as="div" className="relative z-10" onClose={closeModal}>
                 <Transition.Child
