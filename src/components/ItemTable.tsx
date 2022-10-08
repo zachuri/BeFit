@@ -77,6 +77,7 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
     // router.push(`/weight`);
     onError() {
       errorUpdate;
+      setIsOpen(true);
     },
 
     onSuccess() {
@@ -96,7 +97,9 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
 
   return (
     <>
-      {isLoadingUpdate && <div className="text-xs">Updating...</div>}
+      {isLoadingUpdate && (
+        <div className="text-xs text-black dark:text-white">Updating...</div>
+      )}
       {isLoadinRemove && <div className="text-xs">Removing...</div>}
       <tr
         key={id}
@@ -155,11 +158,12 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
                       leaveTo="opacity-0 scale-95"
                     >
                       <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white border border-black  dark:bg-black dark:border dark:border-white p-6 text-left align-middle shadow-xl transition-all">
+                        {errorUpdate && <div>{errorUpdate.message}</div>}
                         <Dialog.Title
                           as="h3"
                           className="text-lg font-medium leading-6 text-gray-900 dark:text-white"
                         >
-                          Please input new weight or descripton!
+                          EDIT
                         </Dialog.Title>
                         <div className="mt-2">
                           <form onSubmit={handleSubmit(onSubmit)}>
