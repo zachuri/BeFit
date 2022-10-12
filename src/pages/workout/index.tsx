@@ -1,11 +1,15 @@
 import { Dialog, Transition } from '@headlessui/react';
+import { router } from '@trpc/server';
 import React, { Fragment, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { MainLayoutFlex } from '../components/layouts/Main';
-import { AddWorkoutInput } from '../schema/workout.schema';
-import { trpc } from '../utils/trpc';
+import { MainLayoutFlex } from '../../components/layouts/Main';
+import { AddWorkoutInput } from '../../schema/workout.schema';
+import { trpc } from '../../utils/trpc';
+import { useRouter } from 'next/router';
 
 const Workout: React.FC = () => {
+  const nextRouter = useRouter();
+
   const { data, isLoading, refetch } = trpc.useQuery([
     'workouts.getAllWorkouts'
   ]);
@@ -50,7 +54,13 @@ const Workout: React.FC = () => {
           {data?.map(workout => {
             return (
               <div className="my-2 border border-white" key={workout.id}>
-                {workout.title}
+                <button
+                  onClick={() => {
+                    nextRouter.push(`/workout/${workout.id}`);
+                  }}
+                >
+                  {workout.title}
+                </button>
               </div>
             );
           })}
