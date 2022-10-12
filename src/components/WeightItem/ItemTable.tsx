@@ -1,8 +1,8 @@
 import { Dialog, Transition } from '@headlessui/react';
 import React, { Fragment, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { UpdateWeightInput } from '../schema/weight.schema';
-import { trpc } from '../utils/trpc';
+import { UpdateWeightInput } from '../../schema/weight.schema';
+import { trpc } from '../../utils/trpc';
 
 const weekday = [
   'Sunday',

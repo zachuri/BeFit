@@ -4,8 +4,8 @@ import { trpc } from '../utils/trpc';
 import { AddWeightInput } from '../schema/weight.schema';
 // import { useQueryClient } from 'react-query';
 import { useSession } from 'next-auth/react';
-import ItemCard from '../components/ItemCard';
-import ItemTable from '../components/ItemTable';
+import ItemCard from '../components/WeightItem/ItemCard';
+import ItemTable from '../components/WeightItem/ItemTable';
 import {
   MainLayoutFill,
   MainLayoutFlex,
