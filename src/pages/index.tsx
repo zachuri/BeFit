@@ -18,9 +18,9 @@ const NavigateLinks = () => {
         </div>
       </Link>
 
-      <Link href="/exercise">
+      <Link href="/workout">
         <div className="p-10 border rounded border-black dark:border-white hover:border-[#00C804] hover:dark:border-[#00C804]">
-          <button>Exercise</button>
+          <button>Workout</button>
         </div>
       </Link>
 
