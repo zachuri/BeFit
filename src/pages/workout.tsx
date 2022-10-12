@@ -1,7 +1,7 @@
 import React from 'react';
 import { MainLayoutFlex } from '../components/layouts/Main';
 
-const Exercise: React.FC = () => {
+const Workout: React.FC = () => {
   return (
     <>
       <MainLayoutFlex>
@@ -16,4 +16,4 @@ const Exercise: React.FC = () => {
   );
 };
 
-export default Exercise;
+export default Workout;
