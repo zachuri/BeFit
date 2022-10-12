@@ -48,7 +48,7 @@ export const workoutRouter = createRouter()
         });
       }
 
-      return ctx.prisma.weight.findMany({
+      return ctx.prisma.workout.findMany({
         orderBy: {
           createdAt: 'desc'
         },
