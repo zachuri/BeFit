@@ -76,7 +76,7 @@ const Item: React.FC<Props> = ({ id, title }) => {
     <>
       {isLoadingUpdate && <div>Updating...</div>}
       {isLoadingRemove && <div>Removing...</div>}
-      <div className="grid grid-cols-4 rounded text-center justify-between border border-white my-5">
+      <div className="grid grid-cols-4 rounded text-center justify-between border border-black dark:border-white my-5">
         <button
           onClick={() => {
             nextRouter.push(`/workout/${id}`);
@@ -89,13 +89,13 @@ const Item: React.FC<Props> = ({ id, title }) => {
         </button>
         <button
           onClick={() => setIsOpen(true)}
-          className="text-xs border-l  hover:dark:text-gray-600 hover:text-gray-500 transition"
+          className="text-xs border-l border-black dark:border-white hover:dark:text-gray-600 hover:text-gray-500 transition"
         >
           Edit
         </button>
         <button
           onClick={() => setIsOpenRemove(true)}
-          className="text-xs border-l  hover:dark:text-gray-600 hover:text-gray-500 transition"
+          className="text-xs border-l border-black dark:border-white hover:dark:text-gray-600 hover:text-gray-500 transition"
         >
           Remove
         </button>
