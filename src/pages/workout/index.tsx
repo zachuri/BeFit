@@ -51,11 +51,9 @@ const Workout: React.FC = () => {
         <div className="flex flex-col justify-center items-center">
           {data?.map(workout => {
             return (
-              <>
-                <div className="w-96">
-                  <Item id={workout.id} title={workout.title} />
-                </div>
-              </>
+              <div key={workout.id} className="w-96">
+                <Item id={workout.id} title={workout.title} />
+              </div>
             );
           })}
         </div>
