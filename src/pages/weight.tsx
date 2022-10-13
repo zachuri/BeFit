@@ -26,8 +26,6 @@ const Weight: React.FC = () => {
     'weights.getAllWeightsPagnation',
     { take: 7, skip: pageIndex }
   ]);
-  
-  console.log(data);
 
   const {
     mutate,
@@ -129,7 +127,7 @@ const Weight: React.FC = () => {
                   );
                 })}
 
-                <div className="flex gap-2">
+                <div className="flex gap-2 items-center justify-center">
                   <button
                     className="border border-white p-2"
                     onClick={() => {
@@ -187,7 +185,7 @@ const Weight: React.FC = () => {
               </div>
               <div className="mt-5 flex items-center justify-center gap-2">
                 <button
-                  className="border border-white p-2"
+                  className="hidden md:block border border-white p-2"
                   onClick={() => {
                     if (pageIndex - 7 !== 0) {
                       setPageIndex(pageIndex - 7);
@@ -198,7 +196,7 @@ const Weight: React.FC = () => {
                   new
                 </button>
                 <button
-                  className="border border-white p-2"
+                  className="hidden md:block border border-white p-2"
                   onClick={() => {
                     setPageIndex(pageIndex + 7);
                   }}
