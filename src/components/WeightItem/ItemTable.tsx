@@ -77,7 +77,6 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
     // router.push(`/weight`);
     onError() {
       errorUpdate;
-      setIsOpen(true);
     },
 
     onSuccess() {
@@ -96,23 +95,20 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
   }
 
   return (
-    <>
-      {isLoadingUpdate && (
-        <div className="text-xs text-black dark:text-white">Updating...</div>
-      )}
-      {isLoadinRemove && <div className="text-xs">Removing...</div>}
+    <tbody>
       <tr
         key={id}
-        className="text-center border-t border-[black] dark:border-white dark:border-t"
+        className="text-center border-t border-[black] dark:border-white dark:border-t overflow-auto"
       >
         <td
           scope="row"
           className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
         >
-          {weekday[day] + ', ' + date}
+          {weekday[day] + ', '}
+          {date}
         </td>
         <td className="py-4 px-6">{weight}</td>
-        <td className="py-4 px-6">{description}</td>
+        <td className="py-4 px-6 overflow-auto">{description}</td>
         <td className="py-4 px-6">
           <div className="flex flex-col gap-2">
             <button
@@ -156,7 +152,6 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
                       leaveTo="opacity-0 scale-95"
                     >
                       <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white border border-black  dark:bg-black dark:border dark:border-white p-6 text-left align-middle shadow-xl transition-all">
-                        {errorUpdate && <div>{errorUpdate.message}</div>}
                         <Dialog.Title
                           as="h3"
                           className="text-lg font-medium leading-6 text-gray-900 dark:text-white"
@@ -193,6 +188,7 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
                               <textarea
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Your post title"
+                                maxLength={35}
                                 required
                                 {...register('body')}
                               />
@@ -202,6 +198,9 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
                                 Update Weight
                               </button>
                             </div>
+                            {errorUpdate && (
+                              <div className="mt-5">{errorUpdate.message}</div>
+                            )}
                           </form>
                         </div>
 
@@ -284,7 +283,17 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
           </div>
         </td>
       </tr>
-    </>
+      {isLoadingUpdate && (
+        <div className=" border-black dark:border-white text-xs text-black dark:text-white">
+          Updating...
+        </div>
+      )}
+      {isLoadinRemove && (
+        <div className=" border-black dark:border-white text-xs text-black dark:text-white">
+          Removing...
+        </div>
+      )}
+    </tbody>
   );
 };
 

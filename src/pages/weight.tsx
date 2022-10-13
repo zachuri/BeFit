@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react';
 import ItemCard from '../components/WeightItem/ItemCard';
 import ItemTable from '../components/WeightItem/ItemTable';
 import {
-  MainLayoutFill,
+  // MainLayoutFill,
   MainLayoutFlex,
   MainLayoutHeightScreen
 } from '../components/layouts/Main';
@@ -86,6 +86,7 @@ const Weight: React.FC = () => {
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="I feel great!"
                     required
+                    maxLength={35}
                     {...register('body')}
                   />
                 </div>
@@ -124,51 +125,41 @@ const Weight: React.FC = () => {
           </MainLayoutFlex>
 
           {/* LayoutFill for Desktop */}
-          <MainLayoutFill>
+          <MainLayoutFlex>
             {/* Desktop Screens -> will show a table */}
-            <div className="-mt-20 mx-5">
+            <div className="-mt-20">
               {/* visible on md and up */}
               <div
                 className="hidden md:block rounded
                     text-black bg-white border border-black  
-                    dark:bg-black dark:text-white dark:border-t dark:border-white"
+                    dark:bg-black dark:text-white dark:border-t dark:border-white overflow-auto"
               >
-                <table className="table-fixed">
+                <table className="table-fixed overflow-auto ">
                   <thead className="text-xs uppercase">
                     <tr>
-                      <th scope="col" className="w-1/2 py-3 px-6">
-                        Date
-                      </th>
-                      <th scope="col" className="w-1/4 py-3 px-6">
-                        Weight
-                      </th>
-                      <th scope="col" className="w-1/2 py-3 px-6">
-                        Description/Image
-                      </th>
-                      <th scope="col" className="w-1/4 py-3 px-6">
-                        Update
-                      </th>
+                      <th className="w-1/2 py-3">Date</th>
+                      <th className="w-1/4 py-3">Weight</th>
+                      <th className="w-1/2 py-3">Description/Image</th>
+                      <th className="w-1/4 py-3">Update</th>
                     </tr>
                   </thead>
 
-                  <tbody>
-                    {data?.map(weight => {
-                      return (
-                        <ItemTable
-                          key={weight.id}
-                          id={weight.id}
-                          weight={weight.weightTotal}
-                          date={weight.createdAt.toLocaleString()}
-                          day={weight.createdAt.getUTCDay()}
-                          description={weight.body}
-                        />
-                      );
-                    })}
-                  </tbody>
+                  {data?.map(weight => {
+                    return (
+                      <ItemTable
+                        key={weight.id}
+                        id={weight.id}
+                        weight={weight.weightTotal}
+                        date={weight.createdAt.toLocaleDateString()}
+                        day={weight.createdAt.getUTCDay()}
+                        description={weight.body}
+                      />
+                    );
+                  })}
                 </table>
               </div>
             </div>
-          </MainLayoutFill>
+          </MainLayoutFlex>
         </>
       ) : (
         <>
