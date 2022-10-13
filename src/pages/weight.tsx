@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { trpc } from '../utils/trpc';
 import { AddWeightInput } from '../schema/weight.schema';
@@ -15,11 +15,19 @@ import {
 const Weight: React.FC = () => {
   const { status } = useSession();
 
-  // const queryClient = useQueryClient();
-
   const { handleSubmit, register, reset } = useForm<AddWeightInput>();
 
-  const { data, isLoading, refetch } = trpc.useQuery(['weights.getAllWeights']);
+  // const { data, isLoading, refetch } = trpc.useQuery(['weights.getAllWeights']);
+
+  // Use this query for pagination
+  const [pageIndex, setPageIndex] = useState(0);
+
+  const { data, isLoading, refetch } = trpc.useQuery([
+    'weights.getAllWeightsPagnation',
+    { take: 7, skip: pageIndex }
+  ]);
+  
+  console.log(data);
 
   const {
     mutate,
@@ -120,6 +128,26 @@ const Weight: React.FC = () => {
                     </div>
                   );
                 })}
+
+                <div className="flex gap-2">
+                  <button
+                    className="border border-white p-2"
+                    onClick={() => {
+                      if (pageIndex - 7 !== 0) {
+                        setPageIndex(pageIndex - 7);
+                      }
+                      setPageIndex(0);
+                    }}
+                  >
+                    back
+                  </button>
+                  <button
+                    className="border border-white p-2"
+                    onClick={() => setPageIndex(pageIndex + 7)}
+                  >
+                    next
+                  </button>
+                </div>
               </div>
             </div>
           </MainLayoutFlex>
@@ -143,7 +171,6 @@ const Weight: React.FC = () => {
                       <th className="w-1/4 py-3">Update</th>
                     </tr>
                   </thead>
-
                   {data?.map(weight => {
                     return (
                       <ItemTable
@@ -157,6 +184,27 @@ const Weight: React.FC = () => {
                     );
                   })}
                 </table>
+              </div>
+              <div className="mt-5 flex items-center justify-center gap-2">
+                <button
+                  className="border border-white p-2"
+                  onClick={() => {
+                    if (pageIndex - 7 !== 0) {
+                      setPageIndex(pageIndex - 7);
+                    }
+                    setPageIndex(0);
+                  }}
+                >
+                  new
+                </button>
+                <button
+                  className="border border-white p-2"
+                  onClick={() => {
+                    setPageIndex(pageIndex + 7);
+                  }}
+                >
+                  old
+                </button>
               </div>
             </div>
           </MainLayoutFlex>
