@@ -23,7 +23,7 @@ export const updateWeightSchema = z.object({
     .min(1, 'Min weight is 1 lbs')
     .max(1000, 'Max weight is 1000lbs')
     .optional(),
-  body: z.string().max(35t , 'Max body length is 100 words')
+  body: z.string().max(35, 'Max body length is 100 words')
 });
 
 export type UpdateWeightInput = z.TypeOf<typeof updateWeightSchema>;
