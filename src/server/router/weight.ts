@@ -2,6 +2,7 @@ import { createRouter } from './context';
 // import { z } from "zod";
 import {
   addWeightSchema,
+  pagnationWeightSchema,
   removeWeightSchema,
   updateWeightSchema
 } from '../../schema/weight.schema';
@@ -96,10 +97,33 @@ export const weightRouter = createRouter()
 
       return ctx.prisma.weight.findMany({
         orderBy: {
-          createdAt: "desc",
+          createdAt: 'desc'
         },
         where: {
           userId: ctx.session?.user?.id
+        }
+      });
+    }
+  })
+  .query('getAllWeightsPagnation', {
+    input: pagnationWeightSchema,
+
+    async resolve({ ctx, input }) {
+      if (!ctx.session) {
+        new trpc.TRPCError({
+          code: 'FORBIDDEN',
+          message: "Please Sign In: can't get any post"
+        });
+      }
+
+      return ctx.prisma.weight.findMany({
+        take: input.take, // Page size
+        skip: input.skip,
+        where: {
+          userId: ctx.session?.user?.id
+        },
+        orderBy: {
+          createdAt: 'desc'
         }
       });
     }

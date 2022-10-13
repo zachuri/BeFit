@@ -31,3 +31,10 @@ export type UpdateWeightInput = z.TypeOf<typeof updateWeightSchema>;
 export const getSingleWeightSchema = z.object({
   weigthId: z.string().uuid()
 });
+
+export const pagnationWeightSchema = z.object({
+  take: z.number().min(1).max(14),
+  skip: z.number() // <-- "cursor" needs to exist, but can be any type
+});
+
+export type PagnationWeightInput = z.TypeOf<typeof pagnationWeightSchema>;
