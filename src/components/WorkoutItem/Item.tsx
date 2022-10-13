@@ -11,6 +11,9 @@ interface Props {
 }
 
 const Item: React.FC<Props> = ({ id, title }) => {
+  const [inputRemove, setInputRemove] = useState('');
+  const [errorRemoveInput, setErrorRemoveInput] = useState(false);
+
   const nextRouter = useRouter();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -90,7 +93,6 @@ const Item: React.FC<Props> = ({ id, title }) => {
   return (
     <div className="grid grid-cols-4 rounded text-center justify-between border border-white my-5">
       <button
-        key={id}
         onClick={() => {
           nextRouter.push(`/workout/${id}`);
         }}
@@ -146,17 +148,36 @@ const Item: React.FC<Props> = ({ id, title }) => {
                   >
                     Are you sure you want to remove?
                   </Dialog.Title>
+                  <h2 className="text-sm text-gray-500">
+                    All your set and reps will be wiped
+                  </h2>
                   <div className="flex justify-center item-center mt-2">
+                    <input
+                      type="text"
+                      placeholder="Leg Day"
+                      className="rounded p-2 mr-2"
+                      onChange={e => {
+                        setInputRemove(e.target.value);
+                        console.log(inputRemove);
+                      }}
+                    />
                     <button
                       onClick={() => {
-                        mutateRemove({ id: id });
-                        setIsOpenRemove(false);
+                        if (inputRemove === title) {
+                          mutateRemove({ id: id });
+                          setIsOpenRemove(false);
+                        }
+                        setErrorRemoveInput(true);
                       }}
                       className="border border-black dark:border-white hover:bg-[red] hover:border-white hover:dark:border-[red] p-2 rounded"
                     >
                       Remove
                     </button>
                   </div>
+
+                  {errorRemoveInput && (
+                    <div>Wrong name, PLease enter correct to remove</div>
+                  )}
 
                   <div className="mt-4">
                     <button
