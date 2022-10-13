@@ -1,5 +1,4 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { router } from '@trpc/server';
 import React, { Fragment, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MainLayoutFlex } from '../../components/layouts/Main';
@@ -48,6 +47,11 @@ const Workout: React.FC = () => {
     <>
       <MainLayoutFlex>
         <h2 className="text-4xl">Workout</h2>
+
+        {/* Loading  */}
+        {isLoading && <div>Data is Loading... </div>}
+        {isLoadingAddWorkout && <div>Adding Workout... </div>}
+
         <div className="flex flex-col justify-center items-center">
           {data?.map(workout => {
             return (
@@ -66,7 +70,7 @@ const Workout: React.FC = () => {
           </button>
         </div>
 
-        {/* Modal Update */}
+        {/* Modal Adding Workouts */}
         <Transition appear show={isOpen} as={Fragment}>
           <Dialog as="div" className="relative z-10" onClose={closeModal}>
             <Transition.Child
@@ -129,6 +133,9 @@ const Workout: React.FC = () => {
                         Cancel
                       </button>
                     </div>
+
+                    {/* Error  */}
+                    {error && <div>{error.message}</div>}
                   </Dialog.Panel>
                 </Transition.Child>
               </div>
