@@ -28,7 +28,7 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
   const {
     mutate: mutateRemove,
     error: errorRemove,
-    isLoading: isLoadinRemove
+    isLoading: isLoadingRemove
   } = trpc.useMutation(['weights.removeWeight'], {
     // onSuccess({ id }) {
     // router.push(`/weight/${id}`);
@@ -100,7 +100,7 @@ const Item: React.FC<Props> = ({ id, date, day, weight, description }) => {
     <>
       <div className="rounded border border-black dark:border-white p-4 mb-10">
         {isLoadingUpdate && <div className="text-xs">Updating...</div>}
-        {isLoadinRemove && <div className="text-xs">Removing...</div>}
+        {isLoadingRemove && <div className="text-xs">Removing...</div>}
         <div>
           Weight: {weight} <span className="text-xs">lbs</span>
         </div>
