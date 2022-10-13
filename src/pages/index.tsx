@@ -40,17 +40,8 @@ const NavigateLinks = () => {
 };
 
 const Home = () => {
-  // const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
+  // Using Next-Auth Session -> check weather the user is signed in
   const { status } = useSession();
-
-  // if (status === 'loading') {
-  //   return (
-  //     <MainLayoutFlex>
-  //       <h1>Data is loading...</h1>
-  //       <NavigateLinks />
-  //     </MainLayoutFlex>
-  //   );
-  // }
 
   return (
     <>
