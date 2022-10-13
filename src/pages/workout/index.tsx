@@ -3,13 +3,11 @@ import { router } from '@trpc/server';
 import React, { Fragment, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MainLayoutFlex } from '../../components/layouts/Main';
+import Item from '../../components/WorkoutItem/Item';
 import { AddWorkoutInput } from '../../schema/workout.schema';
 import { trpc } from '../../utils/trpc';
-import { useRouter } from 'next/router';
 
 const Workout: React.FC = () => {
-  const nextRouter = useRouter();
-
   const { data, isLoading, refetch } = trpc.useQuery([
     'workouts.getAllWorkouts'
   ]);
@@ -49,26 +47,22 @@ const Workout: React.FC = () => {
   return (
     <>
       <MainLayoutFlex>
-        <h2 className="text-xl">Workout</h2>
-        <div className="">
+        <h2 className="text-4xl">Workout</h2>
+        <div className="flex flex-col justify-center items-center">
           {data?.map(workout => {
             return (
-              <div className="my-2 border border-white" key={workout.id}>
-                <button
-                  onClick={() => {
-                    nextRouter.push(`/workout/${workout.id}`);
-                  }}
-                >
-                  {workout.title}
-                </button>
-              </div>
+              <>
+                <div className="w-96">
+                  <Item id={workout.id} title={workout.title} />
+                </div>
+              </>
             );
           })}
         </div>
         <div className="flex items-center justify-center">
           <button
             onClick={openModal}
-            className="border-2 px-10 rounded border-black dark:border-white"
+            className="border-2 px-10 rounded border-black dark:border-white hover:dark:border-gray-500 hover:border-gray-200 transition"
           >
             +
           </button>
@@ -114,7 +108,6 @@ const Workout: React.FC = () => {
                             Workout Name
                           </label>
                           <input
-                            step="0.1"
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Leg Day"
                             required

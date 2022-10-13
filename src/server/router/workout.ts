@@ -1,6 +1,10 @@
 import { createRouter } from './context';
 // import { z } from "zod";
-import { addWorkoutSchema } from '../../schema/workout.schema';
+import {
+  addWorkoutSchema,
+  removeWorkoutSchema,
+  updateWorkoutSchema
+} from '../../schema/workout.schema';
 import * as trpc from '@trpc/server';
 import { TRPCError } from '@trpc/server';
 
@@ -37,6 +41,48 @@ export const workoutRouter = createRouter()
       });
 
       return workout;
+    }
+  })
+  .mutation('removeWorkout', {
+    input: removeWorkoutSchema,
+    async resolve({ ctx, input }) {
+      if (!ctx.session) {
+        new trpc.TRPCError({
+          code: 'FORBIDDEN',
+          message: "Please Sign In: can't get any post"
+        });
+      }
+
+      return ctx.prisma.workout.delete({
+        where: {
+          id: input.id
+        }
+      });
+    }
+  })
+  .mutation('updateWorkout', {
+    input: updateWorkoutSchema,
+    async resolve({ ctx, input }) {
+      if (!ctx.session) {
+        new trpc.TRPCError({
+          code: 'FORBIDDEN',
+          message: "Please Sign In: can't get any post"
+        });
+      }
+
+      return ctx.prisma.workout.update({
+        where: {
+          id: input.id
+        },
+        data: {
+          ...input,
+          user: {
+            connect: {
+              id: ctx.session?.user?.id
+            }
+          }
+        }
+      });
     }
   })
   .query('getAllWorkouts', {
