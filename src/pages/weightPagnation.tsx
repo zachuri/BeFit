@@ -27,18 +27,25 @@ const WeightPagnation: React.FC = () => {
             </>
           );
         })}
-        <button
-          className="border border-white p-2"
-          onClick={() => setPageIndex(pageIndex + 7)}
-        >
-          next
-        </button>
-        <button
-          className="border border-white p-2"
-          onClick={() => setPageIndex(pageIndex - 7)}
-        >
-          back
-        </button>
+        <div className="flex gap-2">
+          <button
+            className="border border-white p-2"
+            onClick={() => {
+              if (pageIndex - 7 !== 0) {
+                setPageIndex(pageIndex - 7);
+              }
+              setPageIndex(0);
+            }}
+          >
+            back
+          </button>
+          <button
+            className="border border-white p-2"
+            onClick={() => setPageIndex(pageIndex + 7)}
+          >
+            next
+          </button>
+        </div>
       </MainLayoutFlex>
     </div>
   );
