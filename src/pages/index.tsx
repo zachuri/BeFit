@@ -43,14 +43,14 @@ const Home = () => {
   // const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
   const { status } = useSession();
 
-  if (status === 'loading') {
-    return (
-      <MainLayoutFlex>
-        <h1>Data is loading...</h1>
-        <NavigateLinks />
-      </MainLayoutFlex>
-    );
-  }
+  // if (status === 'loading') {
+  //   return (
+  //     <MainLayoutFlex>
+  //       <h1>Data is loading...</h1>
+  //       <NavigateLinks />
+  //     </MainLayoutFlex>
+  //   );
+  // }
 
   return (
     <>
@@ -60,7 +60,20 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {status === 'authenticated' ? (
+      {status === 'unauthenticated' ? (
+        <MainLayoutHeightScreen>
+          <div className="flex flex-col text-center">
+            <h1 className="text-2xl">Please Sign in</h1>
+            <p className="">In order to view your progress</p>
+          </div>
+        </MainLayoutHeightScreen>
+      ) : status === 'loading' ? (
+        <MainLayoutHeightScreen>
+          <div className="flex flex-col text-center">
+            <h1 className="text-2xl">Data is loading...</h1>
+          </div>
+        </MainLayoutHeightScreen>
+      ) : (
         <MainLayoutFlex>
           {/* Current Weight of User  */}
           <div className="mt-5 mx-20 text-center">
@@ -88,13 +101,6 @@ const Home = () => {
           {/* Navigation Links */}
           <NavigateLinks />
         </MainLayoutFlex>
-      ) : (
-        <MainLayoutHeightScreen>
-          <div className="flex flex-col text-center">
-            <h1 className="text-2xl">Please Sign in</h1>
-            <p className="">In order to view your progress</p>
-          </div>
-        </MainLayoutHeightScreen>
       )}
     </>
   );
