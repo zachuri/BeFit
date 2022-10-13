@@ -139,13 +139,15 @@ const Item: React.FC<Props> = ({ id, title }) => {
                     >
                       Are you sure you want to remove?
                     </Dialog.Title>
-                    <h2 className="text-sm text-gray-500">
-                      All your set and reps will be wiped
-                    </h2>
-                    <div className="flex justify-center item-center mt-2">
+                    <h3 className="mt-4 text-sm text-gray-100">
+                      Please type{' '}
+                      <span className="text-gray-500">&quot;{title}&quot;</span>{' '}
+                      to <span className="text-red-500">REMOVE FOREVER</span>
+                    </h3>
+                    <div className="flex justify-center item-center my-4">
                       <input
                         type="text"
-                        placeholder="Leg Day"
+                        placeholder={title}
                         className="rounded p-2 mr-2"
                         onChange={e => {
                           setInputRemove(e.target.value);
@@ -164,9 +166,18 @@ const Item: React.FC<Props> = ({ id, title }) => {
                         Remove
                       </button>
                     </div>
+                    <h2 className="text-xs text-red-500">
+                      All your sets and reps will be wiped
+                    </h2>
 
                     {errorRemoveInput && (
-                      <div>Wrong name, PLease enter correct to remove</div>
+                      <div>
+                        Wrong name! Please input
+                        <span className="text-gray-500">
+                          &quot;{title}&quot;
+                        </span>{' '}
+                        remove
+                      </div>
                     )}
 
                     <div className="mt-4">
@@ -175,6 +186,7 @@ const Item: React.FC<Props> = ({ id, title }) => {
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                         onClick={() => {
                           setIsOpenRemove(false);
+                          setErrorRemoveInput(false);
                         }}
                       >
                         Cancel
@@ -260,7 +272,9 @@ const Item: React.FC<Props> = ({ id, title }) => {
                       <button
                         type="button"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                        onClick={() => setIsOpen(false)}
+                        onClick={() => {
+                          setIsOpen(false);
+                        }}
                       >
                         Cancel
                       </button>
