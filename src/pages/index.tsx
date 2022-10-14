@@ -7,6 +7,7 @@ import { AiFillCaretDown } from 'react-icons/ai';
 // import LineGraph from '../components/LineGraph';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
+import { trpc } from '../utils/trpc';
 // import { trpc } from "../utils/trpc";
 
 const NavigateLinks = () => {
@@ -43,6 +44,10 @@ const Home = () => {
   // Using Next-Auth Session -> check weather the user is signed in
   const { status } = useSession();
 
+  const { data, isLoading, refetch } = trpc.useQuery([
+    'weights.getRecentWeight'
+  ]);
+
   return (
     <>
       <Head>
@@ -69,7 +74,7 @@ const Home = () => {
           {/* Current Weight of User  */}
           <div className="mt-5 mx-20 text-center">
             <h1 className="text-5xl">Current Weight</h1>
-            <h2 className="text-4xl">210 LBS</h2>
+            <h2 className="text-4xl">{data?.weightTotal} LBS</h2>
           </div>
 
           {/* Total weight up or down */}
