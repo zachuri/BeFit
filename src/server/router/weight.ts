@@ -127,4 +127,25 @@ export const weightRouter = createRouter()
         }
       });
     }
+  })
+  .query('getAllWeightsLength', {
+    async resolve({ ctx }) {
+      if (!ctx.session) {
+        new trpc.TRPCError({
+          code: 'FORBIDDEN',
+          message: "Please Sign In: can't get any post"
+        });
+      }
+
+      const result = ctx.prisma.weight.findMany({
+        where: {
+          userId: ctx.session?.user?.id
+        },
+        orderBy: {
+          createdAt: 'desc'
+        }
+      });
+
+      return (await result).length;
+    }
   });
