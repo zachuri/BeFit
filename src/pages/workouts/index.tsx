@@ -43,6 +43,11 @@ const Workouts: React.FC = () => {
 
   const { handleSubmit, register, reset } = useForm<AddWorkoutInput>();
 
+  // ------------------------------------------------------------------
+  // REMINDER ADD TEH TENERRY OP SIMILAR TO INDEX AND WORKOUT
+  // isLoading / unauthorized
+  // ------------------------------------------------------------------
+
   return (
     <>
       <MainLayoutFlex>
