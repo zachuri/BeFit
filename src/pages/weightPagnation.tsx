@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MainLayoutFlex } from '../components/layouts/Main';
 import { trpc } from '../utils/trpc';
 
@@ -10,7 +10,11 @@ const WeightPagnation: React.FC = () => {
     { take: 7, skip: pageIndex }
   ]);
 
-  console.log(data);
+  useEffect(() => {
+    if (data?.length === 0) {
+      setPageIndex(pageIndex - 7);
+    }
+  }, [data, pageIndex]);
 
   return (
     <div>
@@ -31,17 +35,19 @@ const WeightPagnation: React.FC = () => {
           <button
             className="border border-white p-2"
             onClick={() => {
-              if (pageIndex - 7 !== 0) {
-                setPageIndex(pageIndex - 7);
+              if (pageIndex - 7 <= 0) {
+                setPageIndex(0);
               }
-              setPageIndex(0);
+              setPageIndex(pageIndex - 7);
             }}
           >
             back
           </button>
           <button
             className="border border-white p-2"
-            onClick={() => setPageIndex(pageIndex + 7)}
+            onClick={() => {
+              setPageIndex(pageIndex + 7);
+            }}
           >
             next
           </button>

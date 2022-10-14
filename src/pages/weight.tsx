@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { trpc } from '../utils/trpc';
 import { AddWeightInput } from '../schema/weight.schema';
@@ -21,11 +21,19 @@ const Weight: React.FC = () => {
 
   // Use this query for pagination
   const [pageIndex, setPageIndex] = useState(0);
+  const [disablePage, setDisablePage] = useState(false);
 
   const { data, isLoading, refetch } = trpc.useQuery([
     'weights.getAllWeightsPagnation',
     { take: 7, skip: pageIndex }
   ]);
+
+  useEffect(() => {
+    if (data?.length === 0) {
+      setPageIndex(pageIndex - 7);
+      setDisablePage(true);
+    }
+  }, [data, pageIndex]);
 
   const {
     mutate,
@@ -131,19 +139,22 @@ const Weight: React.FC = () => {
                   <button
                     className="border border-white p-2"
                     onClick={() => {
-                      if (pageIndex - 7 !== 0) {
+                      if (pageIndex - 7 < 0) {
+                        setPageIndex(0);
+                      } else {
                         setPageIndex(pageIndex - 7);
+                        setDisablePage(false);
                       }
-                      setPageIndex(0);
                     }}
                   >
-                    back
+                    new
                   </button>
                   <button
                     className="border border-white p-2"
                     onClick={() => setPageIndex(pageIndex + 7)}
+                    disabled={disablePage}
                   >
-                    next
+                    old
                   </button>
                 </div>
               </div>
@@ -187,10 +198,12 @@ const Weight: React.FC = () => {
                 <button
                   className="hidden md:block border border-white p-2"
                   onClick={() => {
-                    if (pageIndex - 7 !== 0) {
+                    if (pageIndex - 7 < 0) {
+                      setPageIndex(0);
+                    } else {
                       setPageIndex(pageIndex - 7);
+                      setDisablePage(false);
                     }
-                    setPageIndex(0);
                   }}
                 >
                   new
@@ -200,6 +213,7 @@ const Weight: React.FC = () => {
                   onClick={() => {
                     setPageIndex(pageIndex + 7);
                   }}
+                  disabled={disablePage}
                 >
                   old
                 </button>
