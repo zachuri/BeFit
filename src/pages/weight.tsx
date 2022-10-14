@@ -28,12 +28,18 @@ const Weight: React.FC = () => {
     { take: 7, skip: pageIndex }
   ]);
 
+  const { data: queryLength } = trpc.useQuery(['weights.getAllWeightsLength']);
+
   useEffect(() => {
-    if (data?.length === 0) {
+    if (
+      queryLength !== undefined &&
+      data?.length === 0 &&
+      pageIndex > queryLength
+    ) {
       setPageIndex(pageIndex - 7);
       setDisablePage(true);
     }
-  }, [data, pageIndex]);
+  }, [data, pageIndex, queryLength]);
 
   const {
     mutate,
@@ -57,19 +63,26 @@ const Weight: React.FC = () => {
     mutate(values);
   }
 
-  if (status === 'loading' || isLoading === true) {
-    return (
-      <MainLayoutHeightScreen>
-        <div className="flex flex-col text-center">
-          <h1 className="text-2xl">...Loading</h1>
-        </div>
-      </MainLayoutHeightScreen>
-    );
-  }
-
   return (
     <>
-      {status === 'authenticated' ? (
+      {status === 'unauthenticated' ? (
+        <>
+          <MainLayoutHeightScreen>
+            <div className="min-h-screen flex items-center justify-center -mt-10 md:-mt-20">
+              <div className="flex flex-col text-center">
+                <h1 className="text-4xl">Weight Tracker</h1>
+                <p className="text-2xl text-gray-700">Please Sign in!</p>
+              </div>
+            </div>
+          </MainLayoutHeightScreen>
+        </>
+      ) : status === 'loading' && isLoading === true ? (
+        <MainLayoutHeightScreen>
+          <div className="flex flex-col text-center">
+            <h1 className="text-2xl">...Loading</h1>
+          </div>
+        </MainLayoutHeightScreen>
+      ) : (
         <>
           {/* LayoutFlex for Mobile */}
           <MainLayoutFlex>
@@ -222,17 +235,6 @@ const Weight: React.FC = () => {
               </div>
             </div>
           </MainLayoutFlex>
-        </>
-      ) : (
-        <>
-          <MainLayoutHeightScreen>
-            <div className="min-h-screen flex items-center justify-center -mt-10 md:-mt-20">
-              <div className="flex flex-col text-center">
-                <h1 className="text-4xl">Weight Tracker</h1>
-                <p className="text-2xl text-gray-700">Please Sign in!</p>
-              </div>
-            </div>
-          </MainLayoutHeightScreen>
         </>
       )}
     </>
