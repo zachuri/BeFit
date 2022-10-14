@@ -130,6 +130,7 @@ const Weight: React.FC = () => {
                         date={weight.createdAt.toLocaleString()}
                         day={weight.createdAt.getUTCDay()}
                         description={weight.body}
+                        pageIndex={pageIndex}
                       />
                     </div>
                   );
@@ -189,6 +190,7 @@ const Weight: React.FC = () => {
                         date={weight.createdAt.toLocaleDateString()}
                         day={weight.createdAt.getUTCDay()}
                         description={weight.body}
+                        pageIndex={pageIndex}
                       />
                     );
                   })}
