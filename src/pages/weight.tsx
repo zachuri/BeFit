@@ -127,7 +127,7 @@ const Weight: React.FC = () => {
                       <ItemCard
                         id={weight.id}
                         weight={weight.weightTotal}
-                        date={weight.createdAt.toLocaleString()}
+                        date={weight.createdAt.toLocaleString()} //toLocaleDateString -> for just the date no time
                         day={weight.createdAt.getUTCDay()}
                         description={weight.body}
                         pageIndex={pageIndex}
@@ -187,7 +187,7 @@ const Weight: React.FC = () => {
                         key={weight.id}
                         id={weight.id}
                         weight={weight.weightTotal}
-                        date={weight.createdAt.toLocaleDateString()}
+                        date={weight.createdAt.toLocaleString()} //toLocaleDateString -> for just the date no time
                         day={weight.createdAt.getUTCDay()}
                         description={weight.body}
                         pageIndex={pageIndex}

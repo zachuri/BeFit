@@ -116,8 +116,17 @@ const Item: React.FC<Props> = ({
           scope="row"
           className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
         >
-          {weekday[day] + ', '}
-          {date}
+          <div className="text-left flex flex-col">
+            <div>
+              Date: {weekday[day]},{' '}
+              {date.split(' ').slice(0, 1).join(' ').replace(',', '')}
+            </div>
+            <div className="text-xs">
+              Time: {date.split(' ').slice(-2).join(' ')}
+            </div>
+          </div>
+          {/* {weekday[day] + ', '}
+          {date} */}
         </td>
         <td className="py-4 px-6">{weight}</td>
         <td className="py-4 px-6 overflow-auto">{description}</td>
