@@ -56,9 +56,11 @@ const Home = () => {
 
       {status === 'unauthenticated' ? (
         <MainLayoutHeightScreen>
-          <div className="flex flex-col text-center">
-            <h1 className="text-2xl">Please Sign in</h1>
-            <p className="">In order to view your progress</p>
+          <div className="min-h-screen flex items-center justify-center -mt-10 md:-mt-20">
+            <div className="flex flex-col text-center">
+              <h1 className="text-4xl">Home Page</h1>
+              <p className="text-2xl text-gray-700">Please Sign in!</p>
+            </div>
           </div>
         </MainLayoutHeightScreen>
       ) : status === 'loading' ? (
