@@ -6,7 +6,7 @@ import Item from '../../components/WorkoutItem/Item';
 import { AddWorkoutInput } from '../../schema/workout.schema';
 import { trpc } from '../../utils/trpc';
 
-const Workout: React.FC = () => {
+const Workouts: React.FC = () => {
   const { data, isLoading, refetch } = trpc.useQuery([
     'workouts.getAllWorkouts'
   ]);
@@ -147,4 +147,4 @@ const Workout: React.FC = () => {
   );
 };
 
-export default Workout;
+export default Workouts;

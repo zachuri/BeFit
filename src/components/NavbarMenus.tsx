@@ -7,7 +7,7 @@ import router from 'next/router';
 const links = [
   { href: '/', name: 'Home' },
   { href: '/progress', name: 'Progress' },
-  { href: '/exercise', name: 'Exercise' },
+  { href: '/workouts', name: 'Workouts' },
   { href: '/weight', name: 'Weight' },
   { href: '/diet', name: 'Diet' }
 ];
