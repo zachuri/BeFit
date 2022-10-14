@@ -74,9 +74,9 @@ const Weight: React.FC = () => {
           {/* LayoutFlex for Mobile */}
           <MainLayoutFlex>
             {error && <MainLayoutFlex>{error.message}</MainLayoutFlex>}
-            <div className="my-10 md:mx-40 p-3 rounded border border-black dark:border-white">
+            <div className="my-5 md:mx-40 p-3 rounded border border-black dark:border-white">
               <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="mb-6">
+                <div className="mb-5">
                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                     Add current weight (lbs)
                   </label>
@@ -92,7 +92,7 @@ const Weight: React.FC = () => {
                     })}
                   />
                 </div>
-                <div className="mb-6">
+                <div className="mb-5">
                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                     Description
                   </label>
@@ -117,8 +117,31 @@ const Weight: React.FC = () => {
               </form>
             </div>
 
+            <div className="mt-10 mb-5 flex gap-2 items-center justify-center md:hidden">
+              <button
+                className="border border-white p-2"
+                onClick={() => {
+                  if (pageIndex - 7 < 0) {
+                    setPageIndex(0);
+                  } else {
+                    setPageIndex(pageIndex - 7);
+                    setDisablePage(false);
+                  }
+                }}
+              >
+                new
+              </button>
+              <button
+                className="border border-white p-2"
+                onClick={() => setPageIndex(pageIndex + 7)}
+                disabled={disablePage}
+              >
+                old
+              </button>
+            </div>
+
             {/* Mobile Screen */}
-            <div className="grid grid-cols md:grid-cols-2 gap-3 mt-2 w-full">
+            <div className="grid grid-cols md:grid-cols-2 gap-3 w-full">
               {/* hidden on larger screens */}
               <div className="md:hidden">
                 {data?.map(weight => {
@@ -135,29 +158,6 @@ const Weight: React.FC = () => {
                     </div>
                   );
                 })}
-
-                <div className="flex gap-2 items-center justify-center">
-                  <button
-                    className="border border-white p-2"
-                    onClick={() => {
-                      if (pageIndex - 7 < 0) {
-                        setPageIndex(0);
-                      } else {
-                        setPageIndex(pageIndex - 7);
-                        setDisablePage(false);
-                      }
-                    }}
-                  >
-                    new
-                  </button>
-                  <button
-                    className="border border-white p-2"
-                    onClick={() => setPageIndex(pageIndex + 7)}
-                    disabled={disablePage}
-                  >
-                    old
-                  </button>
-                </div>
               </div>
             </div>
           </MainLayoutFlex>
@@ -196,7 +196,7 @@ const Weight: React.FC = () => {
                   })}
                 </table>
               </div>
-              <div className="mt-5 flex items-center justify-center gap-2">
+              <div className="my-5 flex items-center justify-center gap-2">
                 <button
                   className="hidden md:block border border-white p-2"
                   onClick={() => {

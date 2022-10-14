@@ -110,7 +110,7 @@ const Item: React.FC<Props> = ({
 
   return (
     <>
-      <div className="rounded border border-black dark:border-white p-4 mb-10">
+      <div className="rounded border border-black dark:border-white p-4 mb-5">
         {isLoadingUpdate && <div className="text-xs">Updating...</div>}
         {isLoadingRemove && <div className="text-xs">Removing...</div>}
         <div>
