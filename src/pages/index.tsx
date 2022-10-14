@@ -44,9 +44,7 @@ const Home = () => {
   // Using Next-Auth Session -> check weather the user is signed in
   const { status } = useSession();
 
-  const { data, isLoading, refetch } = trpc.useQuery([
-    'weights.getRecentWeight'
-  ]);
+  const { data, isLoading } = trpc.useQuery(['weights.getRecentWeight']);
 
   return (
     <>
@@ -74,6 +72,7 @@ const Home = () => {
           {/* Current Weight of User  */}
           <div className="mt-5 mx-20 text-center">
             <h1 className="text-5xl">Current Weight</h1>
+            {isLoading && <div>Loading Weight</div>}
             <h2 className="text-4xl">{data?.weightTotal} LBS</h2>
           </div>
 
