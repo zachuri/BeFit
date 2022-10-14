@@ -148,4 +148,23 @@ export const weightRouter = createRouter()
 
       return (await result).length;
     }
+  })
+  .query('getRecentWeight', {
+    async resolve({ ctx }) {
+      if (!ctx.session) {
+        new trpc.TRPCError({
+          code: 'FORBIDDEN',
+          message: "Please Sign In: can't get any post"
+        });
+      }
+
+      return ctx.prisma.weight.findFirst({
+        where: {
+          userId: ctx.session?.user?.id
+        },
+        orderBy: {
+          createdAt: 'desc'
+        }
+      });
+    }
   });
