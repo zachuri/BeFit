@@ -139,16 +139,16 @@ const Item: React.FC<Props> = ({ id, title }) => {
                     >
                       Are you sure you want to remove?
                     </Dialog.Title>
-                    <h3 className="mt-4 text-sm text-gray-100">
+                    <h3 className="text-center mt-4 text-xs dark:text-gray-100">
                       Please type{' '}
                       <span className="text-gray-500">&quot;{title}&quot;</span>{' '}
-                      to <span className="text-red-500">REMOVE FOREVER</span>
+                      to <span className="text-red-500">delete forever</span>
                     </h3>
                     <div className="flex justify-center item-center my-4">
                       <input
                         type="text"
                         placeholder={title}
-                        className="rounded p-2 mr-2"
+                        className="rounded p-2 mr-2 border border-black dark:border-white"
                         onChange={e => {
                           setInputRemove(e.target.value);
                         }}
@@ -166,8 +166,8 @@ const Item: React.FC<Props> = ({ id, title }) => {
                         Remove
                       </button>
                     </div>
-                    <h2 className="text-xs text-red-500">
-                      All your sets and reps will be wiped
+                    <h2 className="text-center text-xs text-red-500">
+                      WARNING: All your sets and reps will be wiped
                     </h2>
 
                     {errorRemoveInput && (
