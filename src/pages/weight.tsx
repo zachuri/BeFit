@@ -227,7 +227,7 @@ const Weight: React.FC = () => {
 
                   <h1>
                     {currentPageNumber + 1}
-                    <span className="text-xs text-gray-600">
+                    <span className="text-xs text-gray-600 dark:text-gray-400">
                       ... {totalPage === 0 ? 1 : totalPage}
                     </span>
                   </h1>
@@ -308,7 +308,7 @@ const Weight: React.FC = () => {
 
                       <h1 className="hidden md:block">
                         {currentPageNumber + 1}
-                        <span className="text-xs text-gray-600">
+                        <span className="text-xs text-gray-600 dark:text-gray-400">
                           {' '}
                           ... {totalPage === 0 ? 1 : totalPage}
                         </span>
