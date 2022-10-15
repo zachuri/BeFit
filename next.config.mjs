@@ -1,4 +1,4 @@
-import { env } from "./src/env/server.mjs";
+import { env } from './src/env/server.mjs';
 
 /**
  * Don't be scared of the generics here.
@@ -14,19 +14,19 @@ function defineNextConfig(config) {
 
 export default defineNextConfig({
   reactStrictMode: true,
-  swcMinify: true,
-	images: {
-		domains: [
-			"avatars.githubusercontent.com",
-			"lh3.googleusercontent.com",
-			"robohash.org",
-			"static-cdn.jtvnw.net",
-			"cdn.discordapp.com",
-		],
-	},
+  swcMinify: false,
+  images: {
+    domains: [
+      'avatars.githubusercontent.com',
+      'lh3.googleusercontent.com',
+      'robohash.org',
+      'static-cdn.jtvnw.net',
+      'cdn.discordapp.com'
+    ]
+  },
   // Next.js i18n docs: https://nextjs.org/docs/advanced-features/i18n-routing
   i18n: {
-    locales: ["en"],
-    defaultLocale: "en",
-  },
+    locales: ['en'],
+    defaultLocale: 'en'
+  }
 });
