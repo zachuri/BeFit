@@ -112,7 +112,7 @@ const Item: React.FC<Props> = ({
     <tbody>
       <tr
         key={id}
-        className="text-center border-t border-[black] dark:border-white dark:border-t overflow-auto"
+        className="text-center border-t border-black dark:border-white dark:border-t overflow-auto"
       >
         <td
           scope="row"
@@ -129,19 +129,19 @@ const Item: React.FC<Props> = ({
           {date} */}
         </td>
         <td className="py-4 px-6">{weight}</td>
-        <td className="py-4 px-6 overflow-auto">{description}</td>
+        <td className="text-xs py-4 px-6 overflow-auto">{description}</td>
         <td className="py-4 px-6">
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1">
             <button
               onClick={openModal}
-              className="rounded p-1 border border-black dark:border-white dark:hover:border-blue-500 hover:border-blue-500 transition"
+              className="text-xs rounded p-1 border border-black dark:border-white dark:hover:border-blue-500 hover:border-blue-500 transition"
             >
               Edit
             </button>
 
             <button
               onClick={openModalRemove}
-              className="rounded p-1 border border-black dark:border-white dark:hover:border-[red] hover:border-[red]"
+              className="text-xs rounded p-1 border border-black dark:border-white dark:hover:border-[red] hover:border-[red]"
             >
               Remove
             </button>
@@ -172,7 +172,7 @@ const Item: React.FC<Props> = ({
                       leaveFrom="opacity-100 scale-100"
                       leaveTo="opacity-0 scale-95"
                     >
-                      <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white border border-black  dark:bg-black dark:border dark:border-white p-6 text-left align-middle shadow-xl transition-all">
+                      <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white border-2 border-black  dark:bg-black dark:border-2 dark:border-white p-6 text-left align-middle shadow-xl transition-all">
                         <Dialog.Title
                           as="h3"
                           className="text-lg font-medium leading-6 text-gray-900 dark:text-white"
@@ -267,7 +267,7 @@ const Item: React.FC<Props> = ({
                       leaveFrom="opacity-100 scale-100"
                       leaveTo="opacity-0 scale-95"
                     >
-                      <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white border border-black  dark:bg-black dark:border dark:border-white p-6 text-left align-middle shadow-xl transition-all">
+                      <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white border-2 border-black  dark:bg-black dark:border-2 dark:border-white p-6 text-left align-middle shadow-xl transition-all">
                         <Dialog.Title
                           as="h3"
                           className="text-lg font-medium leading-6 text-gray-900 dark:text-white"

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { trpc } from '../utils/trpc';
 import { AddWeightInput } from '../schema/weight.schema';
@@ -11,6 +11,7 @@ import {
   MainLayoutFlex,
   MainLayoutHeightScreen
 } from '../components/layouts/Main';
+import { Dialog, Transition } from '@headlessui/react';
 
 const Weight: React.FC = () => {
   const { status } = useSession();
@@ -67,6 +68,17 @@ const Weight: React.FC = () => {
   // On Sumbit mutate values of adding weight
   function onSubmit(values: AddWeightInput) {
     mutate(values);
+    setIsOpen(false);
+  }
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
   }
 
   return (
@@ -93,48 +105,108 @@ const Weight: React.FC = () => {
           {/* LayoutFlex for Mobile */}
           <MainLayoutFlex>
             {error && <MainLayoutFlex>{error.message}</MainLayoutFlex>}
-            <div className="my-5 md:mx-40 p-3 rounded border border-black dark:border-white">
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="mb-5">
-                  <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                    Add current weight (lbs)
-                  </label>
-                  <input
-                    type="number"
-                    step="0.1"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="180.4"
-                    required
-                    // {...register('weightTotal')}
-                    {...register('weightTotal', {
-                      setValueAs: v => parseFloat(v)
-                    })}
-                  />
-                </div>
-                <div className="mb-5">
-                  <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                    Description
-                  </label>
-                  <textarea
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="I feel great!"
-                    required
-                    maxLength={35}
-                    {...register('body')}
-                  />
-                </div>
-                <div className="flex items-center justify-center">
-                  <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Add Weight
-                  </button>
-                </div>
-                {isLoadingAddWeights && (
-                  <div className="flex justify-center mt-2 items-center text-xs">
-                    Adding your weight...
-                  </div>
-                )}
-              </form>
+
+            <div className="my-5 flex flex-col items-center justify-center">
+              <h1 className="text-2xl">Add Weight</h1>
+              <button
+                onClick={openModal}
+                className="mt-1 border px-12 rounded border-black dark:border-white hover:dark:border-gray-500 hover:border-gray-200 transition"
+              >
+                +
+              </button>
             </div>
+
+            {/* Modal Add */}
+            <Transition appear show={isOpen} as={Fragment}>
+              <Dialog as="div" className="relative z-10" onClose={closeModal}>
+                <Transition.Child
+                  as={Fragment}
+                  enter="ease-out duration-300"
+                  enterFrom="opacity-0"
+                  enterTo="opacity-100"
+                  leave="ease-in duration-200"
+                  leaveFrom="opacity-100"
+                  leaveTo="opacity-0"
+                >
+                  <div className="fixed inset-0 bg-black bg-opacity-25" />
+                </Transition.Child>
+
+                <div className="fixed inset-0 overflow-y-auto">
+                  <div className="flex min-h-full items-center justify-center p-4 text-center">
+                    <Transition.Child
+                      as={Fragment}
+                      enter="ease-out duration-300"
+                      enterFrom="opacity-0 scale-95"
+                      enterTo="opacity-100 scale-100"
+                      leave="ease-in duration-200"
+                      leaveFrom="opacity-100 scale-100"
+                      leaveTo="opacity-0 scale-95"
+                    >
+                      <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl border-2 bg-white  border-black  dark:bg-black dark:border-2 dark:border-white p-6 text-left align-middle shadow-xl transition-all">
+                        <Dialog.Title
+                          as="h3"
+                          className="text-lg font-medium leading-6 text-gray-900 dark:text-white"
+                        >
+                          Add a weight
+                        </Dialog.Title>
+                        <div className="mt-2">
+                          <form onSubmit={handleSubmit(onSubmit)}>
+                            <div className="mb-5">
+                              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                Add current weight (lbs)
+                              </label>
+                              <input
+                                type="number"
+                                step="0.1"
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="180.4"
+                                required
+                                // {...register('weightTotal')}
+                                {...register('weightTotal', {
+                                  setValueAs: v => parseFloat(v)
+                                })}
+                              />
+                            </div>
+                            <div className="mb-5">
+                              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                Description
+                              </label>
+                              <textarea
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="I feel great!"
+                                required
+                                maxLength={35}
+                                {...register('body')}
+                              />
+                            </div>
+                            <div className="flex items-center justify-center">
+                              <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Add Weight
+                              </button>
+                            </div>
+                            {isLoadingAddWeights && (
+                              <div className="flex justify-center mt-2 items-center text-xs">
+                                Adding your weight...
+                              </div>
+                            )}
+                          </form>
+                        </div>
+
+                        <div className="mt-4">
+                          <button
+                            type="button"
+                            className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                            onClick={closeModal}
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      </Dialog.Panel>
+                    </Transition.Child>
+                  </div>
+                </div>
+              </Dialog>
+            </Transition>
 
             {data?.length === 0 ? (
               <MainLayoutFlex>
@@ -147,7 +219,7 @@ const Weight: React.FC = () => {
               <>
                 <div className="mt-10 mb-5 flex gap-2 items-center justify-center md:hidden">
                   <button
-                    className="border border-white p-2"
+                    className="rounded border border-black dark:border-white p-2"
                     onClick={() => newer()}
                   >
                     newer
@@ -161,7 +233,7 @@ const Weight: React.FC = () => {
                   </h1>
 
                   <button
-                    className="border border-white p-2"
+                    className="rounded border border-black dark:border-white p-2"
                     onClick={() => older()}
                   >
                     older
@@ -199,7 +271,7 @@ const Weight: React.FC = () => {
                         text-black bg-white border border-black  
                         dark:bg-black dark:text-white dark:border-t dark:border-white overflow-auto"
                     >
-                      <table className="table-fixed overflow-auto ">
+                      <table className="table-fixed overflow-auto">
                         <thead className="text-xs uppercase">
                           <tr>
                             <th className="w-1/2 py-3">Date</th>
@@ -226,7 +298,7 @@ const Weight: React.FC = () => {
                     </div>
                     <div className="my-5 flex items-center justify-center gap-2">
                       <button
-                        className="hidden md:block border border-white p-2"
+                        className="hidden md:block rounded border border-black dark:border-white p-2"
                         onClick={() => {
                           newer();
                         }}
@@ -243,7 +315,7 @@ const Weight: React.FC = () => {
                       </h1>
 
                       <button
-                        className="hidden md:block border border-white p-2"
+                        className="hidden md:block rounded border border-black dark:border-white p-2"
                         onClick={() => older()}
                       >
                         older

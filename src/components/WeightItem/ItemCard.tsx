@@ -175,7 +175,7 @@ const Item: React.FC<Props> = ({
                     leaveFrom="opacity-100 scale-100"
                     leaveTo="opacity-0 scale-95"
                   >
-                    <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white border border-black  dark:bg-black dark:border dark:border-white p-6 text-left align-middle shadow-xl transition-all">
+                    <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white border-2 border-black  dark:bg-black dark:border-2 dark:border-white p-6 text-left align-middle shadow-xl transition-all">
                       <Dialog.Title
                         as="h3"
                         className="text-lg font-medium leading-6 text-gray-900 dark:text-white"
@@ -236,7 +236,7 @@ const Item: React.FC<Props> = ({
                     leaveFrom="opacity-100 scale-100"
                     leaveTo="opacity-0 scale-95"
                   >
-                    <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white border border-black  dark:bg-black dark:border dark:border-white p-6 text-left align-middle shadow-xl transition-all">
+                    <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white border-2 border-black  dark:bg-black dark:border-2 dark:border-white p-6 text-left align-middle shadow-xl transition-all">
                       {errorUpdate && <div>{errorUpdate.message}</div>}
                       <Dialog.Title
                         as="h3"
