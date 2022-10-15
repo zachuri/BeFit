@@ -96,7 +96,7 @@ const Weight: React.FC = () => {
             </div>
           </MainLayoutHeightScreen>
         </>
-      ) : status === 'loading' || isLoading || isLoadingAddWeights ? (
+      ) : status === 'loading' || isLoading ? (
         <MainLayoutHeightScreen>
           <div className="flex flex-col text-center">
             <h1 className="text-2xl">...Loading</h1>
@@ -117,6 +117,7 @@ const Weight: React.FC = () => {
                 +
               </button>
             </div>
+            {data?.length === 0 && isLoadingAddWeights && <MainLayoutFlex><div className='my-5'>Adding</div></MainLayoutFlex>} 
 
             {/* Modal Add */}
             <Transition appear show={isOpen} as={Fragment}>
