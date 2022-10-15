@@ -96,7 +96,7 @@ const Weight: React.FC = () => {
             </div>
           </MainLayoutHeightScreen>
         </>
-      ) : status === 'loading' || isLoading === true ? (
+      ) : status === 'loading' || isLoading || isLoadingAddWeights ? (
         <MainLayoutHeightScreen>
           <div className="flex flex-col text-center">
             <h1 className="text-2xl">...Loading</h1>
