@@ -213,7 +213,6 @@ const Weight: React.FC = () => {
             {data?.length === 0 ? (
               <MainLayoutFlex>
                 <div className="flex flex-col items-center justify-center">
-                  <h1 className="text-4xl">Weight Page</h1>
                   <p className="">Please add a new weight!</p>
                 </div>
               </MainLayoutFlex>
