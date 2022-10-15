@@ -30,7 +30,9 @@ const Weight: React.FC = () => {
   ]);
 
   // Query for getting the total pages
-  const { data: queryLength } = trpc.useQuery(['weights.getAllWeightsLength']);
+  const { data: queryLength, isLoading: queryLengthIsLoading } = trpc.useQuery([
+    'weights.getAllWeightsLength'
+  ]);
 
   const totalPage = Math.floor(
     ((queryLength as number) + resultsPerPage - 1) / resultsPerPage
@@ -228,7 +230,12 @@ const Weight: React.FC = () => {
                   <h1>
                     {currentPageNumber + 1}
                     <span className="text-xs text-gray-600 dark:text-gray-400">
-                      ... {totalPage === 0 ? 1 : totalPage}
+                      {' '}
+                      {queryLengthIsLoading ? (
+                        <div>...Loading</div>
+                      ) : (
+                        <>... {totalPage === 0 ? 1 : totalPage}</>
+                      )}
                     </span>
                   </h1>
 
@@ -310,7 +317,11 @@ const Weight: React.FC = () => {
                         {currentPageNumber + 1}
                         <span className="text-xs text-gray-600 dark:text-gray-400">
                           {' '}
-                          ... {totalPage === 0 ? 1 : totalPage}
+                          {queryLengthIsLoading ? (
+                            <div>...Loading</div>
+                          ) : (
+                            <>... {totalPage === 0 ? 1 : totalPage}</>
+                          )}
                         </span>
                       </h1>
 
