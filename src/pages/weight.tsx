@@ -112,11 +112,17 @@ const Weight: React.FC = () => {
               <h1 className="text-2xl">Add Weight</h1>
               <button
                 onClick={openModal}
-                className="mt-1 border px-12 rounded border-black dark:border-white hover:dark:border-gray-500 hover:border-gray-200 transition"
+                className="my-2 border px-12 rounded border-black dark:border-white hover:dark:border-gray-500 hover:border-gray-200 transition"
               >
                 +
               </button>
             </div>
+
+            {isLoadingAddWeights && (
+              <div className="-mt-4 flex justify-center items-center text-xs">
+                Adding your weight...
+              </div>
+            )}
 
             {/* Modal Add */}
             <Transition appear show={isOpen} as={Fragment}>
@@ -186,11 +192,6 @@ const Weight: React.FC = () => {
                                 Add Weight
                               </button>
                             </div>
-                            {isLoadingAddWeights && (
-                              <div className="flex justify-center mt-2 items-center text-xs">
-                                Adding your weight...
-                              </div>
-                            )}
                           </form>
                         </div>
 
@@ -210,6 +211,7 @@ const Weight: React.FC = () => {
               </Dialog>
             </Transition>
 
+            {/* When a new user will not display table */}
             {data?.length === 0 ? (
               isLoadingAddWeights ? (
                 <MainLayoutFlex>
@@ -226,38 +228,10 @@ const Weight: React.FC = () => {
               )
             ) : (
               <>
-                <div className="mt-10 mb-5 flex gap-2 items-center justify-center md:hidden">
-                  <button
-                    className="rounded border border-black dark:border-white p-2"
-                    onClick={() => newer()}
-                  >
-                    newer
-                  </button>
-
-                  <h1>
-                    {currentPageNumber + 1}
-                    <span className="text-xs text-gray-600 dark:text-gray-400">
-                      {' '}
-                      {queryLengthIsLoading ? (
-                        <div>...Loading</div>
-                      ) : (
-                        <>... {totalPage === 0 ? 1 : totalPage}</>
-                      )}
-                    </span>
-                  </h1>
-
-                  <button
-                    className="rounded border border-black dark:border-white p-2"
-                    onClick={() => older()}
-                  >
-                    older
-                  </button>
-                </div>
-
                 {/* Mobile Screen */}
-                <div className="grid grid-cols md:grid-cols-2 gap-3 w-full">
+                <div className="flex flex-col justify-between w-full">
                   {/* hidden on larger screens */}
-                  <div className="md:hidden">
+                  <div className="md:hidden -mb-5">
                     {data?.map(weight => {
                       return (
                         <div key={weight.id}>
@@ -275,72 +249,73 @@ const Weight: React.FC = () => {
                     })}
                   </div>
                 </div>
+
                 {/* LayoutFill for Desktop */}
-                <MainLayoutFlex>
-                  {/* Desktop Screens -> will show a table */}
-                  <div className="-mt-20">
-                    {/* visible on md and up */}
-                    <div
-                      className="hidden md:block rounded
-                        text-black bg-white border border-black  
-                        dark:bg-black dark:text-white dark:border-t dark:border-white overflow-auto"
-                    >
-                      <table className="table-fixed overflow-auto">
-                        <thead className="text-xs uppercase">
-                          <tr>
-                            <th className="w-1/2 py-3">Date</th>
-                            <th className="w-1/4 py-3">Weight</th>
-                            <th className="w-1/2 py-3">Description/Image</th>
-                            <th className="w-1/4 py-3">Update</th>
-                          </tr>
-                        </thead>
-                        {data?.map(weight => {
-                          return (
-                            <ItemTable
-                              key={weight.id}
-                              id={weight.id}
-                              weight={weight.weightTotal}
-                              date={weight.createdAt.toLocaleString()} //toLocaleDateString -> for just the date no time
-                              day={weight.createdAt.getUTCDay()}
-                              description={weight.body}
-                              resultsPerPage={resultsPerPage}
-                              currentPageNumber={currentPageNumber}
-                            />
-                          );
-                        })}
-                      </table>
-                    </div>
-                    <div className="my-5 flex items-center justify-center gap-2">
-                      <button
-                        className="hidden md:block rounded border border-black dark:border-white p-2"
-                        onClick={() => {
-                          newer();
-                        }}
-                      >
-                        newer
-                      </button>
-
-                      <h1 className="hidden md:block">
-                        {currentPageNumber + 1}
-                        <span className="text-xs text-gray-600 dark:text-gray-400">
-                          {' '}
-                          {queryLengthIsLoading ? (
-                            <div>...Loading</div>
-                          ) : (
-                            <>... {totalPage === 0 ? 1 : totalPage}</>
-                          )}
-                        </span>
-                      </h1>
-
-                      <button
-                        className="hidden md:block rounded border border-black dark:border-white p-2"
-                        onClick={() => older()}
-                      >
-                        older
-                      </button>
-                    </div>
+                {/* Desktop Screens -> will show a table */}
+                <div>
+                  {/* visible on md and up */}
+                  <div
+                    className="hidden md:block rounded
+                      text-black bg-white border border-black  
+                      dark:bg-black dark:text-white dark:border-t dark:border-white overflow-auto"
+                  >
+                    <table className="table-fixed overflow-auto">
+                      <thead className="text-xs uppercase">
+                        <tr>
+                          <th className="w-1/2 py-3">Date</th>
+                          <th className="w-1/4 py-3">Weight</th>
+                          <th className="w-1/2 py-3">Description/Image</th>
+                          <th className="w-1/4 py-3">Update</th>
+                        </tr>
+                      </thead>
+                      {data?.map(weight => {
+                        return (
+                          <ItemTable
+                            key={weight.id}
+                            id={weight.id}
+                            weight={weight.weightTotal}
+                            date={weight.createdAt.toLocaleString()} //toLocaleDateString -> for just the date no time
+                            day={weight.createdAt.getUTCDay()}
+                            description={weight.body}
+                            resultsPerPage={resultsPerPage}
+                            currentPageNumber={currentPageNumber}
+                          />
+                        );
+                      })}
+                    </table>
                   </div>
-                </MainLayoutFlex>
+
+                  {/* Pagination Items */}
+                  <div className="my-5 flex items-center justify-center gap-2">
+                    <button
+                      className="rounded border border-black dark:border-white p-2"
+                      onClick={() => {
+                        newer();
+                      }}
+                    >
+                      newer
+                    </button>
+
+                    <h1>
+                      {currentPageNumber + 1}
+                      <span className="text-xs text-gray-600 dark:text-gray-400">
+                        {' '}
+                        {queryLengthIsLoading ? (
+                          <div>...Loading</div>
+                        ) : (
+                          <>... {totalPage === 0 ? 1 : totalPage}</>
+                        )}
+                      </span>
+                    </h1>
+
+                    <button
+                      className="rounded border border-black dark:border-white p-2"
+                      onClick={() => older()}
+                    >
+                      older
+                    </button>
+                  </div>
+                </div>
               </>
             )}
           </MainLayoutFlex>
