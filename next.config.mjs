@@ -14,6 +14,7 @@ function defineNextConfig(config) {
 
 export default defineNextConfig({
   reactStrictMode: true,
+  // Change swcMinify -true ->false for graph to display
   swcMinify: false,
   images: {
     domains: [
