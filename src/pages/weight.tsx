@@ -225,7 +225,7 @@ const Weight: React.FC = () => {
                   newer
                 </button>
 
-                <h1>
+                <h1 className="hidden md:block">
                   {currentPageNumber + 1}
                   <span className="text-xs text-gray-600">
                     {' '}

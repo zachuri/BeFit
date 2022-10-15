@@ -115,37 +115,40 @@ const Item: React.FC<Props> = ({
       <div className="rounded border border-black dark:border-white p-4 mb-5">
         {isLoadingUpdate && <div className="text-xs">Updating...</div>}
         {isLoadingRemove && <div className="text-xs">Removing...</div>}
-        <div>
-          Weight: {weight} <span className="text-xs">lbs</span>
-        </div>
-        {/* If description is empty */}
-        {description.length == 0 ? (
-          <div className="my-9"></div>
-        ) : (
-          <div className="text-xs mb-5">Description: {description}</div>
-        )}
-        <div className="text-xs">
-          {/* Only get the date */}
-          Date: {weekday[day]},{' '}
-          {date.split(' ').slice(0, 1).join(' ').replace(',', '')}
-        </div>
-        <div className="text-xs">
-          Time: {date.split(' ').slice(-2).join(' ')}
-        </div>
-        <div className="mt-2 flex flex-row-reverse gap-2">
-          <button
-            onClick={openModalRemove}
-            className="border border-black dark:border-white hover:border-[red] hover:dark:border-[red] p-1 rounded"
-          >
-            Remove
-          </button>
-          <button
-            onClick={openModal}
-            className="border border-black dark:border-white hover:border-blue-500 hover:dark:border-blue-500 p-1 rounded"
-          >
-            Edit
-          </button>
-
+        <div className="grid grid-cols-5">
+          <div className="col-span-4">
+            <div>
+              Weight: {weight} <span className="text-xs">lbs</span>
+            </div>
+            {/* If description is empty */}
+            {description.length == 0 ? (
+              <div className="my-9"></div>
+            ) : (
+              <div className="text-xs mb-2">Description: {description}</div>
+            )}
+            <div className="text-xs">
+              {/* Only get the date */}
+              Date: {weekday[day]},{' '}
+              {date.split(' ').slice(0, 1).join(' ').replace(',', '')}
+            </div>
+            <div className="text-xs">
+              Time: {date.split(' ').slice(-2).join(' ')}
+            </div>
+          </div>
+          <div className="text-xs flex flex-col gap-2 justify-center">
+            <button
+              onClick={openModal}
+              className="border border-black dark:border-white hover:border-blue-500 hover:dark:border-blue-500 p-1 rounded"
+            >
+              Edit
+            </button>
+            <button
+              onClick={openModalRemove}
+              className="border border-black dark:border-white hover:border-[red] hover:dark:border-[red] p-1 rounded"
+            >
+              Remove
+            </button>
+          </div>
           {/*  Modal for Remove */}
           <Transition appear show={isOpenRemove} as={Fragment}>
             <Dialog as="div" className="relative z-10" onClose={closeModal}>
