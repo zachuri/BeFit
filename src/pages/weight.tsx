@@ -143,6 +143,12 @@ const Weight: React.FC = () => {
               >
                 newer
               </button>
+
+              <h1>
+                {currentPageNumber + 1}
+                <span className="text-xs text-gray-600"> ... {totalPage}</span>
+              </h1>
+
               <button
                 className="border border-white p-2"
                 onClick={() => older()}
@@ -216,8 +222,17 @@ const Weight: React.FC = () => {
                     newer();
                   }}
                 >
-                  new
+                  newer
                 </button>
+
+                <h1>
+                  {currentPageNumber + 1}
+                  <span className="text-xs text-gray-600">
+                    {' '}
+                    ... {totalPage}
+                  </span>
+                </h1>
+
                 <button
                   className="hidden md:block border border-white p-2"
                   onClick={() => older()}
