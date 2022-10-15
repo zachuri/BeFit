@@ -12,6 +12,7 @@ import {
   MainLayoutHeightScreen
 } from '../components/layouts/Main';
 import { Dialog, Transition } from '@headlessui/react';
+import LoadingIcon from '../components/LoadingIcon';
 
 const Weight: React.FC = () => {
   const { status } = useSession();
@@ -97,11 +98,9 @@ const Weight: React.FC = () => {
           </MainLayoutHeightScreen>
         </>
       ) : status === 'loading' || isLoading ? (
-        <MainLayoutHeightScreen>
-          <div className="flex flex-col text-center">
-            <h1 className="text-2xl">...Loading</h1>
-          </div>
-        </MainLayoutHeightScreen>
+        <MainLayoutFlex>
+          <LoadingIcon />
+        </MainLayoutFlex>
       ) : (
         <>
           {/* LayoutFlex for Mobile */}
