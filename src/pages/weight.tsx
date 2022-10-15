@@ -117,13 +117,6 @@ const Weight: React.FC = () => {
                 +
               </button>
             </div>
-            {data?.length === 0 && isLoadingAddWeights && (
-              <MainLayoutFlex>
-                <div className="my-5 flex items-center justify-center">
-                  ...Loading
-                </div>
-              </MainLayoutFlex>
-            )}
 
             {/* Modal Add */}
             <Transition appear show={isOpen} as={Fragment}>
@@ -218,11 +211,19 @@ const Weight: React.FC = () => {
             </Transition>
 
             {data?.length === 0 ? (
-              <MainLayoutFlex>
-                <div className="flex flex-col items-center justify-center">
-                  <p className="">Please add a new weight!</p>
-                </div>
-              </MainLayoutFlex>
+              isLoadingAddWeights ? (
+                <MainLayoutFlex>
+                  <div className="-mt-[50px] flex flex-col items-center justify-center">
+                    <div className="flex justify-center">...Loading</div>
+                  </div>
+                </MainLayoutFlex>
+              ) : (
+                <MainLayoutFlex>
+                  <div className="-mt-[50px] flex flex-col items-center justify-center">
+                    <p className="text-lg">Please add a new weight!</p>
+                  </div>
+                </MainLayoutFlex>
+              )
             ) : (
               <>
                 <div className="mt-10 mb-5 flex gap-2 items-center justify-center md:hidden">
