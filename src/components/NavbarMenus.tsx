@@ -91,7 +91,9 @@ export const AccountMenu: React.FC = () => {
           role="navigation"
           aria-label="hamburger menu to navigate to pages"
         >
-          <div className="flex items-center justify-center md:border-2 md:border-white rounded-full">
+          <div className="flex items-center justify-center md:border md:border-white 
+          hover:md:border-black
+          rounded-full">
             <Image
               className="rounded-full"
               // Just casted as string because next see's string | undefined -> can't be undefined
