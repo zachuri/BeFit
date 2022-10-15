@@ -8,6 +8,7 @@ import { AiFillCaretDown } from 'react-icons/ai';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { trpc } from '../utils/trpc';
+import LoadingIcon from '../components/LoadingIcon';
 // import { trpc } from "../utils/trpc";
 
 const NavigateLinks = () => {
@@ -74,7 +75,12 @@ const Home = () => {
           {/* Current Weight of User  */}
           <div className="mt-5 mx-20 text-center">
             <h1 className="text-5xl">Current Weight</h1>
-            {isLoading && <div>Loading Weight</div>}
+            {isLoading && (
+              <div>
+                {/* Loading Weight */}
+                <LoadingIcon />
+              </div>
+            )}
             <h2 className="text-4xl">{data?.weightTotal} LBS</h2>
           </div>
 
