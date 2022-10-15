@@ -20,7 +20,8 @@ interface Props {
   day: number;
   weight: number;
   description: string;
-  pageIndex: number;
+  resultsPerPage: number;
+  currentPageNumber: number;
 }
 
 const Item: React.FC<Props> = ({
@@ -29,12 +30,13 @@ const Item: React.FC<Props> = ({
   day,
   weight,
   description,
-  pageIndex
+  resultsPerPage,
+  currentPageNumber
 }) => {
   // const { refetch } = trpc.useQuery(['weights.getAllWeights']);
   const { refetch } = trpc.useQuery([
     'weights.getAllWeightsPagnation',
-    { take: 7, skip: pageIndex }
+    { take: resultsPerPage, skip: currentPageNumber * resultsPerPage }
   ]);
 
   const {

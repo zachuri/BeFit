@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { trpc } from '../utils/trpc';
 import { AddWeightInput } from '../schema/weight.schema';
@@ -19,38 +19,43 @@ const Weight: React.FC = () => {
 
   // const { data, isLoading, refetch } = trpc.useQuery(['weights.getAllWeights']);
 
-  // Use this query for pagination
-  const [pageIndex, setPageIndex] = useState(0);
-  const [disablePage, setDisablePage] = useState(false);
+  // Query for Pagination
+  const [currentPageNumber, setCurrentPageNumber] = useState(0);
+  const [resultsPerPage] = useState(7);
 
   const { data, isLoading, refetch } = trpc.useQuery([
     'weights.getAllWeightsPagnation',
-    { take: 7, skip: pageIndex }
+    { take: resultsPerPage, skip: resultsPerPage * currentPageNumber }
   ]);
 
+  // Query for getting the total pages
   const { data: queryLength } = trpc.useQuery(['weights.getAllWeightsLength']);
 
-  useEffect(() => {
-    if (
-      queryLength !== undefined &&
-      data?.length === 0 &&
-      pageIndex > queryLength
-    ) {
-      setPageIndex(pageIndex - 7);
-      setDisablePage(true);
-    }
-  }, [data, pageIndex, queryLength]);
+  const totalPage = Math.floor(
+    ((queryLength as number) + resultsPerPage - 1) / resultsPerPage
+  );
 
+  // functions for pagination (newer/older)
+  function newer() {
+    currentPageNumber - 1 < 0
+      ? setCurrentPageNumber(0)
+      : setCurrentPageNumber(currentPageNumber - 1);
+  }
+
+  function older() {
+    currentPageNumber + 1 === totalPage
+      ? currentPageNumber
+      : setCurrentPageNumber(currentPageNumber + 1);
+  }
+
+  // Query for adding weight
   const {
     mutate,
     error,
     isLoading: isLoadingAddWeights
   } = trpc.useMutation(['weights.addWeight'], {
-    // onSuccess({ id }) {
-    // router.push(`/weight/${id}`);
-    // router.push(`/weight`);
     onSuccess() {
-      // reset teh form
+      // reset the form
       reset();
 
       // able to refetch query
@@ -59,6 +64,7 @@ const Weight: React.FC = () => {
     }
   });
 
+  // On Sumbit mutate values of adding weight
   function onSubmit(values: AddWeightInput) {
     mutate(values);
   }
@@ -133,21 +139,13 @@ const Weight: React.FC = () => {
             <div className="mt-10 mb-5 flex gap-2 items-center justify-center md:hidden">
               <button
                 className="border border-white p-2"
-                onClick={() => {
-                  if (pageIndex - 7 < 0) {
-                    setPageIndex(0);
-                  } else {
-                    setPageIndex(pageIndex - 7);
-                    setDisablePage(false);
-                  }
-                }}
+                onClick={() => newer()}
               >
-                new
+                newer
               </button>
               <button
                 className="border border-white p-2"
-                onClick={() => setPageIndex(pageIndex + 7)}
-                disabled={disablePage}
+                onClick={() => older()}
               >
                 old
               </button>
@@ -166,7 +164,8 @@ const Weight: React.FC = () => {
                         date={weight.createdAt.toLocaleString()} //toLocaleDateString -> for just the date no time
                         day={weight.createdAt.getUTCDay()}
                         description={weight.body}
-                        pageIndex={pageIndex}
+                        resultsPerPage={resultsPerPage}
+                        currentPageNumber={currentPageNumber}
                       />
                     </div>
                   );
@@ -203,7 +202,8 @@ const Weight: React.FC = () => {
                         date={weight.createdAt.toLocaleString()} //toLocaleDateString -> for just the date no time
                         day={weight.createdAt.getUTCDay()}
                         description={weight.body}
-                        pageIndex={pageIndex}
+                        resultsPerPage={resultsPerPage}
+                        currentPageNumber={currentPageNumber}
                       />
                     );
                   })}
@@ -213,24 +213,16 @@ const Weight: React.FC = () => {
                 <button
                   className="hidden md:block border border-white p-2"
                   onClick={() => {
-                    if (pageIndex - 7 < 0) {
-                      setPageIndex(0);
-                    } else {
-                      setPageIndex(pageIndex - 7);
-                      setDisablePage(false);
-                    }
+                    newer();
                   }}
                 >
                   new
                 </button>
                 <button
                   className="hidden md:block border border-white p-2"
-                  onClick={() => {
-                    setPageIndex(pageIndex + 7);
-                  }}
-                  disabled={disablePage}
+                  onClick={() => older()}
                 >
-                  old
+                  older
                 </button>
               </div>
             </div>
