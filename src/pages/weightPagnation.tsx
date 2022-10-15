@@ -1,20 +1,26 @@
+import { Result } from 'postcss';
 import React, { useEffect, useState } from 'react';
 import { MainLayoutFlex } from '../components/layouts/Main';
 import { trpc } from '../utils/trpc';
 
 const WeightPagnation: React.FC = () => {
-  const [pageIndex, setPageIndex] = useState(0);
+  const [currentPageNumber, setCurrentPageNumber] = useState(0);
+  const [resultsPerPage, setResultsPerPage] = useState(7);
+
+  const { data: queryLength } = trpc.useQuery(['weights.getAllWeightsLength']);
+
+  const totalPage = Math.floor(
+    ((queryLength as number) + resultsPerPage - 1) / resultsPerPage
+  );
+
+  console.log('Total Page ' + totalPage);
 
   const { data, isLoading, refetch } = trpc.useQuery([
     'weights.getAllWeightsPagnation',
-    { take: 7, skip: pageIndex }
+    { take: resultsPerPage, skip: resultsPerPage * currentPageNumber }
   ]);
 
-  useEffect(() => {
-    if (data?.length === 0) {
-      setPageIndex(pageIndex - 7);
-    }
-  }, [data, pageIndex]);
+  console.log(currentPageNumber);
 
   return (
     <div>
@@ -35,21 +41,22 @@ const WeightPagnation: React.FC = () => {
           <button
             className="border border-white p-2"
             onClick={() => {
-              if (pageIndex - 7 <= 0) {
-                setPageIndex(0);
-              }
-              setPageIndex(pageIndex - 7);
+              currentPageNumber - 1 < 0
+                ? setCurrentPageNumber(0)
+                : setCurrentPageNumber(currentPageNumber - 1);
             }}
           >
-            back
+            newer
           </button>
           <button
             className="border border-white p-2"
             onClick={() => {
-              setPageIndex(pageIndex + 7);
+              currentPageNumber + 1 === totalPage
+                ? currentPageNumber
+                : setCurrentPageNumber(currentPageNumber + 1);
             }}
           >
-            next
+            older
           </button>
         </div>
       </MainLayoutFlex>
