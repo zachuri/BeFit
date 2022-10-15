@@ -5,7 +5,7 @@ import { trpc } from '../utils/trpc';
 
 const WeightPagnation: React.FC = () => {
   const [currentPageNumber, setCurrentPageNumber] = useState(0);
-  const [resultsPerPage, setResultsPerPage] = useState(7);
+  const [resultsPerPage] = useState(7);
 
   const { data: queryLength } = trpc.useQuery(['weights.getAllWeightsLength']);
 
@@ -37,7 +37,7 @@ const WeightPagnation: React.FC = () => {
             </>
           );
         })}
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center ">
           <button
             className="border border-white p-2"
             onClick={() => {
@@ -48,6 +48,10 @@ const WeightPagnation: React.FC = () => {
           >
             newer
           </button>
+          <h1>
+            {currentPageNumber + 1} ...{' '}
+            <span className="text-xs text-gray-600">{totalPage}</span>
+          </h1>
           <button
             className="border border-white p-2"
             onClick={() => {
