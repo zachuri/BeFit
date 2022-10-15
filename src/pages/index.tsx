@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { trpc } from '../utils/trpc';
 import LoadingIcon from '../components/LoadingIcon';
+import LineGraph from '../components/LineGraph';
 // import { trpc } from "../utils/trpc";
 
 const NavigateLinks = () => {
@@ -97,9 +98,9 @@ const Home = () => {
           </div>
 
           {/* Graph of Progress */}
-          {/* <div className="mt-5">
+          <div className="mt-5">
             <LineGraph />
-          </div> */}
+          </div>
 
           {/* Navigation Links */}
           <NavigateLinks />
