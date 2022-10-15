@@ -82,7 +82,7 @@ const Weight: React.FC = () => {
             </div>
           </MainLayoutHeightScreen>
         </>
-      ) : status === 'loading' && isLoading === true ? (
+      ) : status === 'loading' || isLoading === true ? (
         <MainLayoutHeightScreen>
           <div className="flex flex-col text-center">
             <h1 className="text-2xl">...Loading</h1>
@@ -164,7 +164,7 @@ const Weight: React.FC = () => {
                     className="border border-white p-2"
                     onClick={() => older()}
                   >
-                    old
+                    older
                   </button>
                 </div>
 
