@@ -80,7 +80,7 @@ export const data = {
   datasets: [
     {
       label: 'Users Progress',
-      data: [33, 25, 35, 51, 54, 76, 72, 23, 23, 12, 12, 23, 32],
+      data: [33, 25, 35, 51, 54, 76, 72, 23, 23, 12, 12, 23, 32, 33, 25, 35, 51, 54, 76, 72, 23, 23, 12, 12, 23], 
       borderColor: 'rgb(255, 99, 132)',
       backgroundColor: 'rgba(255, 99, 132, 0.5)',
       borderWidth: 2,
