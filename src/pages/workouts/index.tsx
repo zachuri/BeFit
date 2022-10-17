@@ -68,7 +68,7 @@ const Workouts: React.FC = () => {
         </MainLayoutHeightScreen>
       ) : (
         <MainLayoutFlex>
-          <h2 className="text-4xl">Workout</h2>
+          <h2 className="text-4xl">Workouts</h2>
 
           {/* Loading  */}
           {isLoading && <div>Data is Loading... </div>}
