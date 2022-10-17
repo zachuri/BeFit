@@ -1,10 +1,10 @@
 import z from 'zod';
 
 export const getAllExerciseSchema = z.object({
-  id: z.string().uuid()
+  workoutId: z.string().uuid()
 });
 
-export type getAllExerciseInput = z.TypeOf<typeof getAllExerciseSchema>;
+export type GetAllExerciseInput = z.TypeOf<typeof getAllExerciseSchema>;
 
 export const addExerciseSchema = z.object({
   workoutId: z.string().uuid(),
