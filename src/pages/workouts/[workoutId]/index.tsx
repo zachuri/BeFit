@@ -76,8 +76,10 @@ const Exercises = () => {
       ) : (
         <>
           <MainLayoutFlex>
-            <h2 className="text-4xl">Workout: {router.query.workoutName}</h2>
-            <h1>This is: {workoutId}</h1>
+            <div className="my-5 flex flex-col items-center justify-center">
+              <h2 className="text-4xl">Workout: {router.query.workoutName}</h2>
+              {/* <h1>This is: {workoutId}</h1> */}
+            </div>
 
             {/* Loading  */}
             {isLoading && (
@@ -89,6 +91,14 @@ const Exercises = () => {
               <div className="flex justify-center">Adding Workout... </div>
             )}
 
+            <div className="flex items-center justify-center">
+              <button
+                onClick={openModal}
+                className="border-2 px-10 rounded border-black dark:border-white hover:dark:border-gray-500 hover:border-gray-200 transition"
+              >
+                +
+              </button>
+            </div>
             <div className="flex flex-col justify-center items-center">
               {data?.map(exercise => {
                 return (
@@ -101,14 +111,6 @@ const Exercises = () => {
                   </div>
                 );
               })}
-            </div>
-            <div className="flex items-center justify-center">
-              <button
-                onClick={openModal}
-                className="border-2 px-10 rounded border-black dark:border-white hover:dark:border-gray-500 hover:border-gray-200 transition"
-              >
-                +
-              </button>
             </div>
 
             {/* Modal Adding Workouts */}
