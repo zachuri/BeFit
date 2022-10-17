@@ -5,6 +5,7 @@ import * as trpc from '@trpc/server';
 import { TRPCError } from '@trpc/server';
 import {
   addExerciseSchema,
+  getAllExerciseSchema,
   removeExerciseSchema,
   updateExerciseSchema
 } from '../../schema/exercise.schema';
@@ -92,7 +93,8 @@ export const exerciseRouter = createRouter()
     }
   })
   .query('getAllExercises', {
-    async resolve({ ctx }) {
+    input: getAllExerciseSchema,
+    async resolve({ ctx, input }) {
       if (!ctx.session) {
         new trpc.TRPCError({
           code: 'FORBIDDEN',
@@ -105,7 +107,8 @@ export const exerciseRouter = createRouter()
           createdAt: 'desc'
         },
         where: {
-          userId: ctx.session?.user?.id
+          userId: ctx.session?.user?.id,
+          workoutId: input.id
         }
       });
     }
