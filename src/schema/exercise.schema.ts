@@ -1,7 +1,7 @@
 import z from 'zod';
 
 export const addExerciseSchema = z.object({
-  id: z.string().uuid(),
+  workoutId: z.string().uuid(),
   title: z.string().max(20, 'Max length of workout name is 20')
 });
 
