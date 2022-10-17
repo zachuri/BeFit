@@ -18,3 +18,7 @@ export const removeWorkoutSchema = z.object({
 });
 
 export type RemoveWorkoutInput = z.TypeOf<typeof removeWorkoutSchema>;
+
+export const getSingleWorkoutSchema = z.object({
+  workoutId: z.string().uuid()
+});
