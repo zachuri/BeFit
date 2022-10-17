@@ -69,6 +69,7 @@ const Home = () => {
         <MainLayoutHeightScreen>
           <div className="flex flex-col text-center">
             <h1 className="text-2xl">Data is loading...</h1>
+            <LoadingIcon />
           </div>
         </MainLayoutHeightScreen>
       ) : (

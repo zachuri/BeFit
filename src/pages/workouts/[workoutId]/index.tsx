@@ -8,6 +8,7 @@ import {
   MainLayoutFlex,
   MainLayoutHeightScreen
 } from '../../../components/layouts/Main';
+import LoadingIcon from '../../../components/LoadingIcon';
 import { AddExerciseInput } from '../../../schema/exercise.schema';
 import { trpc } from '../../../utils/trpc';
 
@@ -69,6 +70,7 @@ const Exercises = () => {
         <MainLayoutHeightScreen>
           <div className="flex flex-col text-center">
             <h1 className="text-2xl">Data is loading...</h1>
+            <LoadingIcon />
           </div>
         </MainLayoutHeightScreen>
       ) : (
@@ -78,8 +80,14 @@ const Exercises = () => {
             <h1>This is: {workoutId}</h1>
 
             {/* Loading  */}
-            {isLoading && <div>Data is Loading... </div>}
-            {isLoadingAddWorkout && <div>Adding Workout... </div>}
+            {isLoading && (
+              <div>
+                <LoadingIcon />
+              </div>
+            )}
+            {isLoadingAddWorkout && (
+              <div className="flex justify-center">Adding Workout... </div>
+            )}
 
             <div className="flex flex-col justify-center items-center">
               {data?.map(exercise => {

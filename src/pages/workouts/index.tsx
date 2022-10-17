@@ -6,6 +6,7 @@ import {
   MainLayoutFlex,
   MainLayoutHeightScreen
 } from '../../components/layouts/Main';
+import LoadingIcon from '../../components/LoadingIcon';
 import Item from '../../components/WorkoutItem/Item';
 import { AddWorkoutInput } from '../../schema/workout.schema';
 import { trpc } from '../../utils/trpc';
@@ -64,6 +65,7 @@ const Workouts: React.FC = () => {
         <MainLayoutHeightScreen>
           <div className="flex flex-col text-center">
             <h1 className="text-2xl">Data is loading...</h1>
+            <LoadingIcon />
           </div>
         </MainLayoutHeightScreen>
       ) : (
@@ -71,8 +73,14 @@ const Workouts: React.FC = () => {
           <h2 className="text-4xl">Workouts</h2>
 
           {/* Loading  */}
-          {isLoading && <div>Data is Loading... </div>}
-          {isLoadingAddWorkout && <div>Adding Workout... </div>}
+          {isLoading && (
+            <div>
+              <LoadingIcon />
+            </div>
+          )}
+          {isLoadingAddWorkout && (
+            <div className="flex justify-center">Adding Workout... </div>
+          )}
 
           <div className="flex flex-col justify-center items-center">
             {data?.map(workout => {
