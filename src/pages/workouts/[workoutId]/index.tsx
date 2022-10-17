@@ -77,7 +77,10 @@ const Exercises = () => {
         <>
           <MainLayoutFlex>
             <div className="my-5 flex flex-col items-center justify-center">
-              <h2 className="text-4xl">Workout/ {router.query.workoutName}</h2>
+              <h2 className="text-4xl">
+                <span className="text-2xl text-gray-600">Workout/ </span>
+                {router.query.workoutName}
+              </h2>
               {/* <h1>This is: {workoutId}</h1> */}
             </div>
 
