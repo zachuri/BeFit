@@ -3,13 +3,13 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import React, { Fragment, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import Item from '../../components/ExerciseItem/Item';
+import Item from '../../../components/ExerciseItem/Item';
 import {
   MainLayoutFlex,
   MainLayoutHeightScreen
-} from '../../components/layouts/Main';
-import { AddExerciseInput } from '../../schema/exercise.schema';
-import { trpc } from '../../utils/trpc';
+} from '../../../components/layouts/Main';
+import { AddExerciseInput } from '../../../schema/exercise.schema';
+import { trpc } from '../../../utils/trpc';
 
 const Exercises = () => {
   const { status } = useSession();
@@ -92,7 +92,7 @@ const Exercises = () => {
               {data?.map(exercise => {
                 return (
                   <div key={exercise.id} className="w-96">
-                    <Item id={exercise.id} title={exercise.title} />
+                    <Item workoutId={workoutId} id={exercise.id} title={exercise.title} />
                   </div>
                 );
               })}

@@ -6,11 +6,12 @@ import { UpdateExerciseInput } from '../../schema/exercise.schema';
 import { trpc } from '../../utils/trpc';
 
 interface Props {
+  workoutId: string;
   id: string;
   title: string;
 }
 
-const Item: React.FC<Props> = ({ id, title }) => {
+const Item: React.FC<Props> = ({ workoutId, id, title }) => {
   const [inputRemove, setInputRemove] = useState('');
   const [errorRemoveInput, setErrorRemoveInput] = useState(false);
 
@@ -79,7 +80,7 @@ const Item: React.FC<Props> = ({ id, title }) => {
       <div className="grid grid-cols-4 rounded text-center justify-between border border-black dark:border-white my-5">
         <button
           onClick={() => {
-            nextRouter.push(`/exercise/${id}`);
+            nextRouter.push(`/workouts/${workoutId}/exercise/${id}`);
           }}
           className="my-2 p-4 col-span-2"
         >
