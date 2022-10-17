@@ -108,7 +108,7 @@ export const exerciseRouter = createRouter()
         },
         where: {
           userId: ctx.session?.user?.id,
-          workoutId: input.id
+          workoutId: input.workoutId
         }
       });
     }
