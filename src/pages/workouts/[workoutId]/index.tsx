@@ -42,13 +42,6 @@ const Exercises = () => {
     }
   });
 
-  // Query to obtain workout title
-  const {
-    data: dataWorkout,
-    isLoading: isLoadingeWorkoutTitle,
-    refetch: refetchWorkoutWorkoutTitle
-  } = trpc.useQuery(['workouts.getSingleWorkout', { workoutId }]);
-
   function closeModal() {
     setIsOpen(false);
   }
@@ -81,9 +74,8 @@ const Exercises = () => {
       ) : (
         <>
           <MainLayoutFlex>
-            <h2 className="text-4xl">Workout: {dataWorkout?.title}</h2>
+            <h2 className="text-4xl">Workout: {router.query.workoutName}</h2>
             <h1>This is: {workoutId}</h1>
-            <h2>Name: {dataWorkout?.title}</h2>
 
             {/* Loading  */}
             {isLoading && <div>Data is Loading... </div>}
