@@ -79,7 +79,7 @@ const Item: React.FC<Props> = ({ id, title }) => {
       <div className="grid grid-cols-4 rounded text-center justify-between border border-black dark:border-white my-5">
         <button
           onClick={() => {
-            nextRouter.push(`/workouts/${id}`);
+            nextRouter.push({pathname: `/workouts/${id}`, query: {workoutName: title}});
           }}
           className="my-2 p-4 col-span-2"
         >

@@ -22,7 +22,10 @@ const Item: React.FC<Props> = ({ workoutId, id, title }) => {
 
   const { handleSubmit, register, reset } = useForm<UpdateExerciseInput>();
 
-  const { refetch } = trpc.useQuery(['exercises.getAllExercises', {workoutId}], );
+  const { refetch } = trpc.useQuery([
+    'exercises.getAllExercises',
+    { workoutId }
+  ]);
 
   const {
     mutate: mutateRemove,
@@ -80,7 +83,11 @@ const Item: React.FC<Props> = ({ workoutId, id, title }) => {
       <div className="grid grid-cols-4 rounded text-center justify-between border border-black dark:border-white my-5">
         <button
           onClick={() => {
-            nextRouter.push(`/workouts/${workoutId}/exercise/${id}`);
+            // nextRouter.push(`/workouts/${workoutId}/exercise/${id}`);
+            nextRouter.push({
+              pathname: `/workouts/${workoutId}/exercise/${id}`,
+              query: { exerciseName: title }
+            });
           }}
           className="my-2 p-4 col-span-2"
         >
