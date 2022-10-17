@@ -70,7 +70,7 @@ const Workouts: React.FC = () => {
         </MainLayoutHeightScreen>
       ) : (
         <MainLayoutFlex>
-          <h2 className="text-4xl">Workouts</h2>
+          <h2 className="text-4xl my-5 text-center">Workouts</h2>
 
           {/* Loading  */}
           {isLoading && (
@@ -82,6 +82,15 @@ const Workouts: React.FC = () => {
             <div className="flex justify-center">Adding Workout... </div>
           )}
 
+          <div className="flex items-center justify-center">
+            <button
+              onClick={openModal}
+              className="border-2 px-10 rounded border-black dark:border-white hover:dark:border-gray-500 hover:border-gray-200 transition"
+            >
+              +
+            </button>
+          </div>
+
           <div className="flex flex-col justify-center items-center">
             {data?.map(workout => {
               return (
@@ -90,14 +99,6 @@ const Workouts: React.FC = () => {
                 </div>
               );
             })}
-          </div>
-          <div className="flex items-center justify-center">
-            <button
-              onClick={openModal}
-              className="border-2 px-10 rounded border-black dark:border-white hover:dark:border-gray-500 hover:border-gray-200 transition"
-            >
-              +
-            </button>
           </div>
 
           {/* Modal Adding Workouts */}
