@@ -108,10 +108,12 @@ const Weight: React.FC = () => {
             {error && <MainLayoutFlex>{error.message}</MainLayoutFlex>}
 
             <div className="my-5 flex flex-col items-center justify-center">
-              <h1 className="text-2xl">Add Weight</h1>
+              <h1 className="text-4xl">Weight</h1>
+            </div>
+            <div className="my-5 flex justify-center">
               <button
                 onClick={openModal}
-                className="my-2 border px-12 rounded border-black dark:border-white hover:dark:border-gray-500 hover:border-gray-200 transition"
+                className="border px-12 rounded border-black dark:border-white hover:dark:border-gray-500 hover:border-gray-200 transition"
               >
                 +
               </button>
