@@ -22,7 +22,7 @@ const Item: React.FC<Props> = ({ workoutId, id, title }) => {
 
   const { handleSubmit, register, reset } = useForm<UpdateExerciseInput>();
 
-  const { refetch } = trpc.useQuery(['exercises.getAllExercises']);
+  const { refetch } = trpc.useQuery(['exercises.getAllExercises', {workoutId}], );
 
   const {
     mutate: mutateRemove,
