@@ -29,11 +29,10 @@ export const exerciseRouter = createRouter()
         });
       }
 
-
       // create workout in prisma data base
       const workout = await ctx.prisma.exercises.create({
         data: {
-          ...input,
+          title: input.title,
           user: {
             connect: {
               id: ctx.session?.user?.id
@@ -41,7 +40,7 @@ export const exerciseRouter = createRouter()
           },
           workout: {
             connect: {
-              id: input?.id
+              id: input.workoutId
             }
           }
         }
