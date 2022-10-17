@@ -22,7 +22,8 @@ const Exercises = () => {
 
   // Queries
   const { data, isLoading, refetch } = trpc.useQuery([
-    'exercises.getAllExercises'
+    'exercises.getAllExercises',
+    { workoutId }
   ]);
 
   const {
@@ -92,7 +93,11 @@ const Exercises = () => {
               {data?.map(exercise => {
                 return (
                   <div key={exercise.id} className="w-96">
-                    <Item workoutId={workoutId} id={exercise.id} title={exercise.title} />
+                    <Item
+                      workoutId={workoutId}
+                      id={exercise.id}
+                      title={exercise.title}
+                    />
                   </div>
                 );
               })}
