@@ -77,7 +77,7 @@ const Exercises = () => {
         <>
           <MainLayoutFlex>
             <div className="my-5 flex flex-col items-center justify-center">
-              <h2 className="text-4xl">Workout: {router.query.workoutName}</h2>
+              <h2 className="text-4xl">Workout/ {router.query.workoutName}</h2>
               {/* <h1>This is: {workoutId}</h1> */}
             </div>
 
@@ -104,6 +104,7 @@ const Exercises = () => {
                 return (
                   <div key={exercise.id} className="w-96">
                     <Item
+                      workoutName={router.query.workoutName as string}
                       workoutId={workoutId}
                       id={exercise.id}
                       title={exercise.title}
