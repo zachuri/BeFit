@@ -5,11 +5,18 @@ import {
   MainLayoutFlex,
   MainLayoutHeightScreen
 } from '../../components/layouts/Main';
+import { trpc } from '../../utils/trpc';
 
 const Exercises = () => {
   const { status } = useSession();
   const router = useRouter();
   const workoutId = router.query.workoutId as string;
+
+  const {
+    data: dataWorkout,
+    isLoading: isLoadingWorkout,
+    refetch: refetchWorkout
+  } = trpc.useQuery(['workouts.getSingleWorkout', { workoutId }]);
 
   return (
     <>
@@ -31,6 +38,7 @@ const Exercises = () => {
       ) : (
         <MainLayoutFlex>
           <h1>This is: {workoutId}</h1>
+          <h2>Name: {dataWorkout?.title}</h2>
         </MainLayoutFlex>
       )}
     </>
