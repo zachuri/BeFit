@@ -6,12 +6,13 @@ import { UpdateExerciseInput } from '../../schema/exercise.schema';
 import { trpc } from '../../utils/trpc';
 
 interface Props {
+  workoutName: string;
   workoutId: string;
   id: string;
   title: string;
 }
 
-const Item: React.FC<Props> = ({ workoutId, id, title }) => {
+const Item: React.FC<Props> = ({ workoutName, workoutId, id, title }) => {
   const [inputRemove, setInputRemove] = useState('');
   const [errorRemoveInput, setErrorRemoveInput] = useState(false);
 
@@ -86,7 +87,7 @@ const Item: React.FC<Props> = ({ workoutId, id, title }) => {
             // nextRouter.push(`/workouts/${workoutId}/exercise/${id}`);
             nextRouter.push({
               pathname: `/workouts/${workoutId}/exercise/${id}`,
-              query: { exerciseName: title }
+              query: { workoutName: workoutName, exerciseName: title }
             });
           }}
           className="my-2 p-4 col-span-2"
