@@ -2,6 +2,7 @@ import { createRouter } from './context';
 // import { z } from "zod";
 import {
   addWorkoutSchema,
+  getSingleWorkoutSchema,
   removeWorkoutSchema,
   updateWorkoutSchema
 } from '../../schema/workout.schema';
@@ -100,6 +101,23 @@ export const workoutRouter = createRouter()
         },
         where: {
           userId: ctx.session?.user?.id
+        }
+      });
+    }
+  })
+  .query('getSingleWorkout', {
+    input: getSingleWorkoutSchema,
+    async resolve({ ctx, input }) {
+      if (!ctx.session) {
+        new trpc.TRPCError({
+          code: 'FORBIDDEN',
+          message: "Please Sign In: can't get any post"
+        });
+      }
+
+      return ctx.prisma.workout.findUnique({
+        where: {
+          id: input.workoutId
         }
       });
     }
