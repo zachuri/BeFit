@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 import { MainLayoutFlex } from '../../../../components/layouts/Main';
+import Item from '../../../../components/ExerciseDayItem/Item';
 
 const Sets = () => {
   const router = useRouter();
@@ -22,6 +23,9 @@ const Sets = () => {
         <button className="border-2 px-10 rounded border-black dark:border-white hover:dark:border-gray-500 hover:border-gray-200 transition">
           +
         </button>
+      </div>
+      <div className="flex flex-wrap gap-2 justify-center">
+        <Item />
       </div>
     </MainLayoutFlex>
   );
