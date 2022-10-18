@@ -74,7 +74,7 @@ model User {
   sessions        Session[]
   Weights         Weight[]
   Workouts        Workout[]
-  Exercises       Exercises[]
+  Exercise        Exercise[]
   ExercsieDay     ExercsieDay[]
   ExerciseTracker ExerciseTracker[]
 }
@@ -98,16 +98,16 @@ model Weight {
 }
 
 model Workout {
-  id        String      @unique @default(uuid())
+  id        String     @unique @default(uuid())
   title     String
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  user      User        @relation(fields: [userId], references: [id])
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  user      User       @relation(fields: [userId], references: [id])
   userId    String
-  exercises Exercises[]
+  exercise  Exercise[]
 }
 
-model Exercises {
+model Exercise {
   id          String        @unique @default(uuid())
   title       String
   createdAt   DateTime      @default(now())
@@ -125,8 +125,8 @@ model ExercsieDay {
   updatedAt       DateTime          @updatedAt
   user            User              @relation(fields: [userId], references: [id])
   userId          String
-  exercises       Exercises         @relation(fields: [exercisesId], references: [id])
-  exercisesId     String
+  exercise        Exercise          @relation(fields: [exerciseId], references: [id])
+  exerciseId      String
   exerciseTracker ExerciseTracker[]
 }
 
