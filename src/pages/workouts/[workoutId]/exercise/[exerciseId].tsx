@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 import { MainLayoutFlex } from '../../../../components/layouts/Main';
-import ItemTracker from '../../../../components/ExerciseTrackerItem/Item';
 import ItemDay from '../../../../components/ExerciseDayItem/Item';
 import { trpc } from '../../../../utils/trpc';
 import { AddExerciseDayInput } from '../../../../schema/exerciseDay.schema';
