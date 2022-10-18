@@ -1,5 +1,6 @@
 import React from 'react';
 import { trpc } from '../../utils/trpc';
+import ItemTracker from '../../components/ExerciseTrackerItem/Item';
 
 interface Props {
   exerciseId: string;
@@ -37,13 +38,16 @@ const Item: React.FC<Props> = ({ exerciseId, id, date }) => {
 
   return (
     <div className="my-5 rounded border border-white">
-      <div className="flex flex-row">
-        <div className="mx-5">
-          <div className="p-2">Exercise ID: {exerciseId}</div>
-          <div className="p-2">ExerciseDay ID: {id}</div>
-          <div className="p-2">Date: {date}</div>
+      <div className="flex flex-row justify-between">
+        {errorRemove && <div>{errorRemove.message}</div>}
+
+        {/* Will Display the current Date / able to remove */}
+        <div className="">
+          {/* <div className="p-2">Exercise ID: {exerciseId}</div>
+          <div className="p-2">ExerciseDay ID: {id}</div> */}
+          <div className="text-left p-2">Date: {date}</div>
         </div>
-        <div className="flex items-center justify-center mx-5">
+        <div className="flex items-center justify-center">
           <button
             onClick={() => mutateRemove({ id: id })}
             className="rounded p-1 border borer-white"
@@ -52,7 +56,8 @@ const Item: React.FC<Props> = ({ exerciseId, id, date }) => {
           </button>
         </div>
       </div>
-      {errorRemove && <div>{errorRemove.message}</div>}
+
+      <ItemTracker />
     </div>
   );
 };
