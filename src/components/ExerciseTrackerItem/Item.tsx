@@ -67,8 +67,8 @@ const Item: React.FC<Props> = ({ exerciseDayId }) => {
         {data?.map(items => {
           return (
             <div className="my-5" key={items.id}>
-              <p>Rep: {items.rep}</p>
               <p>Set: {items.set}</p>
+              <p>Rep: {items.rep}</p>
               <p>Weight: {items.weight}</p>
             </div>
           );
