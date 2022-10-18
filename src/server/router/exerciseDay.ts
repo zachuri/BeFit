@@ -5,7 +5,8 @@ import * as trpc from '@trpc/server';
 import { TRPCError } from '@trpc/server';
 import {
   addExerciseDaySchema,
-  getAllExerciseDaySchema
+  getAllExerciseDaySchema,
+  removeExerciseDaySchema
 } from '../../schema/exerciseDay.schema';
 
 export const exerciseDayRouter = createRouter()
@@ -27,13 +28,30 @@ export const exerciseDayRouter = createRouter()
         });
       }
 
-      return ctx.prisma.exercsieDay.findMany({
+      return ctx.prisma.exerciseDay.findMany({
         orderBy: {
           createdAt: 'desc'
         },
         where: {
           userId: ctx.session?.user?.id,
           exerciseId: input.exerciseId
+        }
+      });
+    }
+  })
+  .mutation('removeExerciseDay', {
+    input: removeExerciseDaySchema,
+    async resolve({ ctx, input }) {
+      if (!ctx.session) {
+        new trpc.TRPCError({
+          code: 'FORBIDDEN',
+          message: "Please Sign In: can't get any post"
+        });
+      }
+
+      return ctx.prisma.exerciseDay.delete({
+        where: {
+          id: input.id
         }
       });
     }
@@ -50,7 +68,7 @@ export const exerciseDayRouter = createRouter()
       }
 
       // create workout in prisma data base
-      const workout = await ctx.prisma.exercsieDay.create({
+      const workout = await ctx.prisma.exerciseDay.create({
         data: {
           user: {
             connect: {
