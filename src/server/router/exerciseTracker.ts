@@ -18,7 +18,7 @@ export const exerciseTrackerRouter = createRouter()
     }
     return next();
   })
-  .query('getAllExerciseDay', {
+  .query('getAllExerciseTracker', {
     input: getAllExerciseTrackerSchema,
     async resolve({ ctx, input }) {
       if (!ctx.session) {
@@ -49,14 +49,14 @@ export const exerciseTrackerRouter = createRouter()
         });
       }
 
-      return ctx.prisma.exerciseDay.delete({
+      return ctx.prisma.exerciseTracker.delete({
         where: {
           id: input.id
         }
       });
     }
   })
-  .mutation('addExerciseDay', {
+  .mutation('addExerciseTracker', {
     input: addExerciseTrackerSchema,
     async resolve({ ctx, input }) {
       // !ctx.session.user -> no need for user
@@ -70,7 +70,9 @@ export const exerciseTrackerRouter = createRouter()
       // create workout in prisma data base
       const workout = await ctx.prisma.exerciseTracker.create({
         data: {
-          ...input,
+          set: input.set,
+          rep: input.weight,
+          weight: input.weight,
           user: {
             connect: {
               id: ctx.session?.user?.id
@@ -78,7 +80,7 @@ export const exerciseTrackerRouter = createRouter()
           },
           exerciseDay: {
             connect: {
-              id: input.exerciseDayid
+              id: input.exerciseDayId
             }
           }
         }

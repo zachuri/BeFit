@@ -43,8 +43,8 @@ const Item: React.FC<Props> = ({ exerciseId, id, date }) => {
 
         {/* Will Display the current Date / able to remove */}
         <div className="">
-          {/* <div className="p-2">Exercise ID: {exerciseId}</div>
-          <div className="p-2">ExerciseDay ID: {id}</div> */}
+          <div className="p-2">Exercise ID: {exerciseId}</div>
+          <div className="p-2">ExerciseDay ID: {id}</div>
           <div className="text-left p-2">Date: {date}</div>
         </div>
         <div className="flex items-center justify-center">
@@ -57,7 +57,7 @@ const Item: React.FC<Props> = ({ exerciseId, id, date }) => {
         </div>
       </div>
 
-      <ItemTracker />
+      <ItemTracker exerciseDayId={id} />
     </div>
   );
 };
