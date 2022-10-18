@@ -11,3 +11,9 @@ export const getAllExerciseDaySchema = z.object({
 });
 
 export type GetAllExerciseDayInput = z.TypeOf<typeof getAllExerciseDaySchema>;
+
+export const removeExerciseDaySchema = z.object({
+  id: z.string().uuid()
+});
+
+export type RemoveExerciseDayInput = z.TypeOf<typeof removeExerciseDaySchema>;
