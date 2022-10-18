@@ -1,11 +1,39 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 import { MainLayoutFlex } from '../../../../components/layouts/Main';
-import Item from '../../../../components/ExerciseDayItem/Item';
+import ItemTracker from '../../../../components/ExerciseTrackerItem/Item';
+import ItemDay from '../../../../components/ExerciseDayItem/Item';
+import { trpc } from '../../../../utils/trpc';
+import { AddExerciseDayInput } from '../../../../schema/exerciseDay.schema';
 
 const Sets = () => {
   const router = useRouter();
   const exerciseId = router.query.exerciseId as string;
+
+  // Queries
+  const { data, isLoading, refetch } = trpc.useQuery([
+    'exercisesDay.getAllExerciseDay',
+    { exerciseId }
+  ]);
+
+  const {
+    mutate,
+    error,
+    isLoading: isLoadingAddWorkout
+  } = trpc.useMutation(['exercisesDay.addExerciseDay'], {
+    onSuccess() {
+      // reset the form
+      // reset();
+
+      // able to refetch query
+      // queryClient.refetchQueries('weights.getAllWeights');
+      refetch();
+    }
+  });
+
+  function onSubmit(values: AddExerciseDayInput) {
+    mutate(values);
+  }
 
   return (
     <MainLayoutFlex>
@@ -20,12 +48,24 @@ const Sets = () => {
         {/* <h1>This is: {exerciseId}</h1> */}
       </div>
       <div className="flex justify-center">
-        <button className="border-2 px-10 rounded border-black dark:border-white hover:dark:border-gray-500 hover:border-gray-200 transition">
+        <button
+          onClick={() => onSubmit({ exerciseId: exerciseId })}
+          className="border-2 px-10 rounded border-black dark:border-white hover:dark:border-gray-500 hover:border-gray-200 transition"
+        >
           +
         </button>
       </div>
       <div className="flex flex-wrap gap-2 justify-center">
-        <Item />
+        {data?.map(exerciseDay => {
+          return (
+            <ItemDay
+              key={exerciseDay.id}
+              exerciseId={exerciseId}
+              id={exerciseDay.id}
+              date={exerciseDay.createdAt.toLocaleDateString()}
+            />
+          );
+        })}
       </div>
     </MainLayoutFlex>
   );
