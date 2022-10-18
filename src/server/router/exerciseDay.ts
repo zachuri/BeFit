@@ -3,7 +3,10 @@ import { createRouter } from './context';
 import {} from '../../schema/workout.schema';
 import * as trpc from '@trpc/server';
 import { TRPCError } from '@trpc/server';
-import { addExerciseDaySchema } from '../../schema/exerciseDay.schema';
+import {
+  addExerciseDaySchema,
+  getAllExerciseDaySchema
+} from '../../schema/exerciseDay.schema';
 
 export const exerciseDayRouter = createRouter()
   .middleware(async ({ ctx, next }) => {
@@ -13,6 +16,27 @@ export const exerciseDayRouter = createRouter()
       throw new TRPCError({ code: 'UNAUTHORIZED' });
     }
     return next();
+  })
+  .query('getAllExerciseDay', {
+    input: getAllExerciseDaySchema,
+    async resolve({ ctx, input }) {
+      if (!ctx.session) {
+        new trpc.TRPCError({
+          code: 'FORBIDDEN',
+          message: "Please Sign In: can't get any post"
+        });
+      }
+
+      return ctx.prisma.exercsieDay.findMany({
+        orderBy: {
+          createdAt: 'desc'
+        },
+        where: {
+          userId: ctx.session?.user?.id,
+          exerciseId: input.exerciseId
+        }
+      });
+    }
   })
   .mutation('addExerciseDay', {
     input: addExerciseDaySchema,
