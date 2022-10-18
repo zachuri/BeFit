@@ -132,7 +132,7 @@ model ExerciseDay {
 
 model ExerciseTracker {
   id            String      @unique @default(uuid())
-  set           Float
+  set           Int
   rep           Float
   weight        Float
   createdAt     DateTime    @default(now())
