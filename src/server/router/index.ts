@@ -7,7 +7,9 @@ import { protectedExampleRouter } from './protected-example-router';
 import { weightRouter } from './weight';
 import { workoutRouter } from './workout';
 import { exerciseRouter } from './exercise';
+import { setsRouter } from './sets';
 import { setRouter } from './set';
+
 
 export const appRouter = createRouter()
   .transformer(superjson)
@@ -16,7 +18,8 @@ export const appRouter = createRouter()
   .merge('weights.', weightRouter)
   .merge('workouts.', workoutRouter)
   .merge('exercises.', exerciseRouter)
-  .merge('sets.', setRouter);
+  .merge('sets.', setsRouter)
+  .merge('set.', setRouter);
 
 // export type definition of API
 export type AppRouter = typeof appRouter;

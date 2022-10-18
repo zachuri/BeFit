@@ -3,7 +3,7 @@ import { createRouter } from './context';
 import * as trpc from '@trpc/server';
 import { TRPCError } from '@trpc/server';
 
-export const setRouter = createRouter().middleware(async ({ ctx, next }) => {
+export const setsRouter = createRouter().middleware(async ({ ctx, next }) => {
   // Any queries or mutations after this middleware will
   // raise an error unless there is a current session
   if (!ctx.session) {
