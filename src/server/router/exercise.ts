@@ -31,7 +31,7 @@ export const exerciseRouter = createRouter()
       }
 
       // create workout in prisma data base
-      const workout = await ctx.prisma.exercises.create({
+      const workout = await ctx.prisma.exercise.create({
         data: {
           title: input.title,
           user: {
@@ -60,7 +60,7 @@ export const exerciseRouter = createRouter()
         });
       }
 
-      return ctx.prisma.exercises.delete({
+      return ctx.prisma.exercise.delete({
         where: {
           id: input.id
         }
@@ -77,7 +77,7 @@ export const exerciseRouter = createRouter()
         });
       }
 
-      return ctx.prisma.exercises.update({
+      return ctx.prisma.exercise.update({
         where: {
           id: input.id
         },
@@ -102,7 +102,7 @@ export const exerciseRouter = createRouter()
         });
       }
 
-      return ctx.prisma.exercises.findMany({
+      return ctx.prisma.exercise.findMany({
         orderBy: {
           createdAt: 'desc'
         },
