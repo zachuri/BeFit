@@ -172,32 +172,50 @@ const ExerciseTrackerItem: React.FC<Props> = ({ exerciseDayId }) => {
   }
 
   return (
-    <div className="my-5 rounded border border-white">
-      <h1>Exercise Day Tracker Table</h1>
+    <div className="rounded">
+      {/* <h1>Exercise Day Tracker Table</h1> */}
       <div>
+        {error && <div>{error.message}</div>}
+
+        {/* Display Table for viewport md > */}
+        <div
+          className="mx-5 hidden md:block rounded
+          text-black bg-white border border-black  
+          dark:bg-black dark:text-white dark:border-t dark:border-white overflow-auto"
+        >
+          <table className="table-fixed overflow-auto">
+            <thead className="text-xs uppercase">
+              <tr>
+                <th className="w-1/3 py-3">Set</th>
+                <th className="w-1/4 py-3">Reps</th>
+                <th className="w-1/4 py-3">Weight</th>
+                <th className="w-1/4 py-3">Update</th>
+              </tr>
+            </thead>
+            {data?.map(items => {
+              return (
+                <TrackerItems
+                  key={items.id}
+                  id={items.id}
+                  set={items.set}
+                  rep={items.rep}
+                  weight={items.weight}
+                />
+              );
+            })}
+          </table>
+        </div>
+
         <div className="flex items-center justify-center">
           <button
             onClick={() => openModal()}
-            className="border-2 px-5 rounded border-black dark:border-white hover:dark:border-gray-500 hover:border-gray-200 transition"
+            className="my-5 border-2 px-5 rounded border-black dark:border-white hover:dark:border-gray-500 hover:border-gray-200 transition"
           >
             +
           </button>
         </div>
 
-        {error && <div>{error.message}</div>}
-
-        {data?.map(items => {
-          return (
-            <TrackerItems
-              key={items.id}
-              id={items.id}
-              set={items.set}
-              rep={items.rep}
-              weight={items.weight}
-            />
-          );
-        })}
-
+        {/* Modal to add more sets/reps/weight */}
         <Modal />
       </div>
     </div>
