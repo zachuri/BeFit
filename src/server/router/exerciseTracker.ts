@@ -30,7 +30,7 @@ export const exerciseTrackerRouter = createRouter()
 
       return ctx.prisma.exerciseTracker.findMany({
         orderBy: {
-          createdAt: 'desc'
+          createdAt: 'asc'
         },
         where: {
           userId: ctx.session?.user?.id,
