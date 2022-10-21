@@ -1,7 +1,7 @@
 import z from 'zod';
 
 export const addExerciseTrackerSchema = z.object({
-  exerciseDayId: z.string(),
+  exerciseDayId: z.string().uuid(),
   // set: z.number().min(1, 'Min set is 1 lbs').max(20, 'Max set is 20lbs'),
   rep: z.number().min(1, 'Min set is 1 lbs').max(200, 'Max set is 200lbs'),
   weight: z.number().min(1, 'Min set is 1 lbs').max(1500, 'Max set is 1500lbs')
@@ -23,4 +23,14 @@ export const removeExerciseTrackerSchema = z.object({
 
 export type RemoveExerciseTrackerInput = z.TypeOf<
   typeof removeExerciseTrackerSchema
+>;
+
+export const updateExerciseTrackerSchema = z.object({
+  id: z.string().uuid(),
+  rep: z.number().min(1, 'Min set is 1 lbs').max(200, 'Max set is 200lbs'),
+  weight: z.number().min(1, 'Min set is 1 lbs').max(1500, 'Max set is 1500lbs')
+});
+
+export type UpdateExerciseTrackerInput = z.TypeOf<
+  typeof updateExerciseTrackerSchema
 >;

@@ -6,7 +6,8 @@ import { TRPCError } from '@trpc/server';
 import {
   addExerciseTrackerSchema,
   getAllExerciseTrackerSchema,
-  removeExerciseTrackerSchema
+  removeExerciseTrackerSchema,
+  updateExerciseTrackerSchema
 } from '../../schema/exerciseTracker.schema';
 
 export const exerciseTrackerRouter = createRouter()
@@ -87,5 +88,30 @@ export const exerciseTrackerRouter = createRouter()
       });
 
       return workout;
+    }
+  })
+  .mutation('updateExerciseTracker', {
+    input: updateExerciseTrackerSchema,
+    async resolve({ ctx, input }) {
+      if (!ctx.session) {
+        new trpc.TRPCError({
+          code: 'FORBIDDEN',
+          message: "Please Sign In: can't get any post"
+        });
+      }
+
+      return ctx.prisma.exerciseTracker.update({
+        where: {
+          id: input.id
+        },
+        data: {
+          ...input,
+          user: {
+            connect: {
+              id: ctx.session?.user?.id
+            }
+          }
+        }
+      });
     }
   });
