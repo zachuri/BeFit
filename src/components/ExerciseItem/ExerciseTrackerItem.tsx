@@ -3,6 +3,7 @@ import React, { Fragment, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AddExerciseTrackerInput } from '../../schema/exerciseTracker.schema';
 import { trpc } from '../../utils/trpc';
+import TrackerItems from './TrackerItems';
 
 interface Props {
   exerciseDayId: string;
@@ -187,11 +188,13 @@ const ExerciseTrackerItem: React.FC<Props> = ({ exerciseDayId }) => {
 
         {data?.map(items => {
           return (
-            <div className="my-5" key={items.id}>
-              <p>Set: {items.set}</p>
-              <p>Rep: {items.rep}</p>
-              <p>Weight: {items.weight}</p>
-            </div>
+            <TrackerItems
+              key={items.id}
+              id={items.id}
+              set={items.set}
+              rep={items.rep}
+              weight={items.weight}
+            />
           );
         })}
 
