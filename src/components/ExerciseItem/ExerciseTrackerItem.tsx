@@ -23,7 +23,7 @@ const ExerciseTrackerItem: React.FC<Props> = ({ exerciseDayId }) => {
   } = trpc.useMutation(['exercisesTracker.addExerciseTracker'], {
     onSuccess() {
       // reset the form
-      // reset();
+      reset();
 
       // able to refetch query
       // queryClient.refetchQueries('weights.getAllWeights');
@@ -49,31 +49,9 @@ const ExerciseTrackerItem: React.FC<Props> = ({ exerciseDayId }) => {
     setIsOpen(false);
   }
 
-  return (
-    <div className="my-5 rounded border border-white">
-      <h1>Exercise Day Tracker Table</h1>
-      <div>
-        <div className="flex items-center justify-center">
-          <button
-            onClick={() => openModal()}
-            className="border-2 px-5 rounded border-black dark:border-white hover:dark:border-gray-500 hover:border-gray-200 transition"
-          >
-            +
-          </button>
-        </div>
-
-        {error && <div>{error.message}</div>}
-
-        {data?.map(items => {
-          return (
-            <div className="my-5" key={items.id}>
-              <p>Set: {items.set}</p>
-              <p>Rep: {items.rep}</p>
-              <p>Weight: {items.weight}</p>
-            </div>
-          );
-        })}
-
+  function Modal() {
+    return (
+      <>
         {/* Modal Add */}
         <Transition appear show={isOpen} as={Fragment}>
           <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -188,6 +166,36 @@ const ExerciseTrackerItem: React.FC<Props> = ({ exerciseDayId }) => {
             </div>
           </Dialog>
         </Transition>
+      </>
+    );
+  }
+
+  return (
+    <div className="my-5 rounded border border-white">
+      <h1>Exercise Day Tracker Table</h1>
+      <div>
+        <div className="flex items-center justify-center">
+          <button
+            onClick={() => openModal()}
+            className="border-2 px-5 rounded border-black dark:border-white hover:dark:border-gray-500 hover:border-gray-200 transition"
+          >
+            +
+          </button>
+        </div>
+
+        {error && <div>{error.message}</div>}
+
+        {data?.map(items => {
+          return (
+            <div className="my-5" key={items.id}>
+              <p>Set: {items.set}</p>
+              <p>Rep: {items.rep}</p>
+              <p>Weight: {items.weight}</p>
+            </div>
+          );
+        })}
+
+        <Modal />
       </div>
     </div>
   );
