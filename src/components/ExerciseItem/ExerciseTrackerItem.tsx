@@ -192,13 +192,13 @@ const ExerciseTrackerItem: React.FC<Props> = ({ exerciseDayId }) => {
                 <th className="w-1/4 py-3">Update</th>
               </tr>
             </thead>
-            {data?.map(items => {
+            {data?.map((items, i) => {
               return (
                 <TrackerItems
                   key={items.id}
                   exerciseDayId={exerciseDayId}
                   id={items.id}
-                  set={items.set}
+                  set={i + 1}
                   rep={items.rep}
                   weight={items.weight}
                 />
