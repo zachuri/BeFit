@@ -37,7 +37,7 @@ const ExerciseDayItem: React.FC<Props> = ({ exerciseId, id, date }) => {
   });
 
   return (
-    <div className="w-full rounded border border-white">
+    <div className="mb-5 w-full rounded border border-white">
       <div className="m-5 flex flex-row items-center justify-between">
         {errorRemove && <div>{errorRemove.message}</div>}
 
