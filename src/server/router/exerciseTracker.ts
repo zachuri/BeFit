@@ -71,7 +71,7 @@ export const exerciseTrackerRouter = createRouter()
       const workout = await ctx.prisma.exerciseTracker.create({
         data: {
           set: input.set,
-          rep: input.weight,
+          rep: input.rep,
           weight: input.weight,
           user: {
             connect: {
