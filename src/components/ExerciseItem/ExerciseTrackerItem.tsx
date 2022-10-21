@@ -186,7 +186,7 @@ const ExerciseTrackerItem: React.FC<Props> = ({ exerciseDayId }) => {
           <table className="table-fixed overflow-auto">
             <thead className="text-xs uppercase">
               <tr>
-                <th className="w-1/3 py-3">Set</th>
+                <th className="w-1/2 py-3">Set</th>
                 <th className="w-1/4 py-3">Reps</th>
                 <th className="w-1/4 py-3">Weight</th>
                 <th className="w-1/4 py-3">Update</th>
