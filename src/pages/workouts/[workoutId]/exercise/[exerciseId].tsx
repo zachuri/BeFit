@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 import { MainLayoutFlex } from '../../../../components/layouts/Main';
-import ItemDay from '../../../../components/ExerciseDayItem/Item';
+import ExerciseDayItem from '../../../../components/ExerciseItem/ExerciseDayItem';
 import { trpc } from '../../../../utils/trpc';
 import { AddExerciseDayInput } from '../../../../schema/exerciseDay.schema';
 
@@ -57,7 +57,7 @@ const Sets = () => {
       <div className="flex flex-wrap gap-2 justify-center">
         {data?.map(exerciseDay => {
           return (
-            <ItemDay
+            <ExerciseDayItem
               key={exerciseDay.id}
               exerciseId={exerciseId}
               id={exerciseDay.id}

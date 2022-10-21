@@ -1,6 +1,6 @@
 import React from 'react';
 import { trpc } from '../../utils/trpc';
-import ItemTracker from '../../components/ExerciseTrackerItem/Item';
+import ExerciseItemTracker from './ExerciseTrackerItem';
 
 interface Props {
   exerciseId: string;
@@ -8,7 +8,7 @@ interface Props {
   date: string;
 }
 
-const Item: React.FC<Props> = ({ exerciseId, id, date }) => {
+const ExerciseDayItem: React.FC<Props> = ({ exerciseId, id, date }) => {
   // Queries
   const { refetch } = trpc.useQuery([
     'exercisesDay.getAllExerciseDay',
@@ -57,9 +57,9 @@ const Item: React.FC<Props> = ({ exerciseId, id, date }) => {
         </div>
       </div>
 
-      <ItemTracker exerciseDayId={id} />
+      <ExerciseItemTracker exerciseDayId={id} />
     </div>
   );
 };
 
-export default Item;
+export default ExerciseDayItem;

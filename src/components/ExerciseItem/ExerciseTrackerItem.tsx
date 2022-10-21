@@ -8,7 +8,7 @@ interface Props {
   exerciseDayId: string;
 }
 
-const Item: React.FC<Props> = ({ exerciseDayId }) => {
+const ExerciseTrackerItem: React.FC<Props> = ({ exerciseDayId }) => {
   // Query for adding weight
 
   const { data, isLoading, refetch } = trpc.useQuery([
@@ -193,4 +193,4 @@ const Item: React.FC<Props> = ({ exerciseDayId }) => {
   );
 };
 
-export default Item;
+export default ExerciseTrackerItem;
