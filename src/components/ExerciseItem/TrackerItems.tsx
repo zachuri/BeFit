@@ -21,7 +21,7 @@ const TrackerItems: React.FC<Props> = ({
 }) => {
   const [isOpenRemove, setIsOpenRemove] = useState(false);
 
-  const { data, isLoading, refetch } = trpc.useQuery([
+  const { refetch } = trpc.useQuery([
     'exercisesTracker.getAllExerciseTracker',
     { exerciseDayId }
   ]);
