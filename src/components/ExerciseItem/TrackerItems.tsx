@@ -3,20 +3,39 @@ import React, { Fragment, useState } from 'react';
 import { trpc } from '../../utils/trpc';
 
 interface Props {
+  exerciseDayId: string;
   id: string;
   set: number;
   rep: number;
   weight: number;
 }
 
-const TrackerItems: React.FC<Props> = ({ id, set, rep, weight }) => {
+const TrackerItems: React.FC<Props> = ({
+  exerciseDayId,
+  id,
+  set,
+  rep,
+  weight
+}) => {
   const [isOpenRemove, setIsOpenRemove] = useState(false);
+
+  const { data, isLoading, refetch } = trpc.useQuery([
+    'exercisesTracker.getAllExerciseTracker',
+    { exerciseDayId }
+  ]);
 
   const {
     mutate: mutateRemove,
     error: errorRemove,
     isLoading: isLoadinRemove
-  } = trpc.useMutation(['exercisesTracker.removeExerciseTracker']);
+  } = trpc.useMutation(['exercisesTracker.removeExerciseTracker'], {
+    onError() {
+      errorRemove;
+    },
+    onSuccess() {
+      refetch();
+    }
+  });
 
   function closeModalRemove() {
     setIsOpenRemove(false);

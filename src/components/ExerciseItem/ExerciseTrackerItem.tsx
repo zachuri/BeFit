@@ -196,6 +196,7 @@ const ExerciseTrackerItem: React.FC<Props> = ({ exerciseDayId }) => {
               return (
                 <TrackerItems
                   key={items.id}
+                  exerciseDayId={exerciseDayId}
                   id={items.id}
                   set={items.set}
                   rep={items.rep}
