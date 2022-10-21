@@ -37,20 +37,20 @@ const ExerciseDayItem: React.FC<Props> = ({ exerciseId, id, date }) => {
   });
 
   return (
-    <div className="w-full my-5 rounded border border-white">
-      <div className="flex flex-row items-center justify-between mt-2">
+    <div className="w-full rounded border border-white">
+      <div className="m-5 flex flex-row items-center justify-between">
         {errorRemove && <div>{errorRemove.message}</div>}
 
         {/* Will Display the current Date / able to remove */}
         <div className="">
           {/* <div className="p-2">Exercise ID: {exerciseId}</div>
           <div className="p-2">ExerciseDay ID: {id}</div> */}
-          <div className="text-2xl text-left p-2">Date: {date}</div>
+          <p className="text-2xl text-left">Date: {date}</p>
         </div>
         <div className="flex items-center justify-center">
           <button
             onClick={() => mutateRemove({ id: id })}
-            className="rounded border border-white mr-4"
+            className="rounded border border-white"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
