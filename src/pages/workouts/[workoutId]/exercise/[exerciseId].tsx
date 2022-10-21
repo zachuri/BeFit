@@ -49,7 +49,7 @@ const Sets = () => {
       <div className="flex justify-center">
         <button
           onClick={() => onSubmit({ exerciseId: exerciseId })}
-          className="border-2 px-10 rounded border-black dark:border-white hover:dark:border-gray-500 hover:border-gray-200 transition"
+          className="mb-5 border-2 px-10 rounded border-black dark:border-white hover:dark:border-gray-500 hover:border-gray-200 transition"
         >
           +
         </button>
