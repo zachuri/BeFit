@@ -70,7 +70,7 @@ export const exerciseTrackerRouter = createRouter()
       // create workout in prisma data base
       const workout = await ctx.prisma.exerciseTracker.create({
         data: {
-          set: input.set,
+          // set: input.set,
           rep: input.rep,
           weight: input.weight,
           user: {

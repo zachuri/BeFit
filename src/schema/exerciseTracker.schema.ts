@@ -2,7 +2,7 @@ import z from 'zod';
 
 export const addExerciseTrackerSchema = z.object({
   exerciseDayId: z.string(),
-  set: z.number().min(1, 'Min set is 1 lbs').max(20, 'Max set is 20lbs'),
+  // set: z.number().min(1, 'Min set is 1 lbs').max(20, 'Max set is 20lbs'),
   rep: z.number().min(1, 'Min set is 1 lbs').max(200, 'Max set is 200lbs'),
   weight: z.number().min(1, 'Min set is 1 lbs').max(1500, 'Max set is 1500lbs')
 });
