@@ -79,7 +79,8 @@ const Sets = () => {
             <button
               className="rounded p-1 border border-white hover:dark:border-gray-600 transition"
               onClick={() => {
-                router.push(`/workouts/${router.query.workoutId}`);
+            // nextRouter.push({pathname: `/workouts/${id}`, query: {workoutName: title}});
+                router.push({pathname: `/workouts/${router.query.workoutId}`, query: {workoutName: router.query.workoutName}});
               }}
             >
               <svg
@@ -98,14 +99,14 @@ const Sets = () => {
               </svg>
             </button>
             <h2 className="text-gray-600">
-              Workout:
+              Workout/
               {' ' + router.query.workoutName}
             </h2>
           </div>
 
           <h1 className="text-2xl md:text-4xl text-center">
             <span className="text-lg md:text-2xl text-gray-600">
-              Exercise:{' '}
+              Exercise/{' '}
             </span>
             {router.query.exerciseName}
           </h1>
