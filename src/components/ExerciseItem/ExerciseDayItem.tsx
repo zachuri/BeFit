@@ -52,12 +52,12 @@ const ExerciseDayItem: React.FC<Props> = ({ exerciseId, id, date }) => {
           <div className="p-2">ExerciseDay ID: {id}</div> */}
           <p className="text-2xl text-left">Date: {date}</p>
         </div>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-centerh">
           <button
             onClick={() => {
               setIsOpenRemove(true);
             }}
-            className="rounded border border-white"
+            className="rounded border border-white hover:border-[red] transition"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
