@@ -75,8 +75,9 @@ const Sets = () => {
     <MainLayoutFlex>
       <div className="my-5 flex flex-col">
         <div className="flex flex-col">
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-row gap-2 items-center">
             <button
+              className="rounded p-1 border border-white hover:dark:border-gray-600 transition"
               onClick={() => {
                 router.push(`/workouts/${router.query.workoutId}`);
               }}
@@ -87,7 +88,7 @@ const Sets = () => {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="w-6 h-6"
+                className="w-5 h-5"
               >
                 <path
                   strokeLinecap="round"
@@ -102,8 +103,10 @@ const Sets = () => {
             </h2>
           </div>
 
-          <h1 className="text-4xl text-center">
-            <span className="text-2xl text-gray-600">Exercise: </span>
+          <h1 className="text-2xl md:text-4xl text-center">
+            <span className="text-lg md:text-2xl text-gray-600">
+              Exercise:{' '}
+            </span>
             {router.query.exerciseName}
           </h1>
         </div>
