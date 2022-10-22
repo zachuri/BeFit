@@ -7,13 +7,30 @@ interface Props {
   exerciseId: string;
   id: string;
   date: string;
+  resultsPerPage: number;
+  currentPageNumber: number;
 }
 
-const ExerciseDayItem: React.FC<Props> = ({ exerciseId, id, date }) => {
+const ExerciseDayItem: React.FC<Props> = ({
+  exerciseId,
+  id,
+  date,
+  resultsPerPage,
+  currentPageNumber
+}) => {
   // Queries
+  // const { refetch } = trpc.useQuery([
+  //   'exercisesDay.getAllExerciseDay',
+  //   { exerciseId }
+  // ]);
+
   const { refetch } = trpc.useQuery([
-    'exercisesDay.getAllExerciseDay',
-    { exerciseId }
+    'exercisesDay.getAllExerciseDayPagination',
+    {
+      id: exerciseId,
+      take: resultsPerPage,
+      skip: resultsPerPage * currentPageNumber
+    }
   ]);
 
   const {

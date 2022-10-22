@@ -5,7 +5,9 @@ import * as trpc from '@trpc/server';
 import { TRPCError } from '@trpc/server';
 import {
   addExerciseDaySchema,
+  getAllExerciseDayPagination,
   getAllExerciseDaySchema,
+  getQueryLength,
   removeExerciseDaySchema
 } from '../../schema/exerciseDay.schema';
 
@@ -84,5 +86,52 @@ export const exerciseDayRouter = createRouter()
       });
 
       return workout;
+    }
+  })
+  .query('getAllExerciseDayPagination', {
+    input: getAllExerciseDayPagination,
+
+    async resolve({ ctx, input }) {
+      if (!ctx.session) {
+        new trpc.TRPCError({
+          code: 'FORBIDDEN',
+          message: "Please Sign In: can't get any post"
+        });
+      }
+
+      return ctx.prisma.exerciseDay.findMany({
+        take: input.take, // Page size
+        skip: input.skip,
+        where: {
+          userId: ctx.session?.user?.id,
+          exerciseId: input.id
+        },
+        orderBy: {
+          createdAt: 'desc'
+        }
+      });
+    }
+  })
+  .query('getQueryLength', {
+    input: getQueryLength,
+    async resolve({ ctx, input }) {
+      if (!ctx.session) {
+        new trpc.TRPCError({
+          code: 'FORBIDDEN',
+          message: "Please Sign In: can't get any post"
+        });
+      }
+
+      const result = ctx.prisma.exerciseDay.findMany({
+        where: {
+          userId: ctx.session?.user?.id,
+          exerciseId: input.id
+        },
+        orderBy: {
+          createdAt: 'desc'
+        }
+      });
+
+      return (await result).length;
     }
   });
