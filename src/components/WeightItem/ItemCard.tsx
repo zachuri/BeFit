@@ -135,18 +135,44 @@ const Item: React.FC<Props> = ({
               Time: {date.split(' ').slice(-2).join(' ')}
             </div>
           </div>
-          <div className="text-xs flex flex-col gap-2 justify-center">
+          <div className="text-xs flex flex-row gap-2 items-center justify-center">
             <button
               onClick={openModal}
-              className="border border-black dark:border-white hover:border-blue-500 hover:dark:border-blue-500 p-1 rounded"
+              className="border border-black dark:border-white hover:border-blue-500 hover:dark:border-blue-500 rounded"
             >
-              Edit
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+                />
+              </svg>
             </button>
             <button
               onClick={openModalRemove}
-              className="border border-black dark:border-white hover:border-[red] hover:dark:border-[red] p-1 rounded"
+              className="border border-black dark:border-white hover:border-[red] hover:dark:border-[red] rounded"
             >
-              Remove
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
             </button>
           </div>
           {/*  Modal for Remove */}
