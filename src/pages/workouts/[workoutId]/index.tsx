@@ -76,7 +76,29 @@ const Exercises = () => {
       ) : (
         <>
           <MainLayoutFlex>
-            <div className="my-5 flex flex-col items-center justify-center">
+            <button
+              className="mt-5 rounded p-1 border border-white hover:dark:border-gray-600 transition"
+              onClick={() => {
+                router.push(`/workouts`);
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"
+                />
+              </svg>
+            </button>
+
+            <div className="mb-5 flex flex-col items-center justify-center">
               <h2 className="text-4xl">
                 <span className="text-2xl text-gray-600">Workout/ </span>
                 {router.query.workoutName}
