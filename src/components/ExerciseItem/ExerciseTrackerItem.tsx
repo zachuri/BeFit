@@ -3,7 +3,7 @@ import React, { Fragment, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AddExerciseTrackerInput } from '../../schema/exerciseTracker.schema';
 import { trpc } from '../../utils/trpc';
-import TrackerItems from './TrackerItems';
+import TrackerItemsTable from './TrackerItemsTable';
 
 interface Props {
   exerciseDayId: string;
@@ -165,7 +165,7 @@ const ExerciseTrackerItem: React.FC<Props> = ({ exerciseDayId }) => {
 
         {/* Display Table for viewport md > */}
         <div
-          className="mx-5 hidden md:block rounded
+          className="mx-5 rounded
           text-black bg-white border border-black  
           dark:bg-black dark:text-white dark:border-t dark:border-white overflow-auto"
         >
@@ -180,7 +180,7 @@ const ExerciseTrackerItem: React.FC<Props> = ({ exerciseDayId }) => {
             </thead>
             {data?.map((items, i) => {
               return (
-                <TrackerItems
+                <TrackerItemsTable
                   key={items.id}
                   exerciseDayId={exerciseDayId}
                   id={items.id}

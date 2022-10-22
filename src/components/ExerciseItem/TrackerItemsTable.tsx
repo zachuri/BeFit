@@ -12,7 +12,7 @@ interface Props {
   weight: number;
 }
 
-const TrackerItems: React.FC<Props> = ({
+const TrackerItemsTable: React.FC<Props> = ({
   exerciseDayId,
   id,
   set,
@@ -316,4 +316,4 @@ const TrackerItems: React.FC<Props> = ({
   );
 };
 
-export default TrackerItems;
+export default TrackerItemsTable;
