@@ -77,7 +77,7 @@ const Exercises = () => {
         <>
           <MainLayoutFlex>
             <button
-              className="mt-5 rounded p-1 border border-white hover:dark:border-gray-600 transition"
+              className="mt-5 rounded p-1 border border-black dark:border-white hover:border-gray-200 hover:dark:border-gray-600 transition"
               onClick={() => {
                 router.push(`/workouts`);
               }}

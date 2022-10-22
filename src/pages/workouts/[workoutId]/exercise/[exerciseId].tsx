@@ -77,10 +77,13 @@ const Sets = () => {
         <div className="flex flex-col">
           <div className="flex flex-row gap-2 items-center">
             <button
-              className="rounded p-1 border border-white hover:dark:border-gray-600 transition"
+              className="rounded p-1 border border-black dark:border-white hover:border-gray-200 hover:dark:border-gray-600 transition"
               onClick={() => {
-            // nextRouter.push({pathname: `/workouts/${id}`, query: {workoutName: title}});
-                router.push({pathname: `/workouts/${router.query.workoutId}`, query: {workoutName: router.query.workoutName}});
+                // nextRouter.push({pathname: `/workouts/${id}`, query: {workoutName: title}});
+                router.push({
+                  pathname: `/workouts/${router.query.workoutId}`,
+                  query: { workoutName: router.query.workoutName }
+                });
               }}
             >
               <svg
