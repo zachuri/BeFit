@@ -73,14 +73,40 @@ const Sets = () => {
 
   return (
     <MainLayoutFlex>
-      <div className="my-5 flex flex-col items-center justify-center">
-        <h1 className="text-4xl">
-          <span className="text-lg text-gray-600">
-            {router.query.workoutName + '/ '}
-          </span>
-          <span className="text-2xl text-gray-600">Exercise/ </span>
-          {router.query.exerciseName}
-        </h1>
+      <div className="my-5 flex flex-col">
+        <div className="flex flex-col">
+          <div className="flex flex-row gap-2">
+            <button
+              onClick={() => {
+                router.push(`/workouts/${router.query.workoutId}`);
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"
+                />
+              </svg>
+            </button>
+            <h2 className="text-gray-600">
+              Workout:
+              {' ' + router.query.workoutName}
+            </h2>
+          </div>
+
+          <h1 className="text-4xl text-center">
+            <span className="text-2xl text-gray-600">Exercise: </span>
+            {router.query.exerciseName}
+          </h1>
+        </div>
         {/* <h1>This is: {exerciseId}</h1> */}
       </div>
       <div className="flex justify-center">
