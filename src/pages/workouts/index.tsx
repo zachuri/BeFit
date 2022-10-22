@@ -71,7 +71,6 @@ const Workouts: React.FC = () => {
       ) : (
         <MainLayoutFlex>
           <h2 className="text-4xl my-5 text-center">Workouts</h2>
-
           {/* Loading  */}
           {isLoading && (
             <div>
@@ -81,7 +80,6 @@ const Workouts: React.FC = () => {
           {isLoadingAddWorkout && (
             <div className="flex justify-center">Adding Workout... </div>
           )}
-
           <div className="flex items-center justify-center">
             <button
               onClick={openModal}
@@ -90,7 +88,6 @@ const Workouts: React.FC = () => {
               +
             </button>
           </div>
-
           <div className="flex flex-col justify-center items-center">
             {data?.map(workout => {
               return (
@@ -100,7 +97,6 @@ const Workouts: React.FC = () => {
               );
             })}
           </div>
-
           {/* Modal Adding Workouts */}
           <Transition appear show={isOpen} as={Fragment}>
             <Dialog as="div" className="relative z-10" onClose={closeModal}>
