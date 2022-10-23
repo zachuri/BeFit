@@ -4,6 +4,7 @@ import { MainLayoutFlex } from '../../../../components/layouts/Main';
 import ExerciseDayItem from '../../../../components/ExerciseItem/ExerciseDayItem';
 import { trpc } from '../../../../utils/trpc';
 import { AddExerciseDayInput } from '../../../../schema/exerciseDay.schema';
+import LoadingIcon from '../../../../components/LoadingIcon';
 
 const Sets = () => {
   const router = useRouter();
@@ -57,6 +58,9 @@ const Sets = () => {
     error,
     isLoading: isLoadingAddWorkout
   } = trpc.useMutation(['exercisesDay.addExerciseDay'], {
+    onError() {
+      error
+    },
     onSuccess() {
       // reset the form
       // reset();
@@ -124,6 +128,19 @@ const Sets = () => {
           +
         </button>
       </div>
+
+      {isLoadingAddWorkout && (
+        <div>
+          <p>Adding Todays Date...</p>
+        </div>
+      )}
+
+      {isLoading && (
+        <div>
+          <LoadingIcon />
+        </div>
+      )}
+
       <div className="flex flex-wrap gap-2 justify-center">
         {data?.map(exerciseDay => {
           return (
@@ -155,7 +172,10 @@ const Sets = () => {
           <span className="text-xs text-gray-600 dark:text-gray-400">
             {' '}
             {queryLengthIsLoading ? (
-              <div>...Loading</div>
+              <div>
+                <LoadingIcon />
+                {/* ...Loading */}
+              </div>
             ) : (
               <>... {totalPage === 0 ? 1 : totalPage}</>
             )}
