@@ -59,7 +59,7 @@ const Sets = () => {
     isLoading: isLoadingAddWorkout
   } = trpc.useMutation(['exercisesDay.addExerciseDay'], {
     onError() {
-      error
+      error;
     },
     onSuccess() {
       // reset the form
@@ -130,7 +130,7 @@ const Sets = () => {
       </div>
 
       {isLoadingAddWorkout && (
-        <div>
+        <div className="flex justify-center">
           <p>Adding Todays Date...</p>
         </div>
       )}

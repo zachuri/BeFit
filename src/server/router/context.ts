@@ -42,7 +42,7 @@ type Context = trpc.inferAsyncReturnType<typeof createContext>;
 export const createRouter = () => trpc.router<Context>();
 
 /**
- * Creates a tRPC router that asserts all queries and mutations are from an authorized user. Will throw an unauthorized error if a user is not signed in.
+ * Creates a tRPC router that asserts all queries and mutations re from an authorized user. Will throw an unauthorized error if a user is not signed in.
  **/
 export function createProtectedRouter() {
   return createRouter().middleware(({ ctx, next }) => {

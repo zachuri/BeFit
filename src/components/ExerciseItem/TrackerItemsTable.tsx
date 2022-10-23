@@ -261,6 +261,8 @@ const TrackerItemsTable: React.FC<Props> = ({
     <>
       <tbody>
         <tr className="text-center border-t border-black dark:border-white dark:border-t overflow-auto">
+          {isLoadingUpdate && <div>Updating...</div>}
+          {isLoadinRemove && <div>Removing...</div>}
           <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
             {set}
           </td>

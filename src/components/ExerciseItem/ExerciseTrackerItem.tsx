@@ -161,7 +161,11 @@ const ExerciseTrackerItem: React.FC<Props> = ({ exerciseDayId }) => {
     <div className="rounded">
       {/* <h1>Exercise Day Tracker Table</h1> */}
       <div>
-        {error && <div>{error.message}</div>}
+        <div className="mx-5">
+          {error && <div>{error.message}</div>}
+          {isLoading && <div>Loading your sets, reps, weights ...</div>}
+          {isLoadingAddWeights && <div>Adding your input</div>}
+        </div>
 
         {/* Display Table for viewport md > */}
         <div
