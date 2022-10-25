@@ -5,9 +5,9 @@ import { MainLayoutHeightScreen } from '../components/layouts/Main';
 const NotFound = () => {
   return (
     <MainLayoutHeightScreen>
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center mx-10">
         <h1 className="text-4xl">Not Found</h1>
-        <p className="mt-5">The page you&apos;re looking for was not found</p>
+        <p className="mt-5 text-xs md:text-base">The page you&apos;re looking for was not found</p>
 
         <hr className="mt-5 border w-full" />
 
