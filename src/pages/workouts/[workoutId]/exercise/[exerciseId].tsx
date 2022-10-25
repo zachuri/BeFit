@@ -5,6 +5,7 @@ import ExerciseDayItem from '../../../../components/ExerciseItem/ExerciseDayItem
 import { trpc } from '../../../../utils/trpc';
 import { AddExerciseDayInput } from '../../../../schema/exerciseDay.schema';
 import LoadingIcon from '../../../../components/LoadingIcon';
+import SessionAuth from '../../../../components/SessionAuth';
 
 const Sets = () => {
   const router = useRouter();
@@ -76,120 +77,122 @@ const Sets = () => {
   }
 
   return (
-    <MainLayoutFlex>
-      <div className="my-5 flex flex-col">
-        <div className="flex flex-col">
-          <div className="flex flex-row gap-2 items-center">
-            <button
-              className="rounded p-1 border border-black dark:border-white hover:border-gray-200 hover:dark:border-gray-600 transition"
-              onClick={() => {
-                // nextRouter.push({pathname: `/workouts/${id}`, query: {workoutName: title}});
-                router.push({
-                  pathname: `/workouts/${router.query.workoutId}`,
-                  query: { workoutName: router.query.workoutName }
-                });
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-5 h-5"
+    <SessionAuth pageName="Exercise Tracker Page">
+      <MainLayoutFlex>
+        <div className="my-5 flex flex-col">
+          <div className="flex flex-col">
+            <div className="flex flex-row gap-2 items-center">
+              <button
+                className="rounded p-1 border border-black dark:border-white hover:border-gray-200 hover:dark:border-gray-600 transition"
+                onClick={() => {
+                  // nextRouter.push({pathname: `/workouts/${id}`, query: {workoutName: title}});
+                  router.push({
+                    pathname: `/workouts/${router.query.workoutId}`,
+                    query: { workoutName: router.query.workoutName }
+                  });
+                }}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"
-                />
-              </svg>
-            </button>
-            <h2 className="text-gray-600">
-              Workout/
-              {' ' + router.query.workoutName}
-            </h2>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-5 h-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"
+                  />
+                </svg>
+              </button>
+              <h2 className="text-gray-600">
+                Workout/
+                {' ' + router.query.workoutName}
+              </h2>
+            </div>
+
+            <h1 className="text-2xl md:text-4xl text-center">
+              <span className="text-lg md:text-2xl text-gray-600">
+                Exercise/{' '}
+              </span>
+              {router.query.exerciseName}
+            </h1>
           </div>
-
-          <h1 className="text-2xl md:text-4xl text-center">
-            <span className="text-lg md:text-2xl text-gray-600">
-              Exercise/{' '}
-            </span>
-            {router.query.exerciseName}
-          </h1>
+          {/* <h1>This is: {exerciseId}</h1> */}
         </div>
-        {/* <h1>This is: {exerciseId}</h1> */}
-      </div>
-      <div className="flex justify-center">
-        <button
-          onClick={() => onSubmit({ exerciseId: exerciseId })}
-          className="mb-5 border-2 px-10 rounded border-black dark:border-white hover:dark:border-gray-500 hover:border-gray-200 transition"
-        >
-          +
-        </button>
-      </div>
-
-      {isLoadingAddWorkout && (
         <div className="flex justify-center">
-          <p>Adding Todays Date...</p>
+          <button
+            onClick={() => onSubmit({ exerciseId: exerciseId })}
+            className="mb-5 border-2 px-10 rounded border-black dark:border-white hover:dark:border-gray-500 hover:border-gray-200 transition"
+          >
+            +
+          </button>
         </div>
-      )}
 
-      {isLoading && (
-        <div>
-          <LoadingIcon />
+        {isLoadingAddWorkout && (
+          <div className="flex justify-center">
+            <p>Adding Todays Date...</p>
+          </div>
+        )}
+
+        {isLoading && (
+          <div>
+            <LoadingIcon />
+          </div>
+        )}
+
+        <div className="flex flex-wrap gap-2 justify-center">
+          {data?.map(exerciseDay => {
+            return (
+              <ExerciseDayItem
+                key={exerciseDay.id}
+                exerciseId={exerciseId}
+                id={exerciseDay.id}
+                date={exerciseDay.createdAt.toLocaleDateString()}
+                resultsPerPage={resultsPerPage}
+                currentPageNumber={currentPageNumber}
+              />
+            );
+          })}
         </div>
-      )}
 
-      <div className="flex flex-wrap gap-2 justify-center">
-        {data?.map(exerciseDay => {
-          return (
-            <ExerciseDayItem
-              key={exerciseDay.id}
-              exerciseId={exerciseId}
-              id={exerciseDay.id}
-              date={exerciseDay.createdAt.toLocaleDateString()}
-              resultsPerPage={resultsPerPage}
-              currentPageNumber={currentPageNumber}
-            />
-          );
-        })}
-      </div>
+        {/* Pagination Items */}
+        <div className="my-5 flex items-center justify-center gap-2">
+          <button
+            className="rounded border border-black dark:border-white p-2"
+            onClick={() => {
+              newer();
+            }}
+          >
+            newer
+          </button>
 
-      {/* Pagination Items */}
-      <div className="my-5 flex items-center justify-center gap-2">
-        <button
-          className="rounded border border-black dark:border-white p-2"
-          onClick={() => {
-            newer();
-          }}
-        >
-          newer
-        </button>
+          <h1>
+            {currentPageNumber + 1}
+            <span className="text-xs text-gray-600 dark:text-gray-400">
+              {' '}
+              {queryLengthIsLoading ? (
+                <div>
+                  <LoadingIcon />
+                  {/* ...Loading */}
+                </div>
+              ) : (
+                <>... {totalPage === 0 ? 1 : totalPage}</>
+              )}
+            </span>
+          </h1>
 
-        <h1>
-          {currentPageNumber + 1}
-          <span className="text-xs text-gray-600 dark:text-gray-400">
-            {' '}
-            {queryLengthIsLoading ? (
-              <div>
-                <LoadingIcon />
-                {/* ...Loading */}
-              </div>
-            ) : (
-              <>... {totalPage === 0 ? 1 : totalPage}</>
-            )}
-          </span>
-        </h1>
-
-        <button
-          className="rounded border border-black dark:border-white p-2"
-          onClick={() => older()}
-        >
-          older
-        </button>
-      </div>
-    </MainLayoutFlex>
+          <button
+            className="rounded border border-black dark:border-white p-2"
+            onClick={() => older()}
+          >
+            older
+          </button>
+        </div>
+      </MainLayoutFlex>
+    </SessionAuth>
   );
 };
 

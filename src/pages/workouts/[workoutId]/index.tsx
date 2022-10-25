@@ -1,19 +1,15 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import React, { Fragment, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Item from '../../../components/ExerciseItem/Item';
-import {
-  MainLayoutFlex,
-  MainLayoutHeightScreen
-} from '../../../components/layouts/Main';
+import { MainLayoutFlex } from '../../../components/layouts/Main';
 import LoadingIcon from '../../../components/LoadingIcon';
+import SessionAuth from '../../../components/SessionAuth';
 import { AddExerciseInput } from '../../../schema/exercise.schema';
 import { trpc } from '../../../utils/trpc';
 
 const Exercises = () => {
-  const { status } = useSession();
   const router = useRouter();
   const workoutId = router.query.workoutId as string;
 
@@ -57,23 +53,7 @@ const Exercises = () => {
 
   return (
     <>
-      {status === 'unauthenticated' ? (
-        <MainLayoutHeightScreen>
-          <div className="min-h-screen flex items-center justify-center -mt-10 md:-mt-20">
-            <div className="flex flex-col text-center">
-              <h1 className="text-4xl">Workouts Page</h1>
-              <p className="text-2xl text-gray-700">Please Sign in!</p>
-            </div>
-          </div>
-        </MainLayoutHeightScreen>
-      ) : status === 'loading' ? (
-        <MainLayoutHeightScreen>
-          <div className="flex flex-col text-center">
-            <h1 className="text-2xl">Data is loading...</h1>
-            <LoadingIcon />
-          </div>
-        </MainLayoutHeightScreen>
-      ) : (
+      <SessionAuth pageName="Workout Page">
         <>
           <MainLayoutFlex>
             <button
@@ -217,7 +197,7 @@ const Exercises = () => {
             </Transition>
           </MainLayoutFlex>
         </>
-      )}
+      </SessionAuth>
     </>
   );
 };
