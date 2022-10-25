@@ -6,9 +6,10 @@ import LoadingIcon from './LoadingIcon';
 interface Props {
   children: React.ReactNode;
   pageName: string;
+  isLoading?: boolean;
 }
 
-const SessionAuth: React.FC<Props> = ({ children, pageName }) => {
+const SessionAuth: React.FC<Props> = ({ children, pageName, isLoading }) => {
   const { status } = useSession();
 
   return (
@@ -22,7 +23,7 @@ const SessionAuth: React.FC<Props> = ({ children, pageName }) => {
             </div>
           </div>
         </MainLayoutHeightScreen>
-      ) : status === 'loading' ? (
+      ) : status === 'loading' || isLoading ? (
         <MainLayoutHeightScreen>
           <div className="flex flex-col text-center">
             <h1 className="text-2xl">Data is loading...</h1>
