@@ -10,6 +10,7 @@ interface Props {
 }
 
 const SessionAuth: React.FC<Props> = ({ children, pageName, isLoading }) => {
+  // Using Next-Auth Session -> check weather the user is signed in
   const { status } = useSession();
 
   return (

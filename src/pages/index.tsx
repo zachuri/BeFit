@@ -1,15 +1,14 @@
 import Head from 'next/head';
 import {
   MainLayoutFlex,
-  MainLayoutHeightScreen
 } from '../components/layouts/Main';
 import { AiFillCaretDown } from 'react-icons/ai';
 // import LineGraph from '../components/LineGraph';
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
 import { trpc } from '../utils/trpc';
 import LoadingIcon from '../components/LoadingIcon';
 import LineGraph from '../components/LineGraph';
+import SessionAuth from '../components/SessionAuth';
 // import { trpc } from "../utils/trpc";
 
 const NavigateLinks = () => {
@@ -43,9 +42,6 @@ const NavigateLinks = () => {
 };
 
 const Home = () => {
-  // Using Next-Auth Session -> check weather the user is signed in
-  const { status } = useSession();
-
   const { data, isLoading } = trpc.useQuery(['weights.getRecentWeight']);
 
   return (
@@ -56,23 +52,7 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {status === 'unauthenticated' ? (
-        <MainLayoutHeightScreen>
-          <div className="min-h-screen flex items-center justify-center -mt-10 md:-mt-20">
-            <div className="flex flex-col text-center">
-              <h1 className="text-4xl">Home Page</h1>
-              <p className="text-2xl text-gray-700">Please Sign in!</p>
-            </div>
-          </div>
-        </MainLayoutHeightScreen>
-      ) : status === 'loading' ? (
-        <MainLayoutHeightScreen>
-          <div className="flex flex-col text-center">
-            <h1 className="text-2xl">Data is loading...</h1>
-            <LoadingIcon />
-          </div>
-        </MainLayoutHeightScreen>
-      ) : (
+      <SessionAuth pageName="Home Page">
         <MainLayoutFlex>
           {/* Current Weight of User  */}
           <div className="mt-5 mx-20 text-center">
@@ -106,7 +86,7 @@ const Home = () => {
           {/* Navigation Links */}
           <NavigateLinks />
         </MainLayoutFlex>
-      )}
+      </SessionAuth>
     </>
   );
 };
