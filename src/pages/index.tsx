@@ -1,7 +1,5 @@
 import Head from 'next/head';
-import {
-  MainLayoutFlex,
-} from '../components/layouts/Main';
+import { MainLayoutFlex } from '../components/layouts/Main';
 import { AiFillCaretDown } from 'react-icons/ai';
 // import LineGraph from '../components/LineGraph';
 import Link from 'next/link';
