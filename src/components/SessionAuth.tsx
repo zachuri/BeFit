@@ -5,9 +5,10 @@ import LoadingIcon from './LoadingIcon';
 
 interface Props {
   children: React.ReactNode;
+  pageName: string;
 }
 
-const SessionAuth: React.FC<Props> = ({ children }) => {
+const SessionAuth: React.FC<Props> = ({ children, pageName }) => {
   const { status } = useSession();
 
   return (
@@ -16,7 +17,7 @@ const SessionAuth: React.FC<Props> = ({ children }) => {
         <MainLayoutHeightScreen>
           <div className="min-h-screen flex items-center justify-center -mt-10 md:-mt-20">
             <div className="flex flex-col text-center">
-              <h1 className="text-4xl">Home Page</h1>
+              <h1 className="text-4xl">{pageName}</h1>
               <p className="text-2xl text-gray-700">Please Sign in!</p>
             </div>
           </div>
