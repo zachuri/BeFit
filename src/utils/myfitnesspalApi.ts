@@ -7,16 +7,36 @@ interface Result {
   remaining?: string[];
 }
 
-export const getMyFitnessPalData = async (): Promise<Result> => {
-  const url =
-    'https://www.myfitnesspal.com/food/diary/aaronjbergman?date=2021-05-02';
+export const getMyFitnessPalData = async (
+  userName: string | undefined,
+  date: Date
+): Promise<Result> => {
+  const day = date?.getDate();
+  const month = date.getMonth();
+  const year = date?.getFullYear();
 
-  const pageResponse = await axios.get(url);
+  const url = `https://www.myfitnesspal.com/food/diary/${userName}?date=${year}-${
+    month + 1
+  }-${day}`;
+
+  // console.log(url);
+
+  // const url =
+  //   'https://www.myfitnesspal.com/food/diary/aaronjbergman?date=2021-05-03';
+
+  const pageResponse = await axios
+    .get(url)
+    .then(res => {
+      return res.data;
+    })
+    .catch(error => {
+      console.log(error);
+    });
 
   const keys = [];
   const result = [];
 
-  const $ = cheerio.load(pageResponse.data);
+  const $ = cheerio.load(pageResponse);
 
   const total: any[] | PromiseLike<any[]> = [];
   const dailyGoal: any[] | PromiseLike<any[]> = [];
