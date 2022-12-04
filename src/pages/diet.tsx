@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { MainLayoutFlex } from '../components/layouts/Main';
+import LoadingIcon from '../components/LoadingIcon';
 import { getMyFitnessPalData } from '../utils/myfitnesspalApi';
 
 const Diet = () => {
@@ -8,6 +9,7 @@ const Diet = () => {
   const [remaining, setRemaining] = useState<any>([]);
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
   const [userName, setUserName] = useState<string | undefined>();
+  const [isLoading, setIsLoading] = useState<boolean>();
 
   const dateFull = `
     ${
@@ -15,15 +17,18 @@ const Diet = () => {
     }/${currentDate.getDate()}/${currentDate.getFullYear()}`;
 
   useEffect(() => {
+    setIsLoading(true);
     setUserName('punsalangzachary');
     getMyFitnessPalData(userName, currentDate)
       .then(res => {
         setTotal(res.total);
         setGoal(res.dailyGoal);
         setRemaining(res.remaining);
+        setIsLoading(false);
       })
       .catch(error => {
         console.log(error);
+        setIsLoading(false);
       });
     console.log('Called: ' + currentDate);
   }, [currentDate, userName]);
@@ -43,7 +48,7 @@ const Diet = () => {
             <p>{total[6]}</p>
           </div>
           <div className="border border-white mt-2">
-            <h3 className="text-2xl">{goal[0]}</h3>
+            <h3 className="text-xl">{goal[0]}</h3>
             <p>{goal[1]}</p>
             <p>{goal[2]}</p>
             <p>{goal[3]}</p>
@@ -114,6 +119,11 @@ const Diet = () => {
             </svg>
           </button>
         </div>
+        {isLoading && (
+          <div className="">
+            <LoadingIcon />
+          </div>
+        )}
       </MainLayoutFlex>
     </>
   );
