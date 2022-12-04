@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useHydrate } from 'react-query';
 import { MainLayoutFlex } from '../components/layouts/Main';
 import LoadingIcon from '../components/LoadingIcon';
-import { getMyFitnessPalData } from '../utils/myfitnesspalApi';
+import { getMyFitnessPalData } from './api/myfitnesspalApi';
 
 const Diet = () => {
   const [total, setTotal] = useState<any>([]);
@@ -19,19 +20,43 @@ const Diet = () => {
   useEffect(() => {
     setIsLoading(true);
     setUserName('punsalangzachary');
-    getMyFitnessPalData(userName, currentDate)
-      .then(res => {
-        setTotal(res.total);
-        setGoal(res.dailyGoal);
-        setRemaining(res.remaining);
-        setIsLoading(false);
-      })
-      .catch(error => {
-        console.log(error);
+
+    fetch('/api/dietData', {
+      method: 'post',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({ userName: userName, userDate: currentDate })
+    })
+      .then(res => res.json())
+      .then(userData => {
+        setTotal(userData.total);
+        setGoal(userData.dailyGoal);
+        setRemaining(userData.remaining);
         setIsLoading(false);
       });
-    console.log('Called: ' + currentDate);
+    // .catch(error => {
+    //   console.log(error);
+    //   setIsLoading(false);
+    // });
   }, [currentDate, userName]);
+
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   setUserName('punsalangzachary');
+  //   getMyFitnessPalData(userName, currentDate)
+  //     .then(res => {
+  //       setTotal(res.total);
+  //       setGoal(res.dailyGoal);
+  //       setRemaining(res.remaining);
+  //       setIsLoading(false);
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //       setIsLoading(false);
+  //     });
+  //   console.log('Called: ' + currentDate);
+  // }, [currentDate, userName]);
 
   return (
     <>
@@ -73,7 +98,6 @@ const Diet = () => {
               const date = new Date(currentDate);
               date.setDate(currentDate.getDate() - 1);
               setCurrentDate(date);
-              getMyFitnessPalData(userName, currentDate);
             }}
           >
             <svg
@@ -100,7 +124,6 @@ const Diet = () => {
               const date = new Date(currentDate);
               date.setDate(currentDate.getDate() + 1);
               setCurrentDate(date);
-              getMyFitnessPalData(userName, currentDate);
             }}
           >
             <svg

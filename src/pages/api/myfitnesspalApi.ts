@@ -1,5 +1,6 @@
 import axios from 'axios';
 import cheerio from 'cheerio';
+import Cors from 'cors';
 
 interface Result {
   total?: string[];
@@ -19,22 +20,19 @@ export const getMyFitnessPalData = async (
     month + 1
   }-${day}`;
 
-  // console.log(url);
+  console.log(url);
 
   // const url =
   //   'https://www.myfitnesspal.com/food/diary/aaronjbergman?date=2021-05-03';
 
   const pageResponse = await axios
-    .get(url)
+    .get(url, {})
     .then(res => {
       return res.data;
     })
     .catch(error => {
       console.log(error);
     });
-
-  const keys = [];
-  const result = [];
 
   const $ = cheerio.load(pageResponse);
 
