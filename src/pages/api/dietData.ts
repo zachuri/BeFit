@@ -8,17 +8,32 @@ const cors = Cors({
 
 // Helper method to wait for a middleware to execute before continuing
 // And to throw an error when an error happens in a middleware
-function runMiddleware(req: { method: string; body: { userName: any; userDate: any; }; }, res: {
-    statusCode: number; json: (arg0: {
-      total: any[] | never []; dailyGoal: any[] | never[]; remaining: any[] | never[]; userName?: any; error // Helper method to wait for a middleware to execute before continuing
-      // And to throw an error when an error happens in a middleware
-      ?: string | undefined;
+function runMiddleware(
+  req: { method: string; body: { userName: any; userDate: any } },
+  res: {
+    statusCode: number;
+    json: (arg0: {
+      total: any[] | never[];
+      dailyGoal: any[] | never[];
+      remaining: any[] | never[];
+      userName?: any;
+      error?: // And to throw an error when an error happens in a middleware // Helper method to wait for a middleware to execute before continuing
+      string | undefined;
     }) => any;
-  }, fn: {
-    (req: Cors.CorsRequest, res: {
-      statusCode?: number | undefined; setHeader(key: string, value: string): any; end(): any; // This is to remove the percentage
-    }, next: (err?: any) => any): void; (arg0: any, arg1: any, arg2: (result: unknown) => void): void;
-  }) {
+  },
+  fn: {
+    (
+      req: Cors.CorsRequest,
+      res: {
+        statusCode?: number | undefined;
+        setHeader(key: string, value: string): any;
+        end(): any; // This is to remove the percentage
+      },
+      next: (err?: any) => any
+    ): void;
+    (arg0: any, arg1: any, arg2: (result: unknown) => void): void;
+  }
+) {
   return new Promise((resolve, reject) => {
     fn(req, res, (result: unknown) => {
       if (result instanceof Error) {
@@ -44,12 +59,12 @@ export default async (
     }) => any;
   }
 ) => {
-  await runMiddleware(req, res, cors)
+  await runMiddleware(req, res, cors);
   if (req.method === 'POST') {
     const userName = req.body.userName;
     const date = new Date(req.body.userDate);
 
-    console.log(date);
+    // console.log(date);
 
     const day = date.getDate();
     const month = date.getMonth();
@@ -60,7 +75,7 @@ export default async (
         month + 1
       }-${day}`;
 
-      console.log(url);
+      // console.log(url);
 
       const response = await fetch(url);
       const htmlString = await response.text();
@@ -116,7 +131,7 @@ const getTotal = ($: any, total: any[]) => {
           .replace(/(\r\n|\n|\r)/gm, '')
       );
     });
-  console.log('FUNCTION Total: ' + total);
+  // console.log('FUNCTION Total: ' + total);
 };
 
 const getDailyGoal = ($: any, dailyGoal: any[]) => {
@@ -133,7 +148,7 @@ const getDailyGoal = ($: any, dailyGoal: any[]) => {
           .replace(/(\r\n|\n|\r)/gm, '')
       );
     });
-  console.log('FUNCTION Daily Goal: ' + dailyGoal);
+  // console.log('FUNCTION Daily Goal: ' + dailyGoal);
 };
 
 const getRemaining = ($: any, remaining: any[]) => {
@@ -150,5 +165,5 @@ const getRemaining = ($: any, remaining: any[]) => {
           .replace(/(\r\n|\n|\r)/gm, '')
       );
     });
-  console.log('FUNCTION Remaining: ' + remaining);
+  // console.log('FUNCTION Remaining: ' + remaining);
 };
