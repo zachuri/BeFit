@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useHydrate } from 'react-query';
 import { MainLayoutFlex } from '../components/layouts/Main';
 import LoadingIcon from '../components/LoadingIcon';
-import { getMyFitnessPalData } from './api/myfitnesspalApi';
 
 const Diet = () => {
   const [total, setTotal] = useState<any>([]);
@@ -26,7 +24,13 @@ const Diet = () => {
       headers: {
         'content-type': 'application/json'
       },
-      body: JSON.stringify({ userName: userName, userDate: currentDate })
+      // body: JSON.stringify({ userName: userName, userDate: currentDate })
+      body: JSON.stringify({
+        userName: userName,
+        day: currentDate.getDay(),
+        month: currentDate.getMonth() + 1,
+        year: currentDate.getFullYear()
+      })
     })
       .then(res => res.json())
       .then(userData => {
@@ -34,29 +38,12 @@ const Diet = () => {
         setGoal(userData.dailyGoal);
         setRemaining(userData.remaining);
         setIsLoading(false);
-      });
-    // .catch(error => {
-    //   console.log(error);
-    //   setIsLoading(false);
-    // });
-  }, [currentDate, userName]);
 
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   setUserName('punsalangzachary');
-  //   getMyFitnessPalData(userName, currentDate)
-  //     .then(res => {
-  //       setTotal(res.total);
-  //       setGoal(res.dailyGoal);
-  //       setRemaining(res.remaining);
-  //       setIsLoading(false);
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //       setIsLoading(false);
-  //     });
-  //   console.log('Called: ' + currentDate);
-  // }, [currentDate, userName]);
+        console.log('Total + ' + userData.total);
+        console.log('Data + ' + userData.dailyGoal);
+        console.log('Remaining + ' + userData.remaining);
+      });
+  }, [currentDate, userName]);
 
   return (
     <>
