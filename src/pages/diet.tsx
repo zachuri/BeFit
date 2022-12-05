@@ -32,6 +32,10 @@ const Diet = () => {
         setGoal(userData.dailyGoal);
         setRemaining(userData.remaining);
         setIsLoading(false);
+
+        console.log('Total + ' + userData.total);
+        console.log('Data + ' + userData.dailyGoal);
+        console.log('Remaining + ' + userData.remaining);
       });
   }, [currentDate, userName]);
 
