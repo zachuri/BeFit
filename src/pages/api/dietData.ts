@@ -1,50 +1,6 @@
 import cheerio from 'cheerio';
 import Cors from 'cors';
 
-// Initializing the cors middleware
-const cors = Cors({
-  methods: ['POST']
-});
-
-// Helper method to wait for a middleware to execute before continuing
-// And to throw an error when an error happens in a middleware
-function runMiddleware(
-  req: { method: string; body: { userName: any; userDate: any } },
-  res: {
-    statusCode: number;
-    json: (arg0: {
-      total: any[] | never[];
-      dailyGoal: any[] | never[];
-      remaining: any[] | never[];
-      userName?: any;
-      error?: // And to throw an error when an error happens in a middleware // Helper method to wait for a middleware to execute before continuing
-      string | undefined;
-    }) => any;
-  },
-  fn: {
-    (
-      req: Cors.CorsRequest,
-      res: {
-        statusCode?: number | undefined;
-        setHeader(key: string, value: string): any;
-        end(): any; // This is to remove the percentage
-      },
-      next: (err?: any) => any
-    ): void;
-    (arg0: any, arg1: any, arg2: (result: unknown) => void): void;
-  }
-) {
-  return new Promise((resolve, reject) => {
-    fn(req, res, (result: unknown) => {
-      if (result instanceof Error) {
-        return reject(result);
-      }
-
-      return resolve(result);
-    });
-  });
-}
-
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (
   req: { method: string; body: { userName: any; userDate: any } },
@@ -64,7 +20,7 @@ export default async (
     const userName = req.body.userName;
     const date = new Date(req.body.userDate);
 
-    // console.log(date);
+    // console.log('DATE' + date);
 
     const day = date.getDate();
     const month = date.getMonth();
@@ -75,7 +31,7 @@ export default async (
         month + 1
       }-${day}`;
 
-      // console.log(url);
+      console.log(url);
 
       const response = await fetch(url);
       const htmlString = await response.text();
@@ -167,3 +123,47 @@ const getRemaining = ($: any, remaining: any[]) => {
     });
   // console.log('FUNCTION Remaining: ' + remaining);
 };
+
+// Initializing the cors middleware
+const cors = Cors({
+  methods: ['POST']
+});
+
+// Helper method to wait for a middleware to execute before continuing
+// And to throw an error when an error happens in a middleware
+function runMiddleware(
+  req: { method: string; body: { userName: any; userDate: any } },
+  res: {
+    statusCode: number;
+    json: (arg0: {
+      total: any[] | never[];
+      dailyGoal: any[] | never[];
+      remaining: any[] | never[];
+      userName?: any;
+      error?: // And to throw an error when an error happens in a middleware // Helper method to wait for a middleware to execute before continuing
+      string | undefined;
+    }) => any;
+  },
+  fn: {
+    (
+      req: Cors.CorsRequest,
+      res: {
+        statusCode?: number | undefined;
+        setHeader(key: string, value: string): any;
+        end(): any; // This is to remove the percentage
+      },
+      next: (err?: any) => any
+    ): void;
+    (arg0: any, arg1: any, arg2: (result: unknown) => void): void;
+  }
+) {
+  return new Promise((resolve, reject) => {
+    fn(req, res, (result: unknown) => {
+      if (result instanceof Error) {
+        return reject(result);
+      }
+
+      return resolve(result);
+    });
+  });
+}
