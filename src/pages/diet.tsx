@@ -24,7 +24,13 @@ const Diet = () => {
       headers: {
         'content-type': 'application/json'
       },
-      body: JSON.stringify({ userName: userName, userDate: currentDate })
+      // body: JSON.stringify({ userName: userName, userDate: currentDate })
+      body: JSON.stringify({
+        userName: userName,
+        day: currentDate.getDay(),
+        month: currentDate.getMonth() + 1,
+        year: currentDate.getFullYear()
+      })
     })
       .then(res => res.json())
       .then(userData => {

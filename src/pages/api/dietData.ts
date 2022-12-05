@@ -3,7 +3,10 @@ import Cors from 'cors';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (
-  req: { method: string; body: { userName: any; userDate: any } },
+  req: {
+    method: string;
+    body: { userName: any; day: any; month: any; year: any };
+  },
   res: {
     statusCode: number;
     json: (arg0: {
@@ -18,18 +21,16 @@ export default async (
   await runMiddleware(req, res, cors);
   if (req.method === 'POST') {
     const userName = req.body.userName;
-    const date = new Date(req.body.userDate);
+    // const date = new Date(req.body.userDate);
 
-    // console.log('DATE' + date);
+    // console.log(date);
 
-    const day = date.getDate();
-    const month = date.getMonth();
-    const year = date.getFullYear();
+    // const day = date.getDate();
+    // const month = date.getMonth();
+    // const year = date.getFullYear();
 
     try {
-      const url = `https://www.myfitnesspal.com/food/diary/${userName}?date=${year}-${
-        month + 1
-      }-${day}`;
+      const url = `https://www.myfitnesspal.com/food/diary/${userName}?date=${req.body.year}-${req.body.month}-${req.body.day}`;
 
       console.log(url);
 
@@ -132,7 +133,10 @@ const cors = Cors({
 // Helper method to wait for a middleware to execute before continuing
 // And to throw an error when an error happens in a middleware
 function runMiddleware(
-  req: { method: string; body: { userName: any; userDate: any } },
+  req: {
+    method: string;
+    body: { userName: any; day: any; month: any; year: any };
+  },
   res: {
     statusCode: number;
     json: (arg0: {
