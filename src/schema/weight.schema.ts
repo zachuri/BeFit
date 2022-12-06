@@ -5,7 +5,7 @@ export const addWeightSchema = z.object({
     .number()
     .min(1, 'Min weight is 1 lbs')
     .max(1000, 'Max weight is 1000lbs'),
-  body: z.string().max(35, 'Max body length is 35 characters')
+  body: z.string().max(40, 'Max body length is 35 characters')
 });
 
 export type AddWeightInput = z.TypeOf<typeof addWeightSchema>;
@@ -23,7 +23,7 @@ export const updateWeightSchema = z.object({
     .min(1, 'Min weight is 1 lbs')
     .max(1000, 'Max weight is 1000lbs')
     .optional(),
-  body: z.string().max(35, 'Max body length is 100 words')
+  body: z.string().max(40, 'Max body length is 100 words')
 });
 
 export type UpdateWeightInput = z.TypeOf<typeof updateWeightSchema>;
