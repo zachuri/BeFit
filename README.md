@@ -7,7 +7,12 @@ It will track three main categories we believe are essentail for body building.
 - Exercise
 - Diet
 
-link: [https://[add_later].vercel.app/](https://[add_later].vercel.app/)
+![image](https://github.com/user-attachments/assets/747a58b2-f7c1-4ce7-b9e1-6dd696185ecb)
+![image](https://github.com/user-attachments/assets/88df88a3-247f-4c84-9057-5c400b008209)
+![image](https://github.com/user-attachments/assets/7cd51b66-6cde-461f-acea-7c81a0ac8863)
+
+
+https://be-fit-kappa.vercel.app/
 
 ## Stack
 
